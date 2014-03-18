@@ -15,7 +15,8 @@ Files:
        docs.
 
 **keystone/Project_Result_ComponentName_Number.xls** 
-       A template for writing analysis result
+       A template for writing analysis result which will be placed in
+       analysis_result repo.
 
 **keystone/analysis_report**
        A directory containing Analysis reports of the 
@@ -27,6 +28,8 @@ Files:
 
 **keystone/analysis_result**
        A directory containting Results of the Analysis.
+       Each file in the analysis_report directory has a corresponding 
+       file in analysis_result directory. 
 
 **keystone/images**
        Related images   
