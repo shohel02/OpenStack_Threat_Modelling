@@ -1,4 +1,4 @@
-OpenStack Threat Modeling : Token Provider
+Keystone Threat Modeling : Token Provider
 =========================================
 ### Table of contents
 [TOC]
