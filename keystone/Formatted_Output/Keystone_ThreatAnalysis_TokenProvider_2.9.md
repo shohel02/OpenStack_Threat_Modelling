@@ -103,7 +103,8 @@ Using weakness in UUID4 token generation (randomness), an attacker can guess a v
 ```
 Security Weakness:
 ```
-UUID4 uses os.urandom to generate 128 bit randomness and encode 122 bit of it to generate a UUID4 token. Assuming os.urandom provides random bits, the attacker has
+UUID4 uses os.urandom to generate 128 bit randomness and encode 122 bit of it to generate a UUID4 token. 
+Assuming os.urandom provides random bits, the attacker has
 the 2^(-122) probability to guess a UUID4 token id. 
 ```
 Counter Measures:
@@ -135,8 +136,11 @@ Internal attacker/ wrong value assignment
 ```
 Attack Vectors:
 ```
-Token expiry is determined by the configuration 'expiration' parameter. An internal attacker (with the permission to change conf file) can modify the 'expiration' parameter to generate long lived valid token, increasing the exposure possibility. Or, reduce the expiration
-time to a low value, causing frequent new token generation. This can lead to performance degradation and possibly DoS.  
+Token expiry is determined by the configuration 'expiration' parameter. An internal attacker 
+(with the permission to change conf file) can modify the 'expiration' parameter to generate long lived valid token, 
+increasing the exposure possibility. Or, reduce the expiration
+time to a low value, causing frequent new token generation. 
+This can lead to performance degradation and possibly DoS.  
 ```
 Security Weakness:
 ```
@@ -172,7 +176,9 @@ Internal Attacker
 Attack Vectors:
 ```
 PKI token is created using openssl which requires signing key. The signing key
-is referred in the keystone.conf file. Two scenarios can happen here 1) a system user with the ability to modify the keystone.conf file can point to a tampered signing key. 2) A system user with ability to read signing keyfile can can generate PKI tokens 
+is referred in the keystone.conf file. 
+Two scenarios can happen here 1) a system user with the ability to modify the keystone.conf file can point to a tampered signing key.
+2) A system user with ability to read signing keyfile can can generate PKI tokens 
 ```
 Security Weakness:
 ```
@@ -206,7 +212,8 @@ Internet attacker
 ```
 Attack Vectors:
 ```
-Depending on the setup, PKI tokens may need to sign large amount of data (with V3, including catalog) during token generation process. A large number of token signing request can lead to performance degradation of PKI signing engine. 
+Depending on the setup, PKI tokens may need to sign large amount of data (with V3, including catalog) during token generation process. 
+A large number of token signing request can lead to performance degradation of PKI signing engine. 
 ```
 Security Weakness:
 ```
@@ -238,7 +245,8 @@ Internal
 ```
 Attack Vectors:
 ```
-An internal attacker can place a token directly in the DB/persistence layer without knowing which token providers has created the token. 
+An internal attacker can place a token directly in the DB/persistence layer 
+without knowing which token providers has created the token. 
 ```
 
 Security Weakness:
