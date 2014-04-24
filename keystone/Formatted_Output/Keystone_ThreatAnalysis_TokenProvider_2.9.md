@@ -116,9 +116,12 @@ Counter Measures:
 
 Extra:
 > Probability: Near Zero
+
 > Impact: High
+
 > Related Info:
    http://lists.openstack.org/pipermail/openstack-security/2014-February/001023.html
+
 > Comments: This is not a feasible threat towards the component. This is reported as an informative note.
 
 
