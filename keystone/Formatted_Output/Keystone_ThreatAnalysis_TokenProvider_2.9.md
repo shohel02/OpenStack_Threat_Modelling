@@ -166,41 +166,33 @@ Comments: This is reported as an informative note.
 
 ####TokenProvider-03
 Threats:
-```
-Spoofing: Spoofing of PKI Token
-```
-Threat Agent:
-```
-Internal Attacker
-```
-Attack Vectors:
-```
-PKI token is created using openssl which requires signing key. The signing key
-is referred in the keystone.conf file. 
-Two scenarios can happen here 1) a system user with the ability to modify the keystone.conf file can point to a tampered signing key.
-2) A system user with ability to read signing keyfile can can generate PKI tokens 
-```
-Security Weakness:
-```
+>Spoofing: Spoofing of PKI Token
 
-```
+Threat Agent:
+>Internal Attacker
+
+Attack Vectors:
+>PKI token is created using openssl which requires signing key. The signing key
+is referred in the keystone.conf file.Two scenarios can happen here 1) a system user with the ability to modify the keystone.conf file can point to a tampered signing key.2) A system user with ability to read signing keyfile can can generate PKI tokens 
+
+Security Weakness:
+>
 
 Counter Measures:
-```
- - keystone.conf file access control limited.
- - Signing key file access limited.
-``` 
+>  keystone.conf file access control limited.
+   Signing key file access limited.
+ 
 
 Extra:
-```
-Probability:Low
 
-Impact:High
+>Probability:Low
+
+>Impact:High
    
-Related Info:
+>Related Info:
 
-Comments: This is reported as an informative note.
-```   
+>Comments: This is reported as an informative note.
+   
 ####TokenProvider-04
 Threats: 
 ```
