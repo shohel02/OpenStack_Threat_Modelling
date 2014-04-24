@@ -1,7 +1,8 @@
 Keystone Threat Modeling : Token Provider
 =========================================
 ### Table of contents
-[TOC]
+* auto-gen TOC:
+{:toc}
 
 ###System Overview
 Application version
