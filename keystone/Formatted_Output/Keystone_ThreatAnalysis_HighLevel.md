@@ -203,14 +203,10 @@ Components layering two trust boundaries and performing critical operations are 
 
 ####ID-1: Client
 
-####Name: ID-1.1: Keystone client
-#####Functionality
-
-####Name: ID-1.2: Dashboard – related to user login sessions
-#####Functionality
-
-####Name: ID-1.3: Auth_Token
-#####Functionality
+ - ID-1.1: Keystone client 
+ - ID-1.2: Dashboard – related to user login
+   sessions 
+ - ID-1.3: Auth_Token
 
 ####Name: ID-2: Keystone Application Server
 
