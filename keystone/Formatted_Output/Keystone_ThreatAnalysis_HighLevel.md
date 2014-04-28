@@ -208,70 +208,35 @@ Components layering two trust boundaries and performing critical operations are 
    sessions 
  - ID-1.3: Auth_Token
 
-####Name: ID-2: Keystone Application Server
+####ID-2: Keystone Application Server
 
-####Name: ID-2.1: Token_auth middleware 
-#####Functionality
+ - ID-2.1: Token_auth middleware  
+ - ID-2.2: Filters 
+ - ID-2.3: Identity Service
+ - ID-2.4: Auth Service 
+ - ID-2.5: Token Service 
+ - ID-2.6: Assignment service 
+ - ID-2.7: Catalog Service 
+ - ID-2.8: Policy Service 
+ - ID-2.9: Token provider 
+ - ID-2.10: Cache 
+ - ID-2.11: Trust
 
-####Name: ID-2.2: Filters
-#####Functionality
+####ID-3: Persistence Storage
 
-####Name: ID-2.3: Identity Service
-#####Functionality
+ - ID-3.1: SQL Backend 
+ - ID-3.2: LDAP Backend
 
-####Name: ID-2.4: Auth Service
-#####Functionality
+####ID-4: System
 
-####Name: ID-2.5: Token Service
-#####Functionality
-
-####Name: ID-2.6: Assignment service
-#####Functionality
-
-####Name: ID-2.7: Catalog Service
-#####Functionality
-
-####Name: ID-2.8: Policy Service
-#####Functionality
-
-####Name: ID-2.9: Token provider
-#####Functionality
-
-####Name: ID-2.10: Cache
-#####Functionality
-
-####Name: ID-2.11: Trust
-#####Functionality
-
-####Name: ID-3: Persistence Storage
-#####Functionality
-
-####Name: ID-3.1: SQL Backend
-#####Functionality
-
-####Name: ID-3.2: LDAP Backend
-#####Functionality
-
-####Name: ID-4: System
-
-####Name: ID-4.1: Web server – WSGI server
-#####Functionality
-
-####Name: ID-4.2: SSL server
-#####Functionality
-
-####Name: ID-4.3: Operating system
-#####Functionality
-
-####Name: ID-4: Dependencies ( PyPI, python packages) httplib2, requirements.txt
-#####Functionality
+ - ID-4.1: Web server – WSGI server 
+ - ID-4.2: SSL server 
+ - ID-4.3 Operating system 
+ - ID-4.4: Dependencies ( PyPI, python packages) httplib2, requirements.txt
 
 ####Name: ID-5: External
-
-
-####Name: ID-5.1: External Auth system
-#####Functionality 
-
+  - ID-5.1: External Auth system
+  
 (Note: The naming of asset and component is sometimes same. There are distinction between asset and component: an asset is something which has value and has a state. Component or proxies on the other hand manipulates /performs operation on top of asset. E.g., Trust is an asset – meaning it defines a relational state while ‘Trust component’ is the process to generate Trust asset)
 
 ----------
