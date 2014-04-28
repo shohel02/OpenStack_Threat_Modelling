@@ -113,31 +113,28 @@ Interfaces through which actors/attackers can request for assets/resources or in
 
 ####Name: IA-U: Internet Attacker– Unauthorized
 #####Actors
-1. Anonymous
-
+ID-1. Anonymous
 #####Details
 
 ####Name: IA-A: Internet Attacker– authorized
 #####Actors
-2. Project User
-3. Owner
-4. Project Admin
-5. Domain Admin
-6. Cloud Admin
-7. Admin (V2 case)
-
+ID-2. Project User
+ID-3. Owner
+ID-4. Project Admin
+ID-5. Domain Admin
+ID-6. Cloud Admin
+ID-7. Admin (V2 case)
 #####Details
-
 
 ####Name: IA-A: Internal Attacker
 #####Actors
-8.  Keystone System user
-9.  Other System user
-10. System Admin
-11. DB Admin
-12. Keystone DB user
-12. External Identity provider user
-13. service user
+ID-8.  Keystone System user
+ID-9.  Other System user
+ID-10. System Admin
+ID-11. DB Admin
+ID-12. Keystone DB user
+ID-13. External Identity provider user
+ID-14. service user
 
 #####Details
 
@@ -189,9 +186,159 @@ access. (10) Does System Admin
 ----------
 <a name="asset"/>
 ###Assets
+**USER RELATED**
+
+####Name: ID-1: User
+#####Details
+User_id  - Unique within the system
+
+User_name – unique within domain
+
+Domin_id – unique within the system
+#####Accessible To
+CRUD by 
+
+(5) (owning) Domain Admin 
+
+(6) Cloud Admin
 
 
+####Name: ID-1.1 User secret  
+#####Details
+User password – only hash password stored
+#####Accessible To
+(3) Owner
 
+
+####Name: ID-1.2 User sensitive data 
+#####Details
+#####Accessible To
+
+####Name: ID-1.3 User protected data
+#####Details
+User_id  - Unique within the system
+
+User_name – unique within domain
+
+Domin_id – unique within the system
+#####Accessible To
+R by
+(3) Owner
+
+(5) (owning) Domain Admin 
+
+(6) Cloud Admin
+
+(13) OpenStack service user
+
+
+####Name: ID-2: Project
+#####Details
+Project_id – unique within system
+
+Project_name-unique within domain
+
+Domain_id-unique within system
+
+#####Accessible To
+CRUD by 
+
+(5)  (owning) Domain Admin 
+
+(6) Cloud Admin
+
+
+####Name: 
+#####Details
+#####Accessible To
+
+####Name: 
+#####Details
+#####Accessible To
+
+####Name: 
+#####Details
+#####Accessible To
+
+####Name: 
+#####Details
+#####Accessible To
+
+####Name: 
+#####Details
+#####Accessible To
+
+####Name: 
+#####Details
+#####Accessible To
+
+####Name: 
+#####Details
+#####Accessible To
+
+####Name: 
+#####Details
+#####Accessible To
+
+####Name: 
+#####Details
+#####Accessible To
+
+####Name: 
+#####Details
+#####Accessible To
+
+####Name: 
+#####Details
+#####Accessible To
+
+####Name: 
+#####Details
+#####Accessible To
+
+####Name: 
+#####Details
+#####Accessible To
+
+####Name: 
+#####Details
+#####Accessible To
+
+####Name: 
+#####Details
+#####Accessible To
+
+####Name: 
+#####Details
+#####Accessible To
+
+####Name: 
+#####Details
+#####Accessible To
+
+####Name: 
+#####Details
+#####Accessible To
+
+####Name: 
+#####Details
+#####Accessible To
+
+####Name: 
+#####Details
+#####Accessible To
+
+####Name: 
+#####Details
+#####Accessible To
+
+####Name: 
+#####Details
+#####Accessible To
+
+####Name: 
+#####Details
+#####Accessible To
 
 
 ----------
