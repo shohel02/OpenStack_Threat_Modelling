@@ -1,6 +1,5 @@
 ###Keystone Asset Library
 
-```html
 <table border="1" cellspacing="0" cellpadding="0">
     <tbody>
         <tr>
@@ -1166,4 +1165,3 @@
         </tr>
     </tbody>
 </table>
-```
