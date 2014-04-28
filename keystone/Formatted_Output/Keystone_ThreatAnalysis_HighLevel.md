@@ -20,6 +20,8 @@ Keystone Threat Modeling - High Level
 
 [Components](#components)
 
+[Excluded List](#excluded)
+
 [Threats](#threats)
 
 
@@ -186,175 +188,104 @@ access. (10) Does System Admin
 ----------
 <a name="asset"/>
 ###Assets
-**USER RELATED**
+Asset library URL.
+[enter link description here][2]
 
-####Name: ID-1: User
-#####Details
-User_id  - Unique within the system
-
-User_name – unique within domain
-
-Domin_id – unique within the system
-#####Accessible To
-CRUD by 
-
-(5) (owning) Domain Admin 
-
-(6) Cloud Admin
-
-
-####Name: ID-1.1 User secret  
-#####Details
-User password – only hash password stored
-#####Accessible To
-(3) Owner
-
-
-####Name: ID-1.2 User sensitive data 
-#####Details
-#####Accessible To
-
-####Name: ID-1.3 User protected data
-#####Details
-User_id  - Unique within the system
-
-User_name – unique within domain
-
-Domin_id – unique within the system
-#####Accessible To
-R by
-(3) Owner
-
-(5) (owning) Domain Admin 
-
-(6) Cloud Admin
-
-(13) OpenStack service user
-
-
-####Name: ID-2: Project
-#####Details
-Project_id – unique within system
-
-Project_name-unique within domain
-
-Domain_id-unique within system
-
-#####Accessible To
-CRUD by 
-
-(5)  (owning) Domain Admin 
-
-(6) Cloud Admin
-
-<table>
-<tr>
-<td> do </td>
-<td> i do ido </td>
-</tr>
-</table>
-
-
-####Name: 
-#####Details
-#####Accessible To
-
-####Name: 
-#####Details
-#####Accessible To
-
-####Name: 
-#####Details
-#####Accessible To
-
-####Name: 
-#####Details
-#####Accessible To
-
-####Name: 
-#####Details
-#####Accessible To
-
-####Name: 
-#####Details
-#####Accessible To
-
-####Name: 
-#####Details
-#####Accessible To
-
-####Name: 
-#####Details
-#####Accessible To
-
-####Name: 
-#####Details
-#####Accessible To
-
-####Name: 
-#####Details
-#####Accessible To
-
-####Name: 
-#####Details
-#####Accessible To
-
-####Name: 
-#####Details
-#####Accessible To
-
-####Name: 
-#####Details
-#####Accessible To
-
-####Name: 
-#####Details
-#####Accessible To
-
-####Name: 
-#####Details
-#####Accessible To
-
-####Name: 
-#####Details
-#####Accessible To
-
-####Name: 
-#####Details
-#####Accessible To
-
-####Name: 
-#####Details
-#####Accessible To
-
-####Name: 
-#####Details
-#####Accessible To
-
-####Name: 
-#####Details
-#####Accessible To
-
-####Name: 
-#####Details
-#####Accessible To
-
-####Name: 
-#####Details
-#####Accessible To
-
-####Name: 
-#####Details
-#####Accessible To
+----------
+<a name="controls"/>
+##Existing Security Controls
 
 
 ----------
 <a name="components"/>
 ###Components
+Components layering two trust boundaries and performing critical operations are interesting for the analysis
+
+####ID-1: Client
+
+####Name: ID-1.1: Keystone client
+#####Functionality
+
+####Name: ID-1.2: Dashboard – related to user login sessions
+#####Functionality
+
+####Name: ID-1.3: Auth_Token
+#####Functionality
+
+####Name: ID-2: Keystone Application Server
+
+####Name: ID-2.1: Token_auth middleware 
+#####Functionality
+
+####Name: ID-2.2: Filters
+#####Functionality
+
+####Name: ID-2.3: Identity Service
+#####Functionality
+
+####Name: ID-2.4: Auth Service
+#####Functionality
+
+####Name: ID-2.5: Token Service
+#####Functionality
+
+####Name: ID-2.6: Assignment service
+#####Functionality
+
+####Name: ID-2.7: Catalog Service
+#####Functionality
+
+####Name: ID-2.8: Policy Service
+#####Functionality
+
+####Name: ID-2.9: Token provider
+#####Functionality
+
+####Name: ID-2.10: Cache
+#####Functionality
+
+####Name: ID-2.11: Trust
+#####Functionality
+
+####Name: ID-3: Persistence Storage
+#####Functionality
+
+####Name: ID-3.1: SQL Backend
+#####Functionality
+
+####Name: ID-3.2: LDAP Backend
+#####Functionality
+
+####Name: ID-4: System
+
+####Name: ID-4.1: Web server – WSGI server
+#####Functionality
+
+####Name: ID-4.2: SSL server
+#####Functionality
+
+####Name: ID-4.3: Operating system
+#####Functionality
+
+####Name: ID-4: Dependencies ( PyPI, python packages) httplib2, requirements.txt
+#####Functionality
+
+####Name: ID-5: External
 
 
+####Name: ID-5.1: External Auth system
+#####Functionality 
+
+(Note: The naming of asset and component is sometimes same. There are distinction between asset and component: an asset is something which has value and has a state. Component or proxies on the other hand manipulates /performs operation on top of asset. E.g., Trust is an asset – meaning it defines a relational state while ‘Trust component’ is the process to generate Trust asset)
 
 ----------
+<a name="excluded"/>
+###Excluded List
+Excluded from current Analysis
+
+----------
+
+
 <a name="threats"/>
 ###Threats
 ####ComponentName-001
@@ -383,24 +314,6 @@ Extra:
 >   Comments:
      Link to Bug/mailing list or Tracking 
 
-####ComponentName-002
-Threats:
-> 
-
-Threat Agent:
-> 
-
-Attack Vectors:
-> 
-
-Security Weakness:
-> 
-
-Counter Measures:
-> 
-
-Extra:
-> 
-
 
   [1]: images/DFD_Attacker_Keystone_level_1.png
+  [2]: Keystone_asset_library.md
