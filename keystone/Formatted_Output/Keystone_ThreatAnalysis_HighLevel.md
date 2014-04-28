@@ -247,6 +247,13 @@ CRUD by
 
 (6) Cloud Admin
 
+<table>
+<tr>
+<td> do </td>
+<td> i do ido </td>
+</tr>
+</table>
+
 
 ####Name: 
 #####Details
