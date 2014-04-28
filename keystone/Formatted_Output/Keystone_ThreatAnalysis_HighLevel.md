@@ -112,13 +112,13 @@ https://wiki.openstack.org/wiki/Security/Juno/Keystone#Notable_changes_since_Ice
 Interfaces through which actors/attackers can request for assets/resources or interfaces through which the system returns asset information to the requester. 
 
 ####Name: IA-U: Internet Attacker– Unauthorized
-###Actors
+#####Actors
 1. Anonymous
 
-###Details
+#####Details
 
 ####Name: IA-A: Internet Attacker– authorized
-###Actors
+#####Actors
 2. Project User
 3. Owner
 4. Project Admin
@@ -126,11 +126,11 @@ Interfaces through which actors/attackers can request for assets/resources or in
 6. Cloud Admin
 7. Admin (V2 case)
 
-###Details
+#####Details
 
 
 ####Name: IA-A: Internal Attacker
-###Actors
+#####Actors
 8.  Keystone System user
 9.  Other System user
 10. System Admin
@@ -139,49 +139,49 @@ Interfaces through which actors/attackers can request for assets/resources or in
 12. External Identity provider user
 13. service user
 
-###Details
+#####Details
 
 ----------
 <a name="entry"/>
 ###Entry Points
 ####Name: ID-01: Public Port
-####Description
+#####Description
 SSL protected port, used to access the keystone server. External requests come and return through this port. Default 5000. If you plan to use SSL proxy, it could be different
-####Accessible To
+#####Accessible To
 All, however only authenticated user can get in.
 
 ####Name: ID-02: Admin port
-####Description
+#####Description
 SSL protected port, used to access the keystone server. External requests come and return through this port. Default 35357. If you plan to use SSL proxy, it could be different. Used only in V2 API
-####Accessible To
+#####Accessible To
 All, however, only admin role user can get in (V2 case)
 
 ####Name: ID-03: External (optional)
-####Description
+#####Description
 Protected, used to authenticate users (user data) from external system
-####Accessible To
+#####Accessible To
 (8) Keystone System user
 (10) System Admin (Does system admin needs this ?)
 can access remote system to verify user data. Not the other way around.
 
-####Name: Interface towards persistence layer
-####Description
+####Name: ID-04 Interface towards persistence layer
+#####Description
 Keystone server communicates with database backend . We only consider MySQL server.
-####Accessible To
+#####Accessible To
 (8) Keystone System user
 access DB (through some DB user). Not the other way around. (10) Does System Admin needs this access?
 
-####Name: Cache interface
-####Description
+####Name: ID-05 Cache interface
+#####Description
 Keystone uses dogpile cache layer which stores data in one of the cache backend.
-####Accessible To
+#####Accessible To
 (8) Keystone System user
 access cache server. Not the other way around. (10) Does System Admin needs this access? 
 
-####Name: Configuration and key materials
-####Description
+####Name: ID-06 Configuration and key materials
+#####Description
 Keystone uses configuration parameter during initialization. It also uses key materials for signing and verifying the PKI key
-####Accessible To
+#####Accessible To
 (8) Keystone System user
 access. (10) Does System Admin 
 
