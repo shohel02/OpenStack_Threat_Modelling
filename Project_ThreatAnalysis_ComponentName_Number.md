@@ -1,4 +1,3 @@
-
 Keystone Threat Modeling : ComponentName
 =========================================
 ### Table of contents
