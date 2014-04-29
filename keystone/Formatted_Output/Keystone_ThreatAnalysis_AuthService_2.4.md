@@ -333,4 +333,4 @@ Extra:
   [3]: images/DFD_AUTH_CONTROLLER_Validate_V3.png
   [4]: images/DFD_AUTH_CONTROLLER_Check_V3.png
   [5]: images/DFD_AUTH_CONTROLLER_revoke_V3.png
-  [6]: keystone/Formatted_Output/Keystone_asset_library.md
+  [6]: Keystone_asset_library.md
