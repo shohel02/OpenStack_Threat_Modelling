@@ -86,7 +86,8 @@ DELETE /auth/tokens revoke_token
 #####Description
 Request from upper pipeline.
 #####Accessible To
-8) Keystone Process user 
+8) Keystone Process user
+
 10)System admin 
 
 ####Name ID-02: External Identity Provider
@@ -95,7 +96,9 @@ Identity Request resolved by external Provider.
 Set REMOTE_USER variable
 #####Accessible To
 8) Keystone Process user 
+
 10)System admin
+
 13)External Identity Provider User
 
 ####Name ID-03: Other Internal Services
