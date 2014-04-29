@@ -77,16 +77,17 @@ Get user token, Validate user token, Build user header, Add user header, Data to
 ####Token Validation (Expanded Validate User Token from previous, Level 2, DFD)
 ![Image Description][3]
 
+####Memcache Level 1
+![Image Description][4]
+
 <a name="entry"/>
 ###Entry Points
 
 ####Public Port
-SSL protected port, used to access the keystone server. External requests come and return through this port. 
-Default 5000. If you plan to use SSL proxy, it could be different.
+SSL protected port, used to access the keystone server. External requests come and return through this port. Default 5000. If you plan to use SSL proxy, it could be different.
 
 ####Admin Port
-SSL protected port, used to access the keystone server. External requests come and return through this port. 
-Default 35357. If you plan to use SSL proxy, it could be different. Used only in V2 API
+SSL protected port, used to access the keystone server. External requests come and return through this port. Default 35357. If you plan to use SSL proxy, it could be different. Used only in V2 API
 
 ----------
 <a name="asset"/>
@@ -97,9 +98,11 @@ Full assets list is documented in url
 <a name="threats"/>
 ###Threats
 
-  [1]: images/TokenValidation_HighLevel.png
-  [2]: images/TokenMiddleware.png
-  [3]: images/TokenValidation_Expanded.png
+  [1]: images/DFD_KeystoneMiddleware_Level1.png
+  [2]: images/DFD_KeystoneMiddleware_ValidateUserToken_Level1.png
+  [3]: images/DFD_KeystoneMiddleware_Level2.png
+  [4]: images/DFD_KeystoneMiddleware_MemCache_Level1.png
+  
  
 
   
