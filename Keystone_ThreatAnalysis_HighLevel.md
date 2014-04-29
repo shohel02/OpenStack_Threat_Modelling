@@ -20,8 +20,6 @@ Keystone Threat Modeling - High Level
 
 [Components](#components)
 
-[Excluded List](#excluded)
-
 [Threats](#threats)
 
 
@@ -113,140 +111,101 @@ https://wiki.openstack.org/wiki/Security/Juno/Keystone#Notable_changes_since_Ice
 ###Attackers and Actors
 Interfaces through which actors/attackers can request for assets/resources or interfaces through which the system returns asset information to the requester. 
 
-####Name: IA-U: Internet Attacker– Unauthorized
-#####Actors
-ID-1. Anonymous
-#####Details
+####Name
+**IA-U: Internet Attacker– Unauthorized**
+###Actors
+1. Anonymous
+###Details
 
-####Name: IA-A: Internet Attacker– authorized
-#####Actors
-ID-2. Project User
-ID-3. Owner
-ID-4. Project Admin
-ID-5. Domain Admin
-ID-6. Cloud Admin
-ID-7. Admin (V2 case)
-#####Details
+####Name
+**IA-A: Internet Attacker– authorized**
+###Actors
+2. Project User
+3. Owner
+4. Project Admin
+5. Domain Admin
+6. Cloud Admin
+7. Admin (V2 case)
+###Details
 
-####Name: IA-A: Internal Attacker
-#####Actors
-ID-8.  Keystone System user
-ID-9.  Other System user
-ID-10. System Admin
-ID-11. DB Admin
-ID-12. Keystone DB user
-ID-13. External Identity provider user
-ID-14. service user
 
-#####Details
+####Name
+**IA-A: Internal Attacker**
+###Actors
+8.  Keystone System user
+9.  Other System user
+10. System Admin
+11. DB Admin
+12. Keystone DB user
+12. External Identity provider user
+13. service user
+###Details
 
 ----------
 <a name="entry"/>
 ###Entry Points
-####Name: ID-01: Public Port
-#####Description
+####Name
+**ID-01: Public Port**
+####Description
 SSL protected port, used to access the keystone server. External requests come and return through this port. Default 5000. If you plan to use SSL proxy, it could be different
-#####Accessible To
+####Accessible To
 All, however only authenticated user can get in.
 
-####Name: ID-02: Admin port
-#####Description
+####Name
+**ID-02: Admin port**
+####Description
 SSL protected port, used to access the keystone server. External requests come and return through this port. Default 35357. If you plan to use SSL proxy, it could be different. Used only in V2 API
-#####Accessible To
+####Accessible To
 All, however, only admin role user can get in (V2 case)
 
-####Name: ID-03: External (optional)
-#####Description
+####Name
+**ID-03: External (optional)**
+####Description
 Protected, used to authenticate users (user data) from external system
-#####Accessible To
+####Accessible To
 (8) Keystone System user
 (10) System Admin (Does system admin needs this ?)
 can access remote system to verify user data. Not the other way around.
 
-####Name: ID-04 Interface towards persistence layer
-#####Description
+####Name
+**Interface towards persistence layer**
+####Description
 Keystone server communicates with database backend . We only consider MySQL server.
-#####Accessible To
+####Accessible To
 (8) Keystone System user
 access DB (through some DB user). Not the other way around. (10) Does System Admin needs this access?
 
-####Name: ID-05 Cache interface
-#####Description
+####Name
+**Cache interface**
+####Description
 Keystone uses dogpile cache layer which stores data in one of the cache backend.
-#####Accessible To
+####Accessible To
 (8) Keystone System user
 access cache server. Not the other way around. (10) Does System Admin needs this access? 
 
-####Name: ID-06 Configuration and key materials
-#####Description
+####Name
+**Configuration and key materials**
+####Description
 Keystone uses configuration parameter during initialization. It also uses key materials for signing and verifying the PKI key
-#####Accessible To
+####Accessible To
 (8) Keystone System user
 access. (10) Does System Admin 
-
 
 ----------
 <a name="asset"/>
 ###Assets
-Asset library URL.
-[enter link description here][2]
 
-----------
-<a name="controls"/>
-##Existing Security Controls
+
+
 
 
 ----------
 <a name="components"/>
 ###Components
-Components layering two trust boundaries and performing critical operations are interesting for the analysis
 
-####ID-1: Client
 
- - ID-1.1: Keystone client 
- - ID-1.2: Dashboard – related to user login
-   sessions 
- - ID-1.3: Auth_Token
-
-####ID-2: Keystone Application Server
-
- - ID-2.1: Token_auth middleware  
- - ID-2.2: Filters 
- - ID-2.3: Identity Service
- - ID-2.4: Auth Service 
- - ID-2.5: Token Service 
- - ID-2.6: Assignment service 
- - ID-2.7: Catalog Service 
- - ID-2.8: Policy Service 
- - ID-2.9: Token provider 
- - ID-2.10: Cache 
- - ID-2.11: Trust
-
-####ID-3: Persistence Storage
-
- - ID-3.1: SQL Backend 
- - ID-3.2: LDAP Backend
-
-####ID-4: System
-
- - ID-4.1: Web server – WSGI server 
- - ID-4.2: SSL server 
- - ID-4.3 Operating system 
- - ID-4.4: Dependencies ( PyPI, python packages) httplib2, requirements.txt
-
-####Name: ID-5: External
-  - ID-5.1: External Auth system
-  
-(Note: The naming of asset and component is sometimes same. There are distinction between asset and component: an asset is something which has value and has a state. Component or proxies on the other hand manipulates /performs operation on top of asset. E.g., Trust is an asset – meaning it defines a relational state while ‘Trust component’ is the process to generate Trust asset)
 
 ----------
-<a name="excluded"/>
-###Excluded List
-Excluded from current Analysis
-
-----------
-
-
 <a name="threats"/>
 ###Threats
 ####ComponentName-001
@@ -275,6 +234,24 @@ Extra:
 >   Comments:
      Link to Bug/mailing list or Tracking 
 
+####ComponentName-002
+Threats:
+> 
+
+Threat Agent:
+> 
+
+Attack Vectors:
+> 
+
+Security Weakness:
+> 
+
+Counter Measures:
+> 
+
+Extra:
+> 
+
 
   [1]: images/DFD_Attacker_Keystone_level_1.png
-  [2]: Keystone_asset_library.md
