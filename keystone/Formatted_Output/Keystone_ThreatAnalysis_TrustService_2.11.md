@@ -91,9 +91,13 @@ Request from upper pipeline.
 Full assets list is documented in [url][6]
 
 1)   User ( user_id)
+
 7)   Trust (trust_id, Trustor_id, Trustee_id, project)
+
 6.1) User_project (role grant)
+
 4)   Role
+
 35)  Context
 
 
