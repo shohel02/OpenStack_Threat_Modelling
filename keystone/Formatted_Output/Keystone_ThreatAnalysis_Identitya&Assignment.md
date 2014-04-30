@@ -1,4 +1,3 @@
-
 Keystone Threat Modeling : Identity and Assignment Service
 =========================================
 ### Table of contents
@@ -123,6 +122,61 @@ Full assets list is documented in url
 ----------
 <a name="threats"/>
 ###Threats
+####Assignment & Identity Service-01
+Threat: According to the current Policy File, a domain admin can create a group and add user to the group.
+If the Domain Admin becomes rogue and deletes the group then all tokens for a user beloging to the group are revoked.
+Threat Agent:
+>Domain Admin / Cloud Admin. 
+
+Attack Vectors:
+>Revoking all tokens for a user based on group membership is overkill, as we only would need to revoke tokens
+that had role assignments via the group.  Calculating those assignments would have to be done by the 
+assignment backend.
+
+
+Security Weakness:
+>
+
+Vulnerable Component:
+>Removing Users From Group.
+
+Counter Measures:
+> 
+
+Extra:
+> Probability: Low 
+
+> Impact: High
+
+> Related Info: Keystone Policy File: https://github.com/openstack/keystone/blob/master/etc/policy.v3cloudsample.json Referenced: 21 April 2014. 
+
+> Comments: 
+
+####Assignment & Identity Service-01
+Threat: 
+Threat Agent:
+>
+
+Attack Vectors:
+>
+
+Security Weakness:
+>
+
+Vulnerable Component:
+>
+
+Counter Measures:
+> 
+
+Extra:
+> Probability: 
+
+> Impact: 
+
+> Related Info: 
+
+> Comments:
 
   [1]: images/CreateUser.png
   [2]: images/DeleteUser.png

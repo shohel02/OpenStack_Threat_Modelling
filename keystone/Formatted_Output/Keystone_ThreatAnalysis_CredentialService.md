@@ -76,6 +76,83 @@ Full assets list is documented in url
 ----------
 <a name="threats"/>
 ###Threats
+####Credential Service-01
+Threat: 
+Threat Agent:
+>
+
+Attack Vectors:
+>
+
+Security Weakness:
+>
+
+Vulnerable Component:
+>
+
+Counter Measures:
+> 
+
+Extra:
+> Probability: 
+
+> Impact: 
+
+> Related Info:
+
+> Comments:
+
+####Credential Service-02
+Threat: 
+Threat Agent:
+>
+
+Attack Vectors:
+>
+
+Security Weakness:
+>
+
+Vulnerable Component:
+>
+
+Counter Measures:
+> 
+
+Extra:
+> Probability: 
+
+> Impact: 
+
+> Related Info:
+
+> Comments:
+
+####Credential Service-03
+Threat: 
+Threat Agent:
+>
+
+Attack Vectors:
+>
+
+Security Weakness:
+>
+
+Vulnerable Component:
+>
+
+Counter Measures:
+> 
+
+Extra:
+> Probability: 
+
+> Impact: 
+
+> Related Info:
+
+> Comments:
 
   [1]:images/AddCredential.png
   [2]:images/UpdateCredential.png
