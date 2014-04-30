@@ -1,4 +1,4 @@
-Keystone Threat Modeling : Token Service
+Keystone Threat Modeling : Token API Service
 =========================================
 ### Table of contents
 
@@ -23,9 +23,7 @@ Keystone Threat Modeling : Token Service
    Keystone Havana Stable Release
    
 ####Application Description
-   Token Service is composed of two parts: Token Controller (providig access to token related V2 operation) and a generic token API (Used both by V2 and V3 API) includes the manager and the driver. The manager receives requests and fulfills the request with the help of specific driver. The driver is configurable using keystone.conf.  The driver in turn fulfills the operation by calling a persistent storage layer (SQL alchemy or other backend).
-   
-The V2 Token Controller routes and glues the requests from public router to the appropriate internal services. It also performs filtering on incoming and outgoing requests.  Authenticated users are issued bearer token.
+  Token API includes the manager and the driver. The manager receives requests and fulfills the request with the help of specific driver. The driver is configurable using keystone.conf.  The driver in turn fulfills the operation by calling a persistent storage layer (SQL alchemy or other backend)
 
 ####Additional Info
   
@@ -33,8 +31,6 @@ The V2 Token Controller routes and glues the requests from public router to the 
 <a name="implementation"/>
 ###Implementation Overview
 ####Major Components
-Keystone/token/controllers.py
-
 Keystone/token/core
  
 Keystone/token/backends/driver {sql/kvs/memchace}
@@ -55,7 +51,6 @@ Revocation_list
 ###System Assumptions (External Dependencies)
 
  - Only considered SQL backend
- - Parameters of the incoming request to TOKEN_API is trustworthy
  - The incoming request to TOKEN_API is trustworthy
 
 ###Security Objective
@@ -65,10 +60,14 @@ Revocation_list
 
 <a name="dfd"/>
 ###Data Flow Diagrams 
-####Name 
-image url
- 
-
+####Create_Token
+[enter link description here][1]
+####Validate_Token
+[enter link description here][2]
+####Delete_Token
+[enter link description here][3]
+####Revocation_List
+[enter link description here][4]
 
 <a name="entry"/>
 ###Entry Points
@@ -80,18 +79,31 @@ Request from upper pipeline.
 
 10)System admin 
 
+####Name ID-02: Cache
+#####Description
+Store and Retrieve data from cache
+#####Accessible To
+8) Keystone Process user
+
+10)System admin 
+
 ####Name ID-03: Other Internal Services
 #####Description
-IDENTITY API, TOKEN PROVIDER API, TOKEN  API
-
+IDENTITY API, TOKEN PROVIDER API
 
 
 ----------
 <a name="asset"/>
 ###Assets
-Full assets list is documented in url
+Full assets list is documented in [url][5]
 
+(1) User (user_id)
 
+(8) Token (Token_id, unique_id, Token_ref)
+
+(26) Configuration Parameter (Expiry_Time) 
+
+(8.1) Revocation List
 
 ----------
 ####ComponentName-001
@@ -120,22 +132,9 @@ Extra:
 >   Comments:
      Link to Bug/mailing list or Tracking 
 
-####ComponentName-002
-Threats:
-> 
 
-Threat Agent:
-> 
-
-Attack Vectors:
-> 
-
-Security Weakness:
-> 
-
-Counter Measures:
-> 
-
-Extra:
-> 
-
+  [1]: images/DFD_Token_API_Create_Token.png
+  [2]: images/DFD_Token_API_Validated_Token.png
+  [3]: images/DFD_Token_API_Delete_Token.png
+  [4]: images/DFD_Token_API_revoke_list.png
+  [5]: Keystone_asset_library.md
