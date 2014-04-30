@@ -1,4 +1,3 @@
-
 Keystone Threat Modeling : Auth Token
 =========================================
 ### Table of contents
@@ -175,7 +174,7 @@ Extra:
 
 > Impact: 
 
-> Related Info: https://bugs.launchpad.net/keystone/+bug/1182920
+> Related Info: 
 
 > Comments:
 
@@ -203,7 +202,7 @@ Extra:
 
 > Impact: 
 
-> Related Info: https://bugs.launchpad.net/keystone/+bug/1182920
+> Related Info: 
 
 > Comments:
 
@@ -229,7 +228,7 @@ Extra:
 
 > Impact: 
 
-> Related Info: https://bugs.launchpad.net/keystone/+bug/1182920
+> Related Info: 
 
 > Comments:
 
