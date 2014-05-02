@@ -47,17 +47,17 @@ Keystone Threat Modeling - High Level
 ####Major Components
 **Pipe line middlewares:**  url_nomalizer, token_auth, admin_token_auth, xml_body, Json_body, ec2_extension,  S3_extension,  crud_extension, admin_service, public_service (check the middleware from paste.ini for specific Pipe).  Currently this document focuses on [pipeline:api_v3], the keystone v3 API pipeline. The document also include some parts of [pipeline:public_api] – keystone v2 API pipeline.
 
-Services/internal components: Identity, Assignment, Catalog, policy, Token, Token Provider, Trust
+**Services/internal components:** Identity, Assignment, Catalog, policy, Token, Token Provider, Trust
 
-Drivers/persistence storage:  SQL, FILE, KVA, LDAP
+**Drivers/persistence storage:**  SQL, FILE, KVA, LDAP
 
 
 ####Dependent components
-  Webservers:  WSGI (or any web server on top WSGI modules can run) 
+**Webservers:**  WSGI (or any web server on top WSGI modules can run) 
 
-Operating system and libraries:  oslo.config, dependencies. 
+**Operating system and libraries:**  oslo.config, dependencies. 
 
-Crypto:  OpenSSL library, hashlib, passlib, UUID generator (Crypto library versions are considered)
+**Crypto:**  OpenSSL library, hashlib, passlib, UUID generator (Crypto library versions are considered)
 Related info covered in:  
 https://wiki.openstack.org/wiki/Security/Juno/Keystone#Notable_changes_since_Icehouse
 ####Description
