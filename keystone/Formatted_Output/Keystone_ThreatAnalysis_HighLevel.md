@@ -1,4 +1,3 @@
-
 Keystone Threat Modeling - High Level
 =========================================
 
@@ -33,7 +32,7 @@ Keystone Threat Modeling - High Level
 ####Application Description
    Keystone provides identity and access management for users of OpenStack Cloud.  For this, it provides a shim and most of the underlying components are pluggable. It provides authentication of users, can contain a repository of users (identities) and roles. It also performs account and entitlement management of users.  The entitlements are managed by assigning roles for users and enforcing access control on the target service (object).
    
-   -	Username/user id identifies the user. A user is authenticated by a configured authentication mechanism. Before authentication, account needs to be provisioned. Keystone also performs account provisioning e.g., users, tenant, domain, role, and their assignments. External authentication mechanisms e.g., Apache HTTP authentication can be integrated with keystone.
+   -	Username/user id identifies the user. A user is authenticated by a configured authentication mechanism. Before authentication, the account needs to be provisioned. Keystone also performs account provisioning e.g., users, tenant, domain, role, and their assignments. External authentication mechanisms e.g., Apache HTTP authentication can be integrated with keystone.
 -	Authorization (entitlement) is performed for each request based on assigned role within the token for a user and policy file defined in the system. The entitlement decision is decentralized i.e., made by the respective service.
 -	Each successful and unsuccessful request is logged.
 -	User and system data is protected by access control and sensitive data (only password) is protected by one way hashing.
@@ -46,7 +45,7 @@ Keystone Threat Modeling - High Level
 <a name="implementation"/>
 ###Implementation Overview
 ####Major Components
-   Pipe line middlewares:  url_nomalizer, token_auth, admin_token_auth, xml_body, Json_body, ec2_extension,  S3_extension,  crud_extension, admin_service, public_service (check the middleware from paste.ini for specific Pipe).  Currently this document focuses on [pipeline:api_v3], the keystone v3 API pipeline. The document also include some parts of [pipeline:public_api] – keystone v2 API pipeline.
+**Pipe line middlewares:**  url_nomalizer, token_auth, admin_token_auth, xml_body, Json_body, ec2_extension,  S3_extension,  crud_extension, admin_service, public_service (check the middleware from paste.ini for specific Pipe).  Currently this document focuses on [pipeline:api_v3], the keystone v3 API pipeline. The document also include some parts of [pipeline:public_api] – keystone v2 API pipeline.
 
 Services/internal components: Identity, Assignment, Catalog, policy, Token, Token Provider, Trust
 
@@ -102,7 +101,7 @@ https://wiki.openstack.org/wiki/Security/Juno/Keystone#Notable_changes_since_Ice
 
 <a name="dfd"/>
 ###Data Flow Diagrams 
-####Keystone Components
+####Keystone Internal Components and Threat Agents
 ![enter image description here][1]
 
 
@@ -121,21 +120,32 @@ ID-1. Anonymous
 ####Name: IA-A: Internet Attacker– authorized
 #####Actors
 ID-2. Project User
+
 ID-3. Owner
+
 ID-4. Project Admin
+
 ID-5. Domain Admin
+
 ID-6. Cloud Admin
+
 ID-7. Admin (V2 case)
 #####Details
 
 ####Name: IA-A: Internal Attacker
 #####Actors
 ID-8.  Keystone System user
+
 ID-9.  Other System user
+
 ID-10. System Admin
+
 ID-11. DB Admin
+
 ID-12. Keystone DB user
+
 ID-13. External Identity provider user
+
 ID-14. service user
 
 #####Details
