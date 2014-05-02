@@ -91,7 +91,18 @@ Token creation phase data is stored in DB, validation phase data
 ----------
 <a name="asset"/>
 ###Assets
-Full assets list is documented in url
+Full assets list is documented in [url][4]
+
+8) Token (Token_Ref) , Token_id, Unique_id
+
+8.3) Issue_time
+
+22) PKI Key
+
+2&) Configuration (Expiry_time)
+
+28) UUID.UUID4()
+
 
 ----------
 <a name="threats"/>
@@ -247,3 +258,4 @@ Extra:
   [1]: images/DFD_Token_provider_issue_v2_token.png
   [2]: images/DFD_Token_provider_issue_v3_token.png
   [3]: images/DFD_Token_provider_validate_v2_token.png
+  [4]: Keystone_asset_library.md
