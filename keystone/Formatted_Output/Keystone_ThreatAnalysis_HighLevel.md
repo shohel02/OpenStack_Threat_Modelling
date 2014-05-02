@@ -212,10 +212,9 @@ Components layering two trust boundaries and performing critical operations are 
 
 ####ID-1: Client
 
- - ID-1.1: Keystone client 
- - ID-1.2: Dashboard – related to user login
-   sessions 
- - ID-1.3: Auth_Token
+ - ID-1.1: Keystone client  (Not done)
+ - ID-1.2: Dashboard – related to user login sessions (Not done)
+ - ID-1.3: Auth_Token (with memcache)
 
 ####ID-2: Keystone Application Server
 
@@ -228,15 +227,15 @@ Components layering two trust boundaries and performing critical operations are 
  - ID-2.7: Catalog Service 
  - ID-2.8: Policy Service 
  - ID-2.9: Token provider 
- - ID-2.10: Cache 
+ - ID-2.10: Cache (excluded dogpile)
  - ID-2.11: Trust
 
-####ID-3: Persistence Storage
+####ID-3: Persistence Storage (Not done)
 
  - ID-3.1: SQL Backend 
  - ID-3.2: LDAP Backend
 
-####ID-4: System
+####ID-4: System (Not done)
 
  - ID-4.1: Web server – WSGI server 
  - ID-4.2: SSL server 
@@ -244,7 +243,7 @@ Components layering two trust boundaries and performing critical operations are 
  - ID-4.4: Dependencies ( PyPI, python packages) httplib2, requirements.txt
 
 ####Name: ID-5: External
-  - ID-5.1: External Auth system
+  - ID-5.1: External Auth system (only REMOTE_USER checked)
   
 (Note: The naming of asset and component is sometimes same. There are distinction between asset and component: an asset is something which has value and has a state. Component or proxies on the other hand manipulates /performs operation on top of asset. E.g., Trust is an asset – meaning it defines a relational state while ‘Trust component’ is the process to generate Trust asset)
 
