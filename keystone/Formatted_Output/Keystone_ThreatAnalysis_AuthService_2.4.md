@@ -115,8 +115,6 @@ Full assets list is documented in url
 
 1.1) User Secret (password, Token)
 
-1.4) Auth Mecahnsim (Auth Chaining)
-
 8) Token
 
 8.2.) Scope (project, Domain, Trust)
@@ -126,6 +124,8 @@ Full assets list is documented in url
 27) REMOTE_USER
 
 35) Context 
+
+36) Auth Mecahnsim (Auth Chaining)
 
 ----------
 ####AuthController -001
