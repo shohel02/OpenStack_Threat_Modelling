@@ -91,13 +91,12 @@ https://wiki.openstack.org/wiki/Security/Juno/Keystone#Notable_changes_since_Ice
 
 ###Security Objective
 
- -  An IdAM must provide
--	Identification (authentication) and entitlements of users
--	Entitlement decision (authorization) for user-initiated request
--	Non-repudiable auditing for each request
+ -  An IdAM must provide:
+-	Identification (authentication) and entitlements of users.
+-	Entitlement decision (authorization) for user-initiated request.
+-	Non-repudiable auditing for each request.
 -	Protection of system and user data / state information.
--   In addition, for keystone case: 
-    -    Integrity of catalog information 
+-  In addition, for keystone case: Integrity of catalog information. 
 
 <a name="dfd"/>
 ###Data Flow Diagrams 
@@ -155,19 +154,19 @@ ID-14. service user
 ###Entry Points
 ####Name: ID-01: Public Port
 #####Description
-SSL protected port, used to access the keystone server. External requests come and return through this port. Default 5000. If you plan to use SSL proxy, it could be different
+SSL protected port, used to access the keystone server. External requests come and return through this port. Default 5000. If you plan to use SSL proxy, it could be different.
 #####Accessible To
 All, however only authenticated user can get in.
 
 ####Name: ID-02: Admin port
 #####Description
-SSL protected port, used to access the keystone server. External requests come and return through this port. Default 35357. If you plan to use SSL proxy, it could be different. Used only in V2 API
+SSL protected port, used to access the keystone server. External requests come and return through this port. Default 35357. If you plan to use SSL proxy, it could be different. Used only in V2 API.
 #####Accessible To
-All, however, only admin role user can get in (V2 case)
+All, however, only admin role user can get in (V2 case).
 
 ####Name: ID-03: External (optional)
 #####Description
-Protected, used to authenticate users (user data) from external system
+Protected, used to authenticate users (user data) from external system.
 #####Accessible To
 (8) Keystone System user
 (10) System Admin (Does system admin needs this ?)
@@ -177,7 +176,7 @@ can access remote system to verify user data. Not the other way around.
 #####Description
 Keystone server communicates with database backend . We only consider MySQL server.
 #####Accessible To
-(8) Keystone System user
+(8) Keystone System user can
 access DB (through some DB user). Not the other way around. (10) Does System Admin needs this access?
 
 ####Name: ID-05 Cache interface
