@@ -89,6 +89,16 @@ Request from upper pipeline.
 
 10)System admin 
 
+####Name ID-02: Configuration
+#####Description
+paramters from conf: MAX_PASSWORD_SIZE, MAX_PARAM_SIZE, Expiry_time
+#####Accessible To
+8) Keystone Process user
+
+10)System admin 
+
+
+
 ----------
 <a name="asset"/>
 ###Assets
