@@ -1,4 +1,3 @@
-
 Keystone Threat Modeling : Auth Controller V3
 =========================================
 ### Table of contents
@@ -112,6 +111,21 @@ IDENTITY API, TOKEN PROVIDER API, TOKEN  API
 Full assets list is documented in url
 [Asset Library][6]
 
+1) User
+
+1.1) User Secret (password, Token)
+
+1.4) Auth Mecahnsim (Auth Chaining)
+
+8) Token
+
+8.2.) Scope (project, Domain, Trust)
+
+26) Configuration (Expiry_time)
+
+27) REMOTE_USER
+
+35) Context 
 
 ----------
 ####AuthController -001
