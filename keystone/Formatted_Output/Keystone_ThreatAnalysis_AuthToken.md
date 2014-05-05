@@ -81,16 +81,20 @@ Get user token, Validate user token, Build user header, Add user header, Data to
 <a name="entry"/>
 ###Entry Points
 
-####Public Port
-SSL protected port, used to access the keystone server. External requests come and return through this port. Default 5000. If you plan to use SSL proxy, it could be different.
+####Upstream Pipeline
 
-####Admin Port
-SSL protected port, used to access the keystone server. External requests come and return through this port. Default 35357. If you plan to use SSL proxy, it could be different. Used only in V2 API
-
+####WSGI Server
 ----------
 <a name="asset"/>
 ###Assets
 Full assets list is documented in url
+[Asset Library][5]
+
+1) User
+
+8) Token
+
+20) System
 
 ----------
 <a name="threats"/>
@@ -236,6 +240,7 @@ Extra:
   [2]: images/DFD_KeystoneMiddleware_ValidateUserToken_Level1.png
   [3]: images/DFD_KeystoneMiddleware_Level2.png
   [4]: images/DFD_KeystoneMiddleware_MemCache_Level1.png
+  [5]: Keystone_asset_library.md
   
  
 
