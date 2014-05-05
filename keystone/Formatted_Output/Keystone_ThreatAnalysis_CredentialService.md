@@ -72,6 +72,11 @@ Token creation phase data is stored in DB, validation phase data is retrieved fr
 <a name="asset"/>
 ###Assets
 Full assets list is documented in url
+[Asset Library][4]
+
+9) Credentials
+
+9.1) Credential ID
 
 ----------
 <a name="threats"/>
@@ -157,3 +162,4 @@ Extra:
   [1]:images/AddCredential.png
   [2]:images/UpdateCredential.png
   [3]:images/DeleteCredential.png
+  [4]: Keystone_asset_library.md
