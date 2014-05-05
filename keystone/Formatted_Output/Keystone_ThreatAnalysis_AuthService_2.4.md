@@ -161,7 +161,7 @@ Extra:
 
 ####AuthController-002
 Threats:
-> Spoofing: 
+> Spoofing
 
 Threat Agent:
 > Internet Attacker-authorized or unauthorized,
@@ -173,8 +173,9 @@ Security Weakness:
 > V3 support multiple authentication mechanism. Support for both weak and strong authentication at the same time to get authentication token could resulted in a threat in which an attacker could 
 use the weaker authentication mechanism to get a TOKEN. An attacker will always choose the lower grade authentication mechanism to attack the target.  For example, supporting password and one time password both at the same time. The attacker will choose the lower strength auth method to achieve his goal. Weakness could generate from supporting multiple authentication.
 
+
 Counter Measures:
-> Security best practice to decide, resources available based on authentication method strength
+> Security best practice to decide, resources available based on authentication method strength. User (a domain) can be binded to allowable authentication mechansims. User can only perform authentication using the allowed mechanism. Current authenticaiton mechanims binding is too large ( System wide). 
 
 Extra:
 >  Probability: Low
@@ -344,7 +345,7 @@ Extra:
 
 ####AuthController-008
 Threats:
-> Spoofing: Unsuccessful authentication attempt
+> Spoofing/DoS: Unsuccessful authentication attempt
 
 Threat Agent:
 > Internet Attacker - Unauthorized
@@ -358,16 +359,43 @@ Security Weakness:
 
 Counter Measures:
 > When a number of unsuccessful authentication attempts has been reached, the system
-should have mechanism to restrict (to avoid password guessing attack)
+should have mechanism to restrict (to avoid password guessing attack, DoS attack).
 
 Extra:
->  Probability: 
+>  Probability:  Medium
 
->   Impact: 
+>   Impact: Medium
 
 >   Related Info:
 
 >   Comments:
+
+####AuthController-009
+Threats:
+> Spoofing: via poor quality secrects (user secrects)
+
+Threat Agent:
+> Internet Attacker - Unauthorized
+
+Attack Vectors:
+> An attacker can expoloit a weak secret to easily gain access to the system (e.g., password strenth 
+weakness, token_id(MD5 hashed id) weakness) 
+
+Security Weakness:
+> Lack of measurement of quality of secret. 
+
+Counter Measures:
+> Secrect should be controlled against quality parameters.
+
+Extra:
+>  Probability:  Medium
+
+>   Impact: Medium
+
+>   Related Info:
+
+>   Comments:
+
 
 
 
