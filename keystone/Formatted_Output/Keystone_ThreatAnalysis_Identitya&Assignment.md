@@ -69,6 +69,8 @@ Keystone Policy Engine.
 <a name="dfd"/>
 ###Data Flow Diagrams 
 
+##Identity Operations:
+
 ####Create User
 ![Image Description][1]
 
@@ -86,6 +88,8 @@ Keystone Policy Engine.
 
 ####Delete Group
 ![Image Description][6]
+
+##Assignment Operations:
 
 ####Delete Domain
 ![Image Description][7]
@@ -118,7 +122,10 @@ Token creation phase data is stored in DB, validation phase data is retrieved fr
 <a name="asset"/>
 ###Assets
 Full assets list is documented in url
+[Asset Library][13]
 
+9) Credentials
+20) System
 ----------
 <a name="threats"/>
 ###Threats
@@ -190,5 +197,5 @@ Extra:
   [10]: images/DeleteRole.png
   [11]: images/CreateGrant.png
   [12]: images/RevokeGrant.png
-
+  [13]: Keystone_asset_library.md
   
