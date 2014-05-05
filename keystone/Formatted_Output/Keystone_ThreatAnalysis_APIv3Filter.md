@@ -33,27 +33,27 @@ In this report we look into the filters for the api_v3 pipleline.
 
 The filters present in the api_v3 pipeline are:
 
--sizelimit 
+sizelimit 
 
--url_normalize 
+url_normalize 
 
--build_auth_context 
+build_auth_context 
 
--token_auth 
+token_auth 
 
--admin_token_auth 
+admin_token_auth 
 
--xml_body_v3 
+xml_body_v3 
 
--json_body 
+json_body 
 
--ec2_extension_v3 
+ec2_extension_v3 
 
--s3_extension 
+s3_extension 
 
--simple_cert_extension 
+simple_cert_extension 
 
--service_v3
+service_v3
     
 ####Dependent components
 
