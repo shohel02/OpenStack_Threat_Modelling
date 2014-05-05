@@ -99,6 +99,15 @@ Token creation phase data is stored in DB, validation phase data is retrieved fr
 <a name="asset"/>
 ###Assets
 Full assets list is documented in url
+[Asset Library][7]
+
+10) Service
+
+10.1) Service ID
+
+11) Endpoint
+
+11.1) Endpoint ID
 
 ----------
 <a name="threats"/>
@@ -188,4 +197,5 @@ Extra:
   [4]: images/CreateService.png
   [5]: images/UpdateService.png
   [6]: images/DeleteService.png
+  [7]: Keystone_asset_library.md
   
