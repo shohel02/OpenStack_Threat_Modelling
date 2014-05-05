@@ -128,6 +128,7 @@ Full assets list is documented in url
 36) Auth Mecahnsim (Auth Chaining)
 
 ----------
+<a name="threats"/>
 ####AuthController -001
 Threats:
 > Spoofing: Unauthorized access
@@ -341,6 +342,32 @@ Extra:
 
 >   Comments:
 
+####AuthController-008
+Threats:
+> Spoofing: Unsuccessful authentication attempt
+
+Threat Agent:
+> Internet Attacker - Unauthorized
+
+Attack Vectors:
+> An attacker can issue an unlimited number of authentication request, possibly 
+resulting an DoS attack against  the system
+
+Security Weakness:
+> By default, the system has no authentication failure handling mechanism.
+
+Counter Measures:
+> When a number of unsuccessful authentication attempts has been reached, the system
+should have mechanism to restrict (to avoid password guessing attack)
+
+Extra:
+>  Probability: 
+
+>   Impact: 
+
+>   Related Info:
+
+>   Comments:
 
 
 
