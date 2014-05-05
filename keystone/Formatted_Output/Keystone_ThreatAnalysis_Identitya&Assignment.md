@@ -69,7 +69,7 @@ Keystone Policy Engine.
 <a name="dfd"/>
 ###Data Flow Diagrams 
 
-##Identity Operations:
+###Identity Operations:
 
 ####Create User
 ![Image Description][1]
@@ -89,7 +89,7 @@ Keystone Policy Engine.
 ####Delete Group
 ![Image Description][6]
 
-##Assignment Operations:
+###Assignment Operations:
 
 ####Delete Domain
 ![Image Description][7]
