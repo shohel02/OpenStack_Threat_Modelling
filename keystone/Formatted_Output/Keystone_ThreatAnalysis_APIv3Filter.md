@@ -92,7 +92,7 @@ Code Snippet:
 
 ''' if (len(request.environ['PATH_INFO']) > 1 and
                 request.environ['PATH_INFO'][-1] == '/'):
-            request.environ['PATH_INFO'] = request.environ['PATH_INFO'][:-1] ''''
+            request.environ['PATH_INFO'] = request.environ['PATH_INFO'][:-1] '''
 
 2. Rewrites path to root if no path is given.
 
