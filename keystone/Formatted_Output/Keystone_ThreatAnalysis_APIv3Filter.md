@@ -60,7 +60,7 @@ The filters present in the api_v3 pipeline are:
 
 ####Description
 
-**sizelimit:** keystone.middleware:RequestBodySizeLimiter.factory
+###**sizelimit:** keystone.middleware:RequestBodySizeLimiter.factory
 
 Description: Limits the size of an incoming request
 
@@ -76,7 +76,7 @@ called exception.RequestTooLarge.
 2. If req.content_length is None and req.is_body_readable then it limits the size of an 
 incoming request.
 
-**url_normalize:** keystone.middleware:NormalizingFilter.factory
+###**url_normalize:** keystone.middleware:NormalizingFilter.factory
 
 Description: Middleware filter to handle URL normalization
 
@@ -98,10 +98,10 @@ Code Snippet:
 
 Code Snippet:
 
- elif not request.environ['PATH_INFO']:
-            request.environ['PATH_INFO'] = '/'
+ ` elif not request.environ['PATH_INFO']:
+            request.environ['PATH_INFO'] = '/' `
 
-**build_auth_context:** keystone.middleware:AuthContextMiddleware.factory
+###**build_auth_context:** keystone.middleware:AuthContextMiddleware.factory
 
 Description: Build the authentication context from the request auth token.
 
@@ -122,13 +122,13 @@ is handled by class AdminTokenAuthMiddleware.
 3. If you are using the Revoke extension with backend other than KVS then validate token.
 
 Code Snippet:
-if not CONF.token.revoke_by_id:
+`if not CONF.token.revoke_by_id:
                 self.token_api.token_provider_api.validate_token(
-                    context['token_id'])
+                    context['token_id'])`
 
 4. Validates token_bind;  wsgi.validate_token_bind(context, token_ref)
 
-**admin_token_auth:**  keystone.middleware:AdminTokenAuthMiddleware.factory
+###**admin_token_auth:**  keystone.middleware:AdminTokenAuthMiddleware.factory
 
 Description: A trivial filter that checks for a pre-defined admin token. Sets 'is_admin' 
 to true in the context, expected to be checked by methods that are admin-only.
@@ -139,18 +139,21 @@ Returns:
 
 Method:
 
-1. Get the token from the AUTH_TOKEN_HEADER; 
+1. Get the token from the AUTH_TOKEN_HEADER;
+
 token = request.headers.get(AUTH_TOKEN_HEADER)
 
 2. Gets the context from the request environment; 
+
 context = request.environ.get(CONTEXT_ENV, {})
 
 3. If token is admin_token then set CONTEXT_ENV as context['is_admin']  
-Code Snippet
-context['is_admin'] = (token == CONF.admin_token)
-  request.environ[CONTEXT_ENV] = context
 
-**ec2_extension_v3:** keystone.contrib.ec2:Ec2ExtensionV3.factory
+`Code Snippet
+context['is_admin'] = (token == CONF.admin_token)
+  request.environ[CONTEXT_ENV] = context`
+
+###**ec2_extension_v3:** keystone.contrib.ec2:Ec2ExtensionV3.factory
 
 Description: This service provides Ec2 token validation and CRUD for services configured
 with theEc2_token middleware.
@@ -161,26 +164,26 @@ Returns:
 
 Method:
 
-1. Gets an instance of the ec2 controller; ec2_controller = controllers.Ec2ControllerV3()
+1. Gets an instance of the ec2 controller: `ec2_controller = controllers.Ec2ControllerV3()`
 
 2. Provides Validation and CRUD operations.
 
 (Validation) Code Snippet: 
- mapper.connect(
+ `mapper.connect(
             '/ec2tokens',
             controller=ec2_controller,
             action='authenticate',
-            conditions=dict(method=['POST']))
+            conditions=dict(method=['POST']))`
 
 (CRUD) Code Snippet:
-  mapper.connect(
+  `mapper.connect(
             '/users/{user_id}/credentials/OS-EC2',
             controller=ec2_controller,
             action='ec2_create_credential',
-            conditions=dict(method=['POST']))
+            conditions=dict(method=['POST']))`
 
 
-**s3_extension:** keystone.contrib.s3:S3Extension.factory
+###**s3_extension:** keystone.contrib.s3:S3Extension.factory
 
 Description: This service provides S3 token validation for services configured with the 
 s3_token middleware to authorize S3 requests.
@@ -194,10 +197,11 @@ Method:
 1. Gets an instance of the ec2 controller; ec2_controller = controllers.Ec2ControllerV3()
 
 2. Provides Validation operations.
- mapper.connect('/s3tokens',
+
+ `mapper.connect('/s3tokens',
                        controller=controller,
                        action='authenticate',
-                       conditions=dict(method=['POST']))
+                       conditions=dict(method=['POST']))`
 
 
 <a name="assumption"/>
