@@ -39,7 +39,6 @@ Keystone Threat Analysis Index
  - ID-4.3  Operating system 
  - ID-4.4: Dependencies ( PyPI, python packages) httplib2, requirements.txt
  - ID-4.5: Audit System
- - ID-4.6: Keystone-manage
 
 ####Name: ID-5: External
   - ID-5.1: External Auth system
