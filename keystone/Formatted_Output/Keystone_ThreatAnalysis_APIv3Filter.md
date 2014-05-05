@@ -114,6 +114,7 @@ Exception: Exception.Unauthorized
 Method:
 
 1.  Gets the token_id from token_id = request.headers.get(AUTH_TOKEN_HEADER).
+
 1.1 If the token_id is  admin_token does not process further and returns as admin_token 
 is handled by class AdminTokenAuthMiddleware.
 
@@ -141,16 +142,16 @@ Method:
 
 1. Get the token from the AUTH_TOKEN_HEADER;
 
-token = request.headers.get(AUTH_TOKEN_HEADER)
+`token = request.headers.get(AUTH_TOKEN_HEADER)`
 
 2. Gets the context from the request environment; 
 
-context = request.environ.get(CONTEXT_ENV, {})
+`context = request.environ.get(CONTEXT_ENV, {})`
 
 3. If token is admin_token then set CONTEXT_ENV as context['is_admin']  
 
-`Code Snippet
-context['is_admin'] = (token == CONF.admin_token)
+Code Snippet
+`context['is_admin'] = (token == CONF.admin_token)
   request.environ[CONTEXT_ENV] = context`
 
 ###**ec2_extension_v3:** keystone.contrib.ec2:Ec2ExtensionV3.factory
@@ -194,7 +195,7 @@ Returns:
 
 Method:
 
-1. Gets an instance of the ec2 controller; ec2_controller = controllers.Ec2ControllerV3()
+1. Gets an instance of the ec2 controller; `ec2_controller = controllers.Ec2ControllerV3()`
 
 2. Provides Validation operations.
 
