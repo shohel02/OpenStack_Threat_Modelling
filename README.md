@@ -11,10 +11,10 @@ Files:
        
        
 **Threat_modelling_process.md**
-       Steps of Threat Modelling process in Markdown
+       Steps of the Threat Modelling process (in markdown format)
 
 
-**Project_ThreatAnalysis_ComponentName_Number.md** 
+**Project_ThreatAnalysis_ComponentName_Number.md**
        A common format for threat modelling 
 
 
@@ -50,11 +50,11 @@ Deprecated Soon:
        A template for writing analysis report. A Number 
        is assigned for each component. Each Openstack service can be
        composed of ’n’ number of components. The number can be found in
-       HighLevel docs. **Note: Markdown format replaces this - obsolete**
+       HighLevel docs. 
 
 **Project_Result_ComponentName_Number.xls** 
        A template for writing analysis result which will be placed under
-       analysis_result repo. **Note: Markdown format replaces this - obsolete**
+       analysis_result repo. 
 
 **keystone/images**
        Related images   
