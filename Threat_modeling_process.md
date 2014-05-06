@@ -50,8 +50,8 @@ Currently, we follow simplified steps for modeling (Do not try to reinvent the w
  2. Security Objective of a Component/Sub components
  3. Decomposition (Data Flow Diagrams - DFD, Trust boundaries, entry/exit point, assets, security controls in place)
  4. Threats against assets (Derive known threats).  STRIDE can be used for threat identification and classification. 
- - Threat Quantification (Attacker model, DREAD, RISK Analysis)
- - Security Controls vs. Threats.
+    - Threat Quantification (Attacker model, DREAD, RISK Analysis)
+    - Security Controls vs. Threats.
  5.	Vulnerability Exploitation in Code
  6.	Vulnerability exists but cannot  be exploitable due to attacker model
  7.	Security Guidance/ Security Test case developments
