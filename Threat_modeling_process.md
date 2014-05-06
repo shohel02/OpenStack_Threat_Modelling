@@ -40,6 +40,7 @@ We are currently following an iterative step, starting from the higher level –
 Currently, we follow simplified steps for modeling (Do not try to reinvent the wheel here – Adjusted the OWSAP steps)
 
 **Figures 2: Simplified steps for threat modeling**
+
 ![enter image description here][2]
 
 
@@ -119,7 +120,6 @@ return ranked_Threat
 
 
 [1]: keystone/images/Threat_modeling_steps_high_level.png
-[2]: keystone/images/Threat Modeling_steps.png
+[2]: keystone/images/Threat_Modeling_steps.png
 [3]: keystone/images/Threat_model_combination.png
-
 
