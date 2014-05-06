@@ -11,7 +11,7 @@ Threat Modeling
 
 [Identification of Threats](#identification)
 
-
+-----
 Threat modeling and analysis provides a complete view about the security of a system.  It is performed using a systematic and strategic way for identifying and enumerating threats to a system.
 
 <a name="definition"/>
@@ -110,10 +110,8 @@ for each asset_A in Asset:
    for each operation in DataFlows:
        modified_Asset_A = operation(asset_A)
        for each threat_group in STRIDE:
-         attack_vectors = Find attack_vectors related to threat_group                                   (possibly use Threat DB)
-
-        possible_Threat  = Threats exploitable  by using attack_vectors on                               asset_A to perform an operation
-
+         attack_vectors = Find attack_vectors related to threat_group (possibly use Threat DB)
+         possible_Threat  = Threats exploitable  by using attack_vectors on asset_A to perform an operation
         ranked_Threat = Ranking(possible_Threat)
 
 return ranked_Threat
