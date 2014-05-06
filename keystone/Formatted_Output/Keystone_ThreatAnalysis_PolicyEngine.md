@@ -82,22 +82,80 @@ Keystone configuration file.
 ####Public Port
 SSL protected port, used to access the keystone server. External requests come and return through this port. Default 5000. If you plan to use SSL proxy, it could be different.
 
-####Persistence layer (DB):
-Token creation phase data is stored in DB, validation phase data is retrieved from DB.
+
 
 ----------
 <a name="asset"/>
 ###Assets
-Full assets list is documented in url
+Full assets list is documented in url [Asset Library][5] 
+
+9) Credentials
+
+20) System
+
 
 ----------
 <a name="threats"/>
 ###Threats
 
+####Policy-01
+
+Threat: 
+Threat Agent:
+>
+
+Attack Vectors:
+>
+
+Security Weakness:
+>
+
+Vulnerable Component:
+>
+
+Counter Measures:
+> 
+
+Extra:
+> Probability: 
+
+> Impact: 
+
+> Related Info:
+
+> Comments:
+
+####Policy-02
+Threat: 
+Threat Agent:
+>
+
+Attack Vectors:
+>
+
+Security Weakness:
+>
+
+Vulnerable Component:
+>
+
+Counter Measures:
+> 
+
+Extra:
+> Probability: 
+
+> Impact: 
+
+> Related Info:
+
+> Comments:
+
   [1]: images/DFD_Keystone_Policy_Authorization.png
   [2]: images/DFD_Keystone_Policy_PolicyEngineFlow.png
   [3]: images/DFD_Keystone_Policy_PolicyRule.png
   [4]: images/DFD_Keystone_Policy_CommonPolicyEngine.png
+  [5]: Keystone_asset_library.md
  
   
   
