@@ -21,7 +21,7 @@ Keystone Threat Analysis Index
  - ID-2.5.1: [Token Controller V2][7]
  - ID-2.6: [Assignment service][8] 
  - ID-2.7: [Catalog Service][9] 
- - ID-2.8: Policy Service 
+ - ID-2.8: [Policy Service][14] 
  - ID-2.9: [Token provider][10] 
  - ID-2.10: Cache 
  - ID-2.11: [Trust][11]
@@ -57,3 +57,4 @@ Keystone Threat Analysis Index
   [11]: Formatted_Output/Keystone_ThreatAnalysis_TrustService_2.11.md
   [12]: Formatted_Output/Keystone_ThreatAnalysis_APIv3Filter.md
   [13]: Formatted_Output/Keystone_ThreatAnalysi_ExecutionEnv.md
+  [14]: Formatted_Output/Keystone_ThreatAnalysis_PolicyEngine.md 
