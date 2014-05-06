@@ -30,13 +30,13 @@ Keystone Threat Modeling - High Level
    Keystone Havana Stable Release
    
 ####Application Description
-   Keystone provides identity and access management for users of OpenStack Cloud.  For this, it provides a shim and most of the underlying components are pluggable. It provides authentication of users, can contain a repository of users (identities) and roles. It also performs account and entitlement management of users.  The entitlements are managed by assigning roles for users and enforcing access control on the target service (object).
+   Keystone provides identity and access management for users of OpenStack Cloud.  Keystone is composed of many internal services most of which are pluggable. The internal services are served through a shim layer. It provides authentication of users, can contain a repository of users (identities) and roles. It also performs account and entitlement management of users.  The entitlements are managed by assigning roles for users and enforcing access control on the target service (object).
    
-   -	Username/user id identifies the user. A user is authenticated by a configured authentication mechanism. Before authentication, the account needs to be provisioned. Keystone also performs account provisioning e.g., users, tenant, domain, role, and their assignments. External authentication mechanisms e.g., Apache HTTP authentication can be integrated with keystone.
--	Authorization (entitlement) is performed for each request based on assigned role within the token for a user and policy file defined in the system. The entitlement decision is decentralized i.e., made by the respective service.
--	Each successful and unsuccessful request is logged.
+-	Username/user_id identifies the user. A user is authenticated by a configured authentication mechanism. Before authentication, the account needs to be provisioned. Keystone also performs account provisioning e.g., users, tenant, domain, role, and their assignments. External authentication mechanisms e.g., Apache HTTP authentication can be integrated with Keystone.
+-	Authorization (entitlement) is performed for each request based on assigned role within a token  and policies  defined in the system. The entitlement decision is decentralized i.e., decided by the respective service.
+-	Each successful and unsuccessful request are logged.
 -	User and system data is protected by access control and sensitive data (only password) is protected by one way hashing.
--	Keystone provides catalog information for other services.
+-	In addition, Keystone provides catalog information to locate other services.
 
    
 ####Additional Info
@@ -45,12 +45,12 @@ Keystone Threat Modeling - High Level
 <a name="implementation"/>
 ###Implementation Overview
 ####Major Components
-**Pipe line middlewares:**  url_nomalizer, token_auth, admin_token_auth, xml_body, Json_body, ec2_extension,  S3_extension,  crud_extension, admin_service, public_service (check the middleware from paste.ini for specific Pipe).  Currently this document focuses on [pipeline:api_v3], the keystone v3 API pipeline. The document also include some parts of [pipeline:public_api] – keystone v2 API pipeline.
+**Pipe line middlewares:**  url_nomalizer, token_auth, admin_token_auth, xml_body, Json_body, ec2_extension,  S3_extension,  crud_extension, admin_service, public_service (check the middleware from paste.ini for specific Pipe). 
+This document focuses on [pipeline:api_v3] i.e., the keystone v3 API pipeline. The document also includes some functionalities of [pipeline:public_api] i.e., keystone v2 API pipeline.
 
-**Services/internal components:** Identity, Assignment, Catalog, policy, Token, Token Provider, Trust
+**Services/internal components:** Identity, Assignment, Catalog, Policy, Token, Token Provider, Trust
 
 **Drivers/persistence storage:**  SQL, FILE, KVA, LDAP
-
 
 ####Dependent components
 **Webservers:**  WSGI (or any web server on top WSGI modules can run) 
@@ -62,17 +62,16 @@ Related info covered in:
 https://wiki.openstack.org/wiki/Security/Juno/Keystone#Notable_changes_since_Icehouse
 ####Description
 
--	Keystone consists of a combination of services: identity, assignment, catalog, policy, token and so on. Each of the service has specific drivers, which can be plugged using configuration profile.
--	Keystone performs access control: authentication and authorization (entitlement) of users. The authentication process can be performed using three mechanisms: username/password, token, and External authentication (including external authentication middleware or an external authentication mechanism which set REMOTE_AUTH variable). A successful authentication issues a token to the requester.
--	The authorization process consists of assignment of roles, policy definition file specific for specific OpenStack service, entitlement decision engine and enforcement points. 
+-	Keystone consists of a combination of services: Identity, Assignment, Catalog, Policy, Token and so on. Each of the service has specific drivers, which can be plugged using configuration file.
+-	Keystone performs access control: authentication and authorization (entitlement) of users. The authentication process can be performed using three mechanisms: username/password, token, and external authentication (including external authentication middleware or an external authentication mechanism which set REMOTE_AUTH variable). After successful authentication, Keystone issues a token to the requester.
+-	The authorization process consists of assignment of roles, policy definition file specific for a specific OpenStack service, entitlement decision engine and enforcement points. 
 -	Keystone provides identity provisioning service e.g., users, tenants, groups, roles, domains 
--   As an addition, Keystone provides catalog services   (description of     services and endpoints) for each user.
 
 <a name="assumption"/>
 ###System Assumptions (External Dependencies)
 ####Application
 
-- Keystone running in WSGI server which is accessible via public port 5000 and admin port 35357
+- Keystone is running in WSGI server which is accessible via public port 5000 and admin port 35357
 - The document will cover both V2.0 (limited only for Token service) and V3.0 API.
 - Keystone.conf, unless stated otherwise, the default values of the configuration file is used (keystone with devstack setting)
 - PKI token (default token provider)
@@ -81,7 +80,10 @@ https://wiki.openstack.org/wiki/Security/Juno/Keystone#Notable_changes_since_Ice
 
 ####Persistence 
 - The database server is MySQL and related driver is SQLAlchemy.
-- Default config DB from keystone.conf and mysql.conf
+- Default config for DB from keystone.conf and mysql.conf ( For the time being, we assume 
+  security hardening (Secure tunnel, certificate based auth, and separate of DB network) is performed based 
+  on security best practices:
+  http://docs.openstack.org/security-guide/content/ch042_database-overview.html)
 
 ####Platform
 - Operating systems, webserver, and physical machines are hardened
