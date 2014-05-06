@@ -9,30 +9,39 @@ Files:
 **Threat_modelling_process.pdf**    
        Steps of Threat Modelling process
        
+       
 **Threat_modelling_process.md**
        Steps of Threat Modelling process in Markdown
+
 
 **Project_ThreatAnalysis_ComponentName_Number.md ** 
        A common format for threat modelling 
 
+
 **Threat_DB_Ref.xls**
        A collection of known threats.
+
 
 **keystone**
        Openstack keystone service - Threat Modelling repository related to Keystone. 
 
+
 **keystone/Kesytone_Threat_Analysis.md**
         Template for threat analysis
 
+
 **keystone/Formatted_Output**
        Directory containing Threat analysis reports in Markdown format.
+      
        
 **keystone/Formatted_Output/images**
-       Directory containing images referenced from 'keystone/Formatted_Output' directory
+       Directory containing images referenced from keystone/Formatted_Output directory
+
 
 **keystone/Formatted_Output/images/dia** 
        Directory containing .dia files referenced from 'keystone/Formatted_Output' directory
        (images are drawn in dia)
+
 
 
 Deprecated Soon:
