@@ -14,7 +14,7 @@ Files:
        Steps of Threat Modelling process in Markdown
 
 
-**Project_ThreatAnalysis_ComponentName_Number.md ** 
+**Project_ThreatAnalysis_ComponentName_Number.md** 
        A common format for threat modelling 
 
 
