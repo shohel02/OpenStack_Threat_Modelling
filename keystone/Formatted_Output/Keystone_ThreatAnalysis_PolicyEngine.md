@@ -19,33 +19,29 @@ Keystone Threat Modeling : Policy Engine
 <a name="system"/>
 ###System Overview
 ####Application version
-Keystone Havana Stable Release
+Keystone Havana Stable Release.
    
 ####Application Description
 The Keystone policy service provides a role-based authorization engine.
 
 Various components in the system require different actions to be performed based on a user's authorization.
 
-The DFDs are based ‘Adding Users, Tenants and Roles with python-keystoneclient’ http://docs.openstack.org/grizzly/openstack-compute/admin/content/adding-users-tenants-and-roles-with-python-keystoneclient.html
+The DFDs are based on  the operations of ‘Adding Users, Tenants and Roles with python-keystoneclient’. http://docs.openstack.org/grizzly/openstack-compute/admin/content/adding-users-tenants-and-roles-with-python-keystoneclient.html
 
-*Only users with admin credentials can administer users, tenants and roles. You can configure the python-keystoneclient with admin credentials through either the authentication token, or the username and password method.
+NOTE: Only users with admin credentials can administer users, tenants and roles. You can configure the python-keystoneclient with admin credentials through either the authentication token, or the username and password method.
 
 ####Additional Info
-
 
 <a name="implementation"/>
 ###Implementation Overview
 ####Major Components
-Assert Admin
-
-Policy Engine for Keystone 
-
-Common Policy Engine. 
+- Assert Admin
+- Policy Engine for Keystone 
+- Common Policy Engine. 
 
 ####Dependent components
-Policy file (policy.json is only considered)  
-
-Keystone configuration file.
+- Policy file (policy.json is only considered)  
+- Keystone configuration file.
 
 ####Description
 
@@ -83,7 +79,6 @@ Keystone configuration file.
 SSL protected port, used to access the keystone server. External requests come and return through this port. Default 5000. If you plan to use SSL proxy, it could be different.
 
 
-
 ----------
 <a name="asset"/>
 ###Assets
@@ -105,10 +100,10 @@ Threat Agent:
 >
 
 Attack Vectors:
->No scoping of admin.
+> No scoping of admin.
 
 Security Weakness:
->User with an "admin" role on any tenant gets admin status throughout the system primarily because there is no demarcation between a scoped admin and a global admin.
+> User with an "admin" role on any tenant gets admin status throughout the system primarily because there is no demarcation between a scoped admin and a global admin.
 
 Vulnerable Component:
 >
