@@ -100,15 +100,15 @@ Full assets list is documented in url [Asset Library][5]
 
 ####Policy-01
 
-Threat: 
+Threat: "admin"-ness not properly scoped
 Threat Agent:
 >
 
 Attack Vectors:
->
+>No scoping of admin.
 
 Security Weakness:
->
+>User with an "admin" role on any tenant gets admin status throughout the system primarily because there is no demarcation between a scoped admin and a global admin.
 
 Vulnerable Component:
 >
@@ -117,11 +117,12 @@ Counter Measures:
 > 
 
 Extra:
-> Probability: 
 
-> Impact: 
+> Probability: High
 
-> Related Info:
+> Impact: High
+
+> Related Info: https://bugs.launchpad.net/keystone/+bug/968696
 
 > Comments:
 
