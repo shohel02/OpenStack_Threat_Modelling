@@ -169,14 +169,14 @@ Method:
 
 2. Provides Validation and CRUD operations.
 
-(Validation) Code Snippet: 
+Validation Code Snippet: 
  `mapper.connect(
             '/ec2tokens',
             controller=ec2_controller,
             action='authenticate',
             conditions=dict(method=['POST']))`
 
-(CRUD) Code Snippet:
+CRUD Code Snippet:
   `mapper.connect(
             '/users/{user_id}/credentials/OS-EC2',
             controller=ec2_controller,
