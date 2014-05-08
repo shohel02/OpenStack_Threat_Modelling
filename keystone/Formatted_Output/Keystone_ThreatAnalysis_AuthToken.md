@@ -194,22 +194,19 @@ Extra:
 
 ####AuthToken-04
 
-Threat:Denial of Service
+Threat: Service unavailablity
 
 Threat Agent:
 >Internet attacker Authorized.
 
 Attack Vectors:
->By sending many (large PKI token) legitimate token validation request (difficult)
+>The PKI token is getting larger in V3 API. Due to limitation of WSGI MAX_HEADER_LENGTH, a large PKI token can be rejected due to limiation of WSGI request header size limit. 
 
 Security Weakness:
 >
 
-Vulnerable Component:
->
-
 Counter Measures:
-> 
+>PKI Token with no catalog information. Increase the size of MAX_HEADER_LENGTH (Any security implication?)
 
 Extra:
 > Probability: 
@@ -217,6 +214,7 @@ Extra:
 > Impact: 
 
 > Related Info: 
+https://bugs.launchpad.net/python-keystoneclient/+bug/1186177
 
 > Comments:
 
@@ -231,16 +229,14 @@ Attack Vectors:
 Security Weakness:
 >Log Analysis from Keystone Middleware requests could reveal the user token.
 
-Vulnerable Component:
->API version 2.0 GET request.
 
 Counter Measures:
-> 
+>Use V3 API. Secure Log Management.
 
 Extra:
-> Probability: 
+> Probability: Medium
 
-> Impact: 
+> Impact: High
 
 > Related Info: 
 
