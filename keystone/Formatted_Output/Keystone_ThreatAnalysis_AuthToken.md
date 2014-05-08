@@ -23,7 +23,7 @@ Keystone Havana Stable Release
 ####Application Description
 The Keystone middleware architecture supports a common authentication protocol for all OpenStack projects.  By using keystone as a common authentication and authorization mechanisms, the OpenStack project can plug in to existing authentication and authorization systems.
 
-OpenStack is using a token-based mechanism for authentication and authorization. An authentication middleware component is a proxy that intercepts HTTP calls from clients, validate the header, and populates HTTP headers in the request context for other WSGI middleware or applications to use
+OpenStack is using a token-based mechanism for authentication and authorization. An authentication middleware component is a proxy that intercepts HTTP calls from clients, validate the header, and populates HTTP headers in the request context for other WSGI middleware or applications to use.
 
 
 ####Additional Info
@@ -94,7 +94,12 @@ Full assets list is documented in url
 
 8) Token
 
-20) System
+8.1) Revocation List
+
+22) PKI signing cert
+
+26) Configuration Parameter (Token Cache time, revocation list cache time)
+
 
 ----------
 <a name="threats"/>
@@ -108,22 +113,27 @@ Threat Agent:
 
 Attack Vectors:
 >If token  is found in cache, the target service returns the token data without validating the cached token.
+A recent modification allowed checking chached token against revocation list. However, the revocation list itself
+can be cached in the target system.
 
 Security Weakness:
->In case of token revocation there could be inconsistency between the cached token in target service and the current state of the actual token. Similarly, there could be inconsitency in terms of token data related to a token present in the cache and the token present in the database.
+>In case of token revocation, there could be inconsistency between the cached token in target service and the current state of the actual token. Thishappens due to a stale revocation list.
 
 Vulnerable Component:
 >Cache Management, Validating the cached token.
 
 Counter Measures:
-> 
+>By refreshing (cache) revocation list frequently, we can minimize the impact or zero cache time for revocation list
+can provide the consistency of token state between token source and target system. Deployers should consider the balace between performance and security during initialization of token cahce time and revocation list cache time.
+
 
 Extra:
-> Probability: 
+> Probability: Low
 
-> Impact: 
+> Impact: High
 
-> Related Info:
+> Related Info: 
+https://bugs.launchpad.net/python-keystoneclient/+bug/1287301
 
 > Comments: 
 
@@ -134,23 +144,26 @@ Threat Agent:
 >Internet attacker Unauthorized.
 
 Attack Vectors:
->Restarting Memcache looses token revocation list. This happens in case of memcache and KVS backend only for PKI tokens.
+>Restarting Memcache looses token revocation list. This happens only for PKI tokens with memcache or KVS backend. An attacker can use a revoked token if Memcache server restarts.
 
 Security Weakness:
->With the memcached backend tokens, the revoked token  list only lasts as long as the memcached server is up and running. Thus, if the Keystone server is restarted, all token revocations are dropped, and they will not show up in later token revocation list requests. 
+>With memcached backend, the revoked token  list (revocation list) only lasts as long as the memcached server is up and running. Thus, if the Keystone server is restarted, all token revocations are dropped, and they will not show up in later token revocation list requests. 
 
 Vulnerable Component:
 >Memcache Backend design.
 
 Counter Measures:
-> 
+>Way around is described in See Related Info.
 
 Extra:
-> Probability: 
+> Probability: Low
 
-> Impact: 
+> Impact: Medium
 
-> Related Info: https://bugs.launchpad.net/keystone/+bug/1182920
+> Related Info: 
+https://bugs.launchpad.net/keystone/+bug/1182920
+https://blueprints.launchpad.net/keystone/+spec/revocation-backend
+https://etherpad.openstack.org/p/keystone-revocation-events
 
 > Comments:
 
@@ -165,18 +178,15 @@ Attack Vectors:
 >Consistent spoofing of UUID or PKI token.
 
 Security Weakness:
->Attacker consistently sends UUID and PKI token 
-
-Vulnerable Component:
->Rate limiting/ blocking
+>Attacker consistently sends UUID and PKI token (malformed) to the target system.
 
 Counter Measures:
-> 
+>Deployer can have Rate limiting/ blocking to counter this.
 
 Extra:
-> Probability: 
+> Probability: Very Low
 
-> Impact: 
+> Impact: Medium
 
 > Related Info: 
 
