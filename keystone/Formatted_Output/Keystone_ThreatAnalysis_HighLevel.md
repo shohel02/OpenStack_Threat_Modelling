@@ -87,13 +87,13 @@ https://wiki.openstack.org/wiki/Security/Juno/Keystone#Notable_changes_since_Ice
 
 ####Platform
 - Operating systems, webserver, and physical machines are hardened
-- The system admin follows security best practice
+- The system admin follows security best practices
 - Keystone server is running in Ubuntu 12.04
 - Dependencies (keystone dependent libraries) in requirements.txt  are trustworthy
 
 ###Security Objective
 
- -  An IdAM must provide:
+-  An IdAM must provide:
 -	Identification (authentication) and entitlements of users.
 -	Entitlement decision (authorization) for user-initiated request.
 -	Non-repudiable auditing for each request.
@@ -106,13 +106,10 @@ https://wiki.openstack.org/wiki/Security/Juno/Keystone#Notable_changes_since_Ice
 ![enter image description here][1]
 
 
+
 <a name="attackers"/>
-
-
 ----------
 ###Attackers and Actors
-Interfaces through which actors/attackers can request for assets/resources or interfaces through which the system returns asset information to the requester. 
-
 ####Name: IA-U: Internet Attacker– Unauthorized
 #####Actors
 ID-1. Anonymous
@@ -120,7 +117,7 @@ ID-1. Anonymous
 
 ####Name: IA-A: Internet Attacker– authorized
 #####Actors
-ID-2. Project User
+ID-2. Member User
 
 ID-3. Owner
 
@@ -147,53 +144,58 @@ ID-12. Keystone DB user
 
 ID-13. External Identity provider user
 
-ID-14. service user
+ID-14. Service user
 
 #####Details
 
 ----------
 <a name="entry"/>
 ###Entry Points
+Interfaces through which actors/attackers can request for assets/resources or interfaces through which the system returns asset information to the requester. 
+
 ####Name: ID-01: Public Port
 #####Description
-SSL protected port, used to access the keystone server. External requests come and return through this port. Default 5000. If you plan to use SSL proxy, it could be different.
+SSL protected port to access the Keystone server. Request from outside arrive and return through this port. Default port is 5000. If SSL proxy is used, the outsiders may see a different port.
 #####Accessible To
-All, however only authenticated user can get in.
+All, however, only authenticated user can get in.
 
 ####Name: ID-02: Admin port
 #####Description
-SSL protected port, used to access the keystone server. External requests come and return through this port. Default 35357. If you plan to use SSL proxy, it could be different. Used only in V2 API.
+SSL protected port to access the keystone server. Request from outside arrive and return through this port. Default port is 35357. Used only for V2 API.
 #####Accessible To
 All, however, only admin role user can get in (V2 case).
 
 ####Name: ID-03: External (optional)
 #####Description
-Protected, used to authenticate users (user data) from external system.
+Protected, for authenticating users (user data) from external system.
 #####Accessible To
 (8) Keystone System user
 (10) System Admin (Does system admin needs this ?)
-can access remote system to verify user data. Not the other way around.
+
+Keystone System user can access remote system to verify user data or to perform user authentication.
+Keystone System user should not have permission to modify data in the remote system.
+Not the other way around.
 
 ####Name: ID-04 Interface towards persistence layer
 #####Description
 Keystone server communicates with database backend . We only consider MySQL server.
 #####Accessible To
-(8) Keystone System user can
-access DB (through some DB user). Not the other way around. (10) Does System Admin needs this access?
+(8) Keystone System user can access DB (through a DB user/credential, The DB user is Keystone specific and only
+allowed to do operation within Keystone DB). Not the other way around. 
+(10) Does System Admin needs this access?
 
 ####Name: ID-05 Cache interface
 #####Description
-Keystone uses dogpile cache layer which stores data in one of the cache backend.
+Keystone uses dogpile cache layer which stores data in one of the cache backends.
 #####Accessible To
-(8) Keystone System user
-access cache server. Not the other way around. (10) Does System Admin needs this access? 
+(8) Keystone System user access cache server. Not the other way around. (10) 
 
 ####Name: ID-06 Configuration and key materials
 #####Description
-Keystone uses configuration parameter during initialization. It also uses key materials for signing and verifying the PKI key
+Keystone uses configuration parameters during initialization. It also uses key materials for signing and verifying the PKI key
 #####Accessible To
-(8) Keystone System user
-access. (10) Does System Admin 
+(8)  Keystone System user. 
+(10) System Admin 
 
 
 ----------
@@ -210,12 +212,12 @@ Asset library URL.
 ----------
 <a name="components"/>
 ###Components
-Components layering two trust boundaries and performing critical operations are interesting for the analysis
+Components layering two trust boundaries and performing critical operations are critical for the threat analysis.
 
 ####ID-1: Client
 
- - ID-1.1: Keystone client  (Not done)
- - ID-1.2: Dashboard – related to user login sessions (Not done)
+ - ID-1.1: Keystone client  
+ - ID-1.2: Dashboard – related to user login sessions 
  - ID-1.3: Auth_Token (with memcache)
 
 ####ID-2: Keystone Application Server
@@ -232,22 +234,23 @@ Components layering two trust boundaries and performing critical operations are 
  - ID-2.10: Cache (excluded dogpile)
  - ID-2.11: Trust
 
-####ID-3: Persistence Storage (Not done)
+####ID-3: Persistence Storage 
 
  - ID-3.1: SQL Backend 
  - ID-3.2: LDAP Backend
 
-####ID-4: System (Not done)
+####ID-4: System
 
  - ID-4.1: Web server – WSGI server 
  - ID-4.2: SSL server 
- - ID-4.3 Operating system 
+ - ID-4.3: Operating system 
  - ID-4.4: Dependencies ( PyPI, python packages) httplib2, requirements.txt
+ - ID-4.5: Execution Environment
 
 ####Name: ID-5: External
   - ID-5.1: External Auth system (only REMOTE_USER checked)
   
-(Note: The naming of asset and component is sometimes same. There are distinction between asset and component: an asset is something which has value and has a state. Component or proxies on the other hand manipulates /performs operation on top of asset. E.g., Trust is an asset – meaning it defines a relational state while ‘Trust component’ is the process to generate Trust asset)
+(Note: The naming of asset and component is same for some cases. There are distinctions between an asset and a component: an asset is something which has value and has a state. Component or proxies on the other hand manipulates /performs operation on top of asset. E.g., Trust is an asset – it defines a relational state while ‘Trust component’ is the process doing operation on top of Trust asset)
 
 ----------
 <a name="excluded"/>
