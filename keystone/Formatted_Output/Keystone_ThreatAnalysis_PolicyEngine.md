@@ -1,4 +1,3 @@
-
 Keystone Threat Modeling : Policy Engine
 ========================================
 ### Table of contents
@@ -26,9 +25,13 @@ The Keystone policy service provides a role-based authorization engine.
 
 Various components in the system require different actions to be performed based on a user's authorization.
 
-The DFDs are based on  the operations of ‘Adding Users, Tenants and Roles with python-keystoneclient’. http://docs.openstack.org/grizzly/openstack-compute/admin/content/adding-users-tenants-and-roles-with-python-keystoneclient.html
+The DFDs are based on operations of ‘Adding Users, Tenants and Roles with python-keystoneclient’. http://docs.openstack.org/grizzly/openstack-compute/admin/content/adding-users-tenants-and-roles-with-python-keystoneclient.html
 
 NOTE: Only users with admin credentials can administer users, tenants and roles. You can configure the python-keystoneclient with admin credentials through either the authentication token, or the username and password method.
+
+Related Docs:
+http://www.florentflament.com/blog/customizing-openstack-rbac-policies.html
+http://docs.openstack.org/developer/keystone/configuration.html#keystone-api-protection-with-role-based-access-control-rbac
 
 ####Additional Info
 
@@ -49,12 +52,11 @@ NOTE: Only users with admin credentials can administer users, tenants and roles.
 
 ###System Assumptions (External Dependencies)
  -  Policy.json file is present.
- -  The path for policy.json file is rightly configured in the Keystone configuration file.
- -  The policy.json file can be loaded from the configuration file.
- -  The policy enforcer can be initialized.
-    
+ -  The policy enforcer is initialized.
+
+
 ###Security Objective
- - Authorize a user to perform operations based on his role and rule defined in policy.json file.
+ - Authorize a user to perform operations based on his role and rule defined in the policy.json file.
  
 
 <a name="dfd"/>
@@ -75,9 +77,8 @@ NOTE: Only users with admin credentials can administer users, tenants and roles.
 <a name="entry"/>
 ###Entry Points
 
-####Public Port
-SSL protected port, used to access the keystone server. External requests come and return through this port. Default 5000. If you plan to use SSL proxy, it could be different.
-
+####Controllers
+Authorization resolving requests arrive from various service controllers (Which wants to protect resources).
 
 ----------
 <a name="asset"/>
@@ -95,15 +96,15 @@ Full assets list is documented in url [Asset Library][5]
 
 ####Policy-01
 
-Threat: "admin"-ness not properly scoped
+Threat: "admin"-ness not properly scoped (only for V2.0 API)
 Threat Agent:
->
+>Internal Attacker
 
 Attack Vectors:
-> No scoping of admin.
+>No scoping of admin.
 
 Security Weakness:
-> User with an "admin" role on any tenant gets admin status throughout the system primarily because there is no demarcation between a scoped admin and a global admin.
+>User with an "admin" role on any tenant gets admin status throughout the system primarily because there is no demarcation between a scoped admin and a global admin.
 
 Vulnerable Component:
 >
@@ -113,7 +114,7 @@ Counter Measures:
 
 Extra:
 
-> Probability: High
+> Probability: Low
 
 > Impact: High
 
@@ -122,30 +123,33 @@ Extra:
 > Comments:
 
 ####Policy-02
-Threat: 
+Threat: Threats from Role management
+
 Threat Agent:
 >
 
 Attack Vectors:
->
+>Each OpenStack service has its own policy file, i.e., policy administration is decentralized. While
+this approach distributes the load for authorization requests, this also increases possibility for misconfiguration (e.g, roles are not interpreted in the same way in different services). Another issue is scoping of role i.e., what pemissions (actions on resources) are allowed to each role and how each service interprest those permissions.
 
 Security Weakness:
 >
 
 Vulnerable Component:
->
+>Policy Administration
 
 Counter Measures:
 > 
 
 Extra:
-> Probability: 
+> Probability: Medium
 
-> Impact: 
+> Impact: High
 
 > Related Info:
 
 > Comments:
+
 
   [1]: images/DFD_Keystone_Policy_Authorization.png
   [2]: images/DFD_Keystone_Policy_PolicyEngineFlow.png
