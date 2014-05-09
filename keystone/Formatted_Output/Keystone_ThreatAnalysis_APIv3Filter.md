@@ -31,7 +31,7 @@ In this report we look into the filters for the api_v3 pipleline.
 ###Implementation Overview
 ####Major Components
 
-The filters present in the api_v3 pipeline are:
+The default filters present in the api_v3 pipeline are:
 
 1) sizelimit 
 
@@ -53,7 +53,7 @@ The filters present in the api_v3 pipeline are:
 
 10) simple_cert_extension 
 
-11) service_v3
+11) service_v3 (not covered in this doc)
     
 ####Dependent components
 
@@ -156,8 +156,8 @@ Code Snippet
 
 ###**ec2_extension_v3:** keystone.contrib.ec2:Ec2ExtensionV3.factory
 
-Description: This service provides Ec2 token validation and CRUD for services configured
-with theEc2_token middleware.
+Description: This service provides EC2 token validation and CRUD for services configured
+with the EC2_token middleware.
 
 Parameters: mapper 
 
@@ -209,7 +209,7 @@ Method:
 
 ###System Assumptions (External Dependencies)
  -  The Keystone.conf should be accesible to the Keystone service.
- -  The paste configuration file should be configures in the keystone service.
+ -  The paste configuration file should be configures in the Keystone service.
    
 ###Security Objective
  
@@ -222,7 +222,9 @@ Method:
 <a name="entry"/>
 ###Entry Points:
 
-####Upstream Pipeline
+####WSGI Server
+
+####Upstream pipeline
 
 ----------
 <a name="asset"/>
@@ -235,7 +237,7 @@ Full assets list is documented in url
 ###Threats
 
 ####API_v3-01
-Threat: 
+Threat: Admin token (is_admin) abuse
 Threat Agent:
 >
 
@@ -260,31 +262,6 @@ Extra:
 
 > Comments:
 
-####API_v3-02
-Threat: 
-Threat Agent:
->
-
-Attack Vectors:
->
-
-Security Weakness:
->
-
-Vulnerable Component:
->
-
-Counter Measures:
-> 
-
-Extra:
-> Probability: 
-
-> Impact: 
-
-> Related Info:
-
-> Comments:
 
   [1]:images/DFD_Apiv3_Filter.png
   [2]:Keystone_asset_library.md
