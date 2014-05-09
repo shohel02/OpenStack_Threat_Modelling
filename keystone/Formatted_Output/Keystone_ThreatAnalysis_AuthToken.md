@@ -128,14 +128,14 @@ can provide the consistency of token state between token source and target syste
 
 
 Extra:
-> Probability: Low
+>Probability: Low
 
-> Impact: High
+>Impact: High
 
-> Related Info: 
+>Related Info: 
 https://bugs.launchpad.net/python-keystoneclient/+bug/1287301
 
-> Comments: 
+>Comments: 
 
 ####AuthToken-02
 Threat: 
@@ -156,16 +156,16 @@ Counter Measures:
 >Way around is described in See Related Info.
 
 Extra:
-> Probability: Low
+>Probability: Low
 
-> Impact: Medium
+>Impact: Medium
 
-> Related Info: 
+>Related Info: 
 https://bugs.launchpad.net/keystone/+bug/1182920
 https://blueprints.launchpad.net/keystone/+spec/revocation-backend
 https://etherpad.openstack.org/p/keystone-revocation-events
 
-> Comments:
+>Comments:
 
 ####AuthToken-03
 
@@ -184,13 +184,13 @@ Counter Measures:
 >Deployer can have Rate limiting/ blocking to counter this.
 
 Extra:
-> Probability: Very Low
+>Probability: Very Low
 
-> Impact: Medium
+>Impact: Medium
 
-> Related Info: 
+>Related Info: 
 
-> Comments:
+>Comments:
 
 ####AuthToken-04
 
@@ -209,14 +209,14 @@ Counter Measures:
 >PKI Token with no catalog information. Increase the size of MAX_HEADER_LENGTH (Any security implication?)
 
 Extra:
-> Probability: 
+>Probability: 
 
-> Impact: 
+>Impact: 
 
-> Related Info: 
+>Related Info: 
 https://bugs.launchpad.net/python-keystoneclient/+bug/1186177
 
-> Comments:
+>Comments:
 
 ####AuthToken-05
 Threat: Information Diclosure. 
@@ -234,13 +234,41 @@ Counter Measures:
 >Use V3 API. Secure Log Management.
 
 Extra:
-> Probability: Medium
+>Probability: Medium
 
-> Impact: High
+>Impact: High
 
-> Related Info: 
+>Related Info: 
 
-> Comments:
+>Comments:
+
+####AuthToken-06
+Threats:
+>MiTM attack during Secure channel setup
+
+Threat Agent:
+>Internet Attacker - Unauthorized
+
+Attack Vectors:
+>Fectching of Credentials (certificates to setup secure channel between Keystone Clients and Keystone Server) and using the channel to validate token or fetch revocation_list can lead to MiTM attack. A naive Keystone Client can setup a secure channel with malicious endpoint and thereby the malicious can provide replayed or stale  revocation_list when  a revocation_list is requested by the service (or valid result for invalid UUID token). 
+
+Security Weakness:
+>In case of SSL endpoint, MiTM in the SSL is possible as token is no way bind to transport protocol. using this vulnerability it can replay an old revocation_list to the service
+  
+
+Counter Measures:
+>SSL tunnel, server certificate validation
+Binding of message with transport security.
+
+Extra:
+>Probability:
+
+>Impact:
+
+>Related Info:
+
+>Comments:
+     Link to Bug/mailing list or Tracking 
 
   [1]: images/DFD_KeystoneMiddleware_Level1.png
   [2]: images/DFD_KeystoneMiddleware_ValidateUserToken_Level1.png
