@@ -62,13 +62,13 @@ Revocation_list
 <a name="dfd"/>
 ###Data Flow Diagrams 
 ####Create_Token
-[!enter link description here][1]
+![enter link description here][1]
 ####Validate_Token
-[!enter link description here][2]
+![!enter link description here][2]
 ####Delete_Token
-[!enter link description here][3]
+![!enter link description here][3]
 ####Revocation_List
-[!enter link description here][4]
+![!enter link description here][4]
 
 <a name="entry"/>
 ###Entry Points
