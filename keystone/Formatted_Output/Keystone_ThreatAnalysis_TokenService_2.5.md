@@ -20,10 +20,10 @@ Keystone Threat Modeling : Token API Service
 <a name="system"/>
 ###System Overview
 ####Application version
-   Keystone Havana Stable Release
+Keystone Havana Stable Release
    
 ####Application Description
-  Token API includes the manager and the driver. The manager receives requests and fulfills the request with the help of specific driver. The driver is configurable using keystone.conf.  The driver in turn fulfills the operation by calling a persistent storage layer (SQL alchemy or other backend)
+Token API includes the manager and the driver. The manager receives requests and fulfills the request with the help of specific driver. The driver is configurable using keystone.conf.  The driver in turn fulfills the operation by calling a persistent storage layer (SQL alchemy or other backend)
 
 ####Additional Info
   
@@ -39,6 +39,7 @@ Dogpile.cache, SQLAlchemy, IDENTITY_API
 
 ####Description
 Major process: 
+
 Create_token
 
 Validate_token
@@ -61,35 +62,29 @@ Revocation_list
 <a name="dfd"/>
 ###Data Flow Diagrams 
 ####Create_Token
-[enter link description here][1]
+[!enter link description here][1]
 ####Validate_Token
-[enter link description here][2]
+[!enter link description here][2]
 ####Delete_Token
-[enter link description here][3]
+[!enter link description here][3]
 ####Revocation_List
-[enter link description here][4]
+[!enter link description here][4]
 
 <a name="entry"/>
 ###Entry Points
 ####Name ID-01: Token Controller, Auth Controller
 #####Description
-Request from upper pipeline.
+Request from Controller
 #####Accessible To
 8) Keystone Process user
-
-10)System admin 
 
 ####Name ID-02: Cache
 #####Description
-Store and Retrieve data from cache
+Store and retrieve data from cache
 #####Accessible To
 8) Keystone Process user
 
 10)System admin 
-
-####Name ID-03: Other Internal Services
-#####Description
-IDENTITY API, TOKEN PROVIDER API
 
 
 ----------
