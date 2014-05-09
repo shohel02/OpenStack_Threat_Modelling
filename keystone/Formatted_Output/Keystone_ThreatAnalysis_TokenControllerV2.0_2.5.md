@@ -20,10 +20,10 @@ Keystone Threat Modeling : Token Controller (v2.0)
 <a name="system"/>
 ###System Overview
 ####Application version
-   Keystone Havana Stable Release
+Keystone Havana Stable Release
    
 ####Application Description
- The V2 Token Controller routes and glues the requests from public router to the TOKEN API service. It also performs filtering on incoming and outgoing requests.  Authenticated users are issued bearer token.
+The V2 Token Controller routes and glues requests from router to the TOKEN API service. It performs filtering on incoming and outgoing requests.  Authenticated users are issued bearer token.
 
 ####Additional Info
 V2 API for Token Operation. Request flows from Token controller to Token API
@@ -81,21 +81,13 @@ Major process:
 ![enter image description here][4]
 <a name="entry"/>
 ###Entry Points
-####Name ID-01: public router
+####Name ID-01: Router
 #####Description
 Request from upper pipeline.
 #####Accessible To
 8) Keystone Process user
 
-10)System admin 
-
-####Name ID-02: Configuration
-#####Description
-paramters from conf: MAX_PASSWORD_SIZE, MAX_PARAM_SIZE, Expiry_time
-#####Accessible To
-8) Keystone Process user
-
-10)System admin 
+10) System admin 
 
 
 
@@ -112,7 +104,7 @@ Full assets list is documented in [url][5]
 
 (8) Token (Token_id, Unique_id)
 
-(8.1) Revocation List
+(8.1) Revocation_list
 
 (22) PKI sign key
 
@@ -132,23 +124,23 @@ Threat Agent:
 > 
 
 Attack Vectors:
-> Using attack methods: password guessing, dictionary attack or brute force on password, audit log montiroing
+>Using attack methods: password guessing, dictionary attack or brute force on password, audit log montiroing
 
 Security Weakness:
-> Weakness in password management and rate limiting. Currently, keystone has no control mechanism to maintain password strength, and to maintain password policy
+>Weakness in password management and rate limiting. Currently, keystone has no control mechanism to maintain password strength, and to maintain password policy
 passwords are send in clear text.
 
 Counter Measures:
 > 
 
 Extra:
->  Probability:
+> Probability:
 
->   Impact:
+> Impact:
 
->   Related Info:
+> Related Info:
 
->   Comments:
+> Comments:
      Link to Bug/mailing list or Tracking 
      
 ###TokenController-002
@@ -164,7 +156,6 @@ Attack Vectors:
 
 Security Weakness:
 > Each request will hit the DB to find a  user ref for a user_id/username. Assuming user_id/username is easy to guess/Known, the DB hit will be successful leading to the expensive crypto matching for password authentication. This could potentially lead to system unavailability.
-
 Weakness in ratelimiting, Weakness in input filtering , current check only consists of length check, no whitelisting check (?)
 
 Counter Measures:
@@ -191,11 +182,8 @@ Threat Agent:
 Attack Vectors:
 >  Internal attacker abuses the configuration parameter (e.g., expiry time, 
 password length, max param length.)
-
 max_param_length field can be abused to bypass the initial input filtering on any input (e.g., User_id length), causing expensive query hit to the dB
-
 A malicious/unthoughtful admin sets larger expiry_time, leading to a long lived token
-
 A malicious admin/unthoughtful sets larger password length bad input filtering and unwanted DB hit.
 
 Security Weakness:
@@ -226,7 +214,7 @@ Attack Vectors:
 In default policy setup, it is possible for a malicious service user to get the PKI token by a validate call using MD5 of the PKI token. A malicious service user can use the weakness of MD5 (to guess a forged token id) to get PKI token for another user.
 
 Security Weakness:
->  MD5 for token_id/unique id generation ( This is changing in latest releases)
+>  MD5 for token_id/unique id generation 
 
 Counter Measures:
 > 
@@ -237,63 +225,12 @@ Extra:
 >   Impact:
 
 >   Related Info:
+This is changing in latest releases
 
 >   Comments:
-     Link to Bug/mailing list or Tracking 
+    https://bugs.launchpad.net/keystone/+bug/1174499 
      
-####TokenController-005
-Threats:
-> Unauthorized access via revocation_list
 
-Threat Agent:
-> 
-
-Attack Vectors:
->  An attacker can do MiTM and replay attack and sent an older revocation_list when  a revocation_list is requested by the service. In case of SSL endpoint, MiTM in the SSL is possible as token is no way bind to transport protocol. using this vulnerability it can replay an old revocation_list to the service
-
-Security Weakness:
->  
-
-Counter Measures:
-> SSL tunnel, server certificate validation
-  
-  Binding of channel with transport security.
-
-Extra:
->  Probability:
-
->   Impact:
-
->   Related Info:
-
->   Comments:
-     Link to Bug/mailing list or Tracking 
-
-####TokenController-006
-Threats:
-> Caching of Token and Revocation List
-
-Threat Agent:
-> 
-
-Attack Vectors:
->  Using stale revocation list cache
-
-Security Weakness:
->  
-
-Counter Measures:
-> S
-
-Extra:
->  Probability:
-
->   Impact:
-
->   Related Info:
-
->   Comments:
-     Link to Bug/mailing list or Tracking 
 
 
   [1]: images/DFD_Token_CONTROLLER_authenticate_v2.png
