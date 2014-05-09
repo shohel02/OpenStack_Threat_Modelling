@@ -72,8 +72,8 @@ Keystone Policy Engine.
 
 ####Create User
 ![Image Description][1]
-(Password truncation is removed due to [bug][14]
 
+(Password truncation is removed due to [bug][14]
 
 ####Delete User
 ![Image Description][2]
