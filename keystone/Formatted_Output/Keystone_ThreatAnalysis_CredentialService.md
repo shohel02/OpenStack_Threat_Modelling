@@ -34,8 +34,9 @@ This document is in continuation with the Threat Modeling of Keystone Identity a
 - Keystone Credential Controller.
 
 - Credential Drivers (example SQL).
-    
+
 ####Dependent components
+
 Keystone Policy Engine.
 
 ####Description
@@ -44,8 +45,7 @@ Keystone Policy Engine.
 
 ###System Assumptions (External Dependencies)
  -  The default driver for Keystone Credential Service is SQL.
- -  The path for policy.json file is rightly configured in the Keystone configuration file. In addition, it can be enforced.
-   
+
 ###Security Objective
  - Provide authentic CRUD operation for Credential Services.
  
@@ -63,7 +63,7 @@ Keystone Policy Engine.
 ###Entry Points
 
 ####Public Port
-SSL protected port, used to access the keystone server. External requests come and return through this port. Default 5000. If you plan to use SSL proxy, it could be different.
+SSL protected port, used to send request and receive response from  the Keystone server. Default port is 5000. 
 
 ####Persistence layer (DB):
 Token creation phase data is stored in DB, validation phase data is retrieved from DB.
@@ -76,7 +76,7 @@ Full assets list is documented in url
 
 9) Credentials
 
-9.1) Credential ID
+9.1) Credential_ID
 
 ----------
 <a name="threats"/>
@@ -107,57 +107,6 @@ Extra:
 
 > Comments:
 
-####Credential Service-02
-Threat: 
-Threat Agent:
->
-
-Attack Vectors:
->
-
-Security Weakness:
->
-
-Vulnerable Component:
->
-
-Counter Measures:
-> 
-
-Extra:
-> Probability: 
-
-> Impact: 
-
-> Related Info:
-
-> Comments:
-
-####Credential Service-03
-Threat: 
-Threat Agent:
->
-
-Attack Vectors:
->
-
-Security Weakness:
->
-
-Vulnerable Component:
->
-
-Counter Measures:
-> 
-
-Extra:
-> Probability: 
-
-> Impact: 
-
-> Related Info:
-
-> Comments:
 
   [1]:images/AddCredential.png
   [2]:images/UpdateCredential.png
