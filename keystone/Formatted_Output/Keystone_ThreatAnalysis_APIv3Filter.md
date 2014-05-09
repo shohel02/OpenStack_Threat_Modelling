@@ -238,6 +238,7 @@ Full assets list is documented in url
 
 ####API_v3-01
 Threat: Admin token (is_admin) abuse
+
 Threat Agent:
 >
 
