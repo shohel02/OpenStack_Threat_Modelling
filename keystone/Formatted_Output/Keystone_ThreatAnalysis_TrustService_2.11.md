@@ -23,7 +23,7 @@ Keystone Threat Modeling : Trust
 Keystone Havana Stable Release
    
 ####Application Description
-Trust provides project specific role delegation – i.e., a trustor delegates some roles on a project to the trustee.  The trustee acquires the roles of the trustor for the specified amount of time defined in trust. Optionally, it allows impersonation – i.e., trustee takes the user_id of the trustor. Trust is consumed by creating a token scoped under trust_id. A trust_token cannot be used to create another trust_token.
+Trust provides project specific role delegation – i.e., a trustor delegates roles on a project to the trustee.  The trustee acquires the roles of the trustor for the specified period of time defined in the trust. Optionally, it allows impersonation – i.e., trustee takes the user_id of the trustor. Trust is consumed by creating a token scoped under trust_id. A trust_token cannot be used to create another trust_token.
 
 https://github.com/openstack/identity-api/blob/master/openstack-identity-api/v3/src/markdown/identity-api-v3-os-trust-ext.md
 ####Additional Info
@@ -50,7 +50,6 @@ Identity API
 ####Description
 
 
-
 <a name="assumption"/>
 ###System Assumptions (External Dependencies)
  - Trust for V3 API is only considered
@@ -58,6 +57,7 @@ Identity API
 ###Security Objective
 
  - 
+
 
 <a name="dfd"/>
 ###Data Flow Diagrams 
@@ -81,8 +81,7 @@ Request from upper pipeline.
 #####Accessible To
 8) Keystone Process user
 
-10)System admin 
-
+10) System admin 
 
 
 ----------
@@ -101,45 +100,16 @@ Full assets list is documented in [url][6]
 35)  Context
 
 
-
 ----------
-####ComponentName-001
-Threats:
-> 
-
-Threat Agent:
-> 
-
-Attack Vectors:
-> 
-
-Security Weakness:
-> 
-
-Counter Measures:
-> 
-
-Extra:
->  Probability:
-
->   Impact:
-
->   Related Info:
-
->   Comments:
-     Link to Bug/mailing list or Tracking 
-
 ####Trust-001
 Threats:
->  Repudiation threats from impersonation
+>Repudiation threats from impersonation
 
 Threat Agent:
->  Trustee
+>Internet Attacker - Authorized (Trustee)
 
 Attack Vectors:
-> If token impersonation is enabled , ability to track the events persformed by the impersonated trustee. 
-
-A trustee delegates the trust to many other users with impersonation enabled, allowing many users in the system to use the same user id. 
+>If token impersonation is enabled and a trustor delegates trust to trustee, auditing who is responsible for a certian action can be difficult. (Audit log - is trust_id listed always along with user_id for any operation ?)
 
 Security Weakness:
 > 
@@ -159,15 +129,15 @@ Extra:
 
 ####Trust-002
 Threats:
->  Repudiation of actions
+>Repudiation of actions
 
 Threat Agent:
-> trustor
+>Internet Attacker - Autorized
 
 Attack Vectors:
-> Trust is not binded to requestToken. A trustor can create a trust for a trustee 
-even if trust is not requested. This can happen due to negligence from the trustor
-or intentionally to implicate Trustee for an action.
+>Trust is not binded to a requestToken. A trustor can create a trust for a trustee 
+even if the trustee did not request for such permission. 
+This can happen due to negligence from the trustor or intentionally to implicate Trustee for an action.
 
 Security Weakness:
 > 
