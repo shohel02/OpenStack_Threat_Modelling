@@ -25,7 +25,6 @@ Keystone Threat Analysis Index
  - ID-2.9: [Token provider][10] 
  - ID-2.10: Cache 
  - ID-2.11: [Trust][11]
- -
 
 ####ID-3: Persistence Storage
 
