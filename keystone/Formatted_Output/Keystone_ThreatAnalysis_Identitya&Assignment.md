@@ -21,7 +21,7 @@ Keystone Threat Modeling : Identity and Assignment Service
 Keystone Havana Stable Release
    
 ####Application Description
-The Identity service provides data about Users (projects), Group and as well as any associated metadata. In the basic case all this data is managed by the service, allowing the service to manage all the CRUD associated with the data.
+The Identity service provides data about Users (projects), Group, and as well as any associated metadata. In the basic case all this data is managed by the service, allowing the service to manage all the CRUD associated with the data.
 
 Starting from Havana, several of the entities previously managed via the Identity backend were divided into a new backend called Assignments.  
 
@@ -44,7 +44,6 @@ The Identity driver still manages:
 ####Major Components
 
 Keystone Identity Controller.
-
 
 Keystone Assignment Controller.
 
@@ -73,6 +72,8 @@ Keystone Policy Engine.
 
 ####Create User
 ![Image Description][1]
+(Password truncation is removed due to [bug][14]
+
 
 ####Delete User
 ![Image Description][2]
@@ -113,7 +114,7 @@ Keystone Policy Engine.
 ###Entry Points
 
 ####Public Port
-SSL protected port, used to access the keystone server. External requests come and return through this port. Default 5000. If you plan to use SSL proxy, it could be different.
+SSL protected port, used to access the keystone server. External requests are received and served through this port. Default port is 5000.
 
 ####Persistence layer (DB):
 Token creation phase data is stored in DB, validation phase data is retrieved from DB.
@@ -134,6 +135,7 @@ Full assets list is documented in url
 ####Assignment & Identity Service-01
 Threat: According to the current Policy File, a domain admin can create a group and add user to the group.
 If the Domain Admin becomes rogue and deletes the group then all tokens for a user beloging to the group are revoked.
+
 Threat Agent:
 >Domain Admin / Cloud Admin. 
 
@@ -155,11 +157,14 @@ Counter Measures:
 Extra:
 > Probability: Low 
 
-> Impact: High
+> Impact: Medium
 
-> Related Info: Keystone Policy File: https://github.com/openstack/keystone/blob/master/etc/policy.v3cloudsample.json Referenced: 21 April 2014. 
+> Related Info: Keystone Policy File:
+https://wiki.openstack.org/wiki/OSSN/OSSN-0009
+https://bugs.launchpad.net/keystone/+bug/1268751
 
 > Comments: 
+
 
 ####Assignment & Identity Service-01
 Threat: 
@@ -200,4 +205,4 @@ Extra:
   [11]: images/CreateGrant.png
   [12]: images/RevokeGrant.png
   [13]: Keystone_asset_library.md
-  
+  [14]: https://bugs.launchpad.net/keystone/+bug/1175904
