@@ -50,7 +50,7 @@ GET  /auth/tokens validate_token
 
 HEAD /auth/tokens check_token
 
-Delete token disables a token by changing the ‘enable’ flag
+Delete token disables a token by modifying the ‘enable’ flag
 
 DELETE /auth/tokens revoke_token
 
@@ -58,7 +58,7 @@ DELETE /auth/tokens revoke_token
 
 <a name="assumption"/>
 ###System Assumptions (External Dependencies)
- - The communication channel between end user and keystone is SSL protected.
+ - The communication channel between the end user and Keystone is SSL protected.
  - Only V3.0 API is covered in this doc.
 
 ###Security Objective
@@ -81,7 +81,7 @@ DELETE /auth/tokens revoke_token
  
 <a name="entry"/>
 ###Entry Points
-####Name ID-01: S3_router
+####Name ID-01: Upstream router
 #####Description
 Request from upper pipeline.
 #####Accessible To
@@ -91,8 +91,8 @@ Request from upper pipeline.
 
 ####Name ID-02: External Identity Provider
 #####Description
-Identity Request resolved by external Provider. 
-Set REMOTE_USER variable
+User Identity request resolved by external Provider. 
+Sets REMOTE_USER variable
 #####Accessible To
 8) Keystone Process user 
 
@@ -117,7 +117,7 @@ Full assets list is documented in url
 
 8) Token
 
-8.2.) Scope (project, Domain, Trust)
+8.2) Scope (project, Domain, Trust)
 
 26) Configuration (Expiry_time)
 
@@ -141,9 +141,7 @@ Attack Vectors:
 > REMOTE_USER asset context exploited
 
 Security Weakness:
-> Context generation weakness. No credible one found, but possible exploitation area. Need to check, we can pass the REMOTE_USER in query string. Can it escape somehow the query string parameter in context? Special checks: no one tries to flatten the context. Is REMOTE_USER is set by other 
-source other than authentication purpose? Not all external authentication mechanism do set
-REMOTE_USER variable , what to expect for such cases.
+> Context generation weakness. No credible one found, but possible exploitation area. Need to check, we can pass the REMOTE_USER in query string. Can it escape somehow the query string parameter in context? Special checks: no one tries to flatten the context. Is REMOTE_USER is set by other sources  than authentication purpose? Not all external authentication mechanism do set REMOTE_USER variable , what to expect for such cases.
 
 Counter Measures:
 > Follow best practices
@@ -165,7 +163,7 @@ Threats:
 > Spoofing
 
 Threat Agent:
-> Internet Attacker-authorized or unauthorized,
+> Internet Attacker-Unauthorized or Authorized,
 
 Attack Vectors:
 > Exploiting the weakness of supported authentication mechanism.
@@ -176,7 +174,7 @@ use the weaker authentication mechanism to get a TOKEN. An attacker will always 
 
 
 Counter Measures:
-> Security best practice to decide, resources available based on authentication method strength. User (a domain) can be binded to allowable authentication mechansims. User can only perform authentication using the allowed mechanism. Current authenticaiton mechanims binding is too large ( System wide). 
+> Security best practice to decide, resources available based on authentication method strength. User (or a domain) can be binded to allowable authentication mechansims. User can only perform authentication using the allowed mechanism. Current authenticaiton mechanims binding is too wide (System wide). 
 
 Extra:
 >  Probability: Low
@@ -197,15 +195,15 @@ Attack Vectors:
 > Token validation request for UUID tokens
 
 Security Weakness:
-> Currently there is no white listing check on TokenID (UUID Token) during token validation. All tokenIDs are considered in correct form, which could result in expensive DB lookout to check the correctness of the Token_ID.
+> Currently there is no white listing check on Token_ID (UUID Token) during token validation. All tokenIDs are considered in correct form, which could result in expensive DB lookup to check the correctness of the Token_ID.
 
 Counter Measures:
-> Rate Limiting
+> Whitelisting
 
 Extra:
 >  Probability: Medium
 
->   Impact: Medium
+>   Impact: Low
 
 >   Related Info:
 
@@ -265,7 +263,7 @@ Extra:
 
 ####AuthController-006
 Threats:
-> Spoofing/ Elevation of Priviledge: Unauthorized access using the weakness
+> Spoofing/ Elevation of Priviledge: Unauthorized access using the weakness of
 default auth mechanisms : token authentication
 
 Threat Agent:
@@ -275,7 +273,8 @@ Attack Vectors:
 > 
 
 Security Weakness:
-> currently a unscoped token can be scoped and scoped token can be unscoped. This is true for both V2 and V3. An malicious entity in possession of a scoped token can create a new token with a changed scope ( a new token changing the project role to which the token owner is a member)
+> currently a unscoped token can be scoped and scoped token can be unscoped. This is true for both V2 and V3. A malicious entity in possession of a scoped token can create a new token with a changed scope ( a new token with a 
+changed role, to which the token owner is a member)
 
 Counter Measures:
 > 
@@ -328,9 +327,9 @@ Attack Vectors:
 
 Security Weakness:
 > Currently, Token is binded to user, project and role, not with the 
-endpoint. A single token is valid for all services. Besides, a scoped
+endpoint. A single token is valid for all services/endpoints. Besides, a scoped
 token can be used to get an unscoped token and later on scoped token 
-makes all user asset vulnerable if it get exposed in any place.
+makes all User assets vulnerable if it is exposed in any place.
 
 Counter Measures:
 > 
