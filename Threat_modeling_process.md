@@ -119,7 +119,7 @@ return ranked_Threat
 ```        
 
 
-[1]: keystone/images/Threat_modeling_steps_high_level.png
-[2]: keystone/images/Threat_Modeling_steps.png
-[3]: keystone/images/Threat_model_combination.png
+[1]: images/Threat_modeling_steps_high_level.png
+[2]: images/Threat_Modeling_steps.png
+[3]: images/Threat_model_combination.png
 
