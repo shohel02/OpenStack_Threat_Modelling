@@ -23,22 +23,22 @@ Files:
        A collection of known threats.
 
 
-**keystone**
+**Keystone**
        Openstack Keystone - Threat Modelling repository for Keystone. 
 
 
-**keystone/Kesytone_Threat_Analysis.md**
+**Keystone/Kesytone_Threat_Analysis.md**
         Template for Threat analysis
 
 
-**keystone/Formatted_Output**
+**Keystone/Formatted_Output**
        Directory containing Threat analysis reports in Markdown format.
       
        
-**keystone/Formatted_Output/images**
+**Keystone/Formatted_Output/images**
        Directory containing images referenced from keystone/Formatted_Output directory
 
 
-**keystone/Formatted_Output/images/dia** 
+**Keystone/Formatted_Output/images/dia** 
        Directory containing .dia files referenced from 'keystone/Formatted_Output' directory
        (images are drawn in dia)
