@@ -1,13 +1,14 @@
 OpenStack Threat Modelling
 ==========================
 
-OpenStack Threat modelling files and reports are organized here.
+OpenStack Threat Modelling files are organized here.
 
 Files:
 ------ 
 
 **Threat_modelling_process.pdf**    
-       Steps of Threat Modelling process
+       Steps of Threat Modelling process followed for the 
+       analysis of OpenStack projects.
        
        
 **Threat_modelling_process.md**
@@ -15,7 +16,7 @@ Files:
 
 
 **Project_ThreatAnalysis_ComponentName_Number.md**
-       A common format for threat modelling 
+       A common format for Threat modelling 
 
 
 **Threat_DB_Ref.xls**
@@ -23,11 +24,11 @@ Files:
 
 
 **keystone**
-       Openstack keystone service - Threat Modelling repository related to Keystone. 
+       Openstack Keystone - Threat Modelling repository for Keystone. 
 
 
 **keystone/Kesytone_Threat_Analysis.md**
-        Template for threat analysis
+        Template for Threat analysis
 
 
 **keystone/Formatted_Output**
