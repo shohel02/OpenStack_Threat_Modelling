@@ -21,9 +21,7 @@ Keystone Threat Modeling : Auth Token
 Keystone Havana Stable Release
    
 ####Application Description
-The Keystone middleware architecture supports a common authentication protocol for all OpenStack projects.  By using keystone as a common authentication and authorization mechanisms, the OpenStack project can plug in to existing authentication and authorization systems.
-
-OpenStack is using a token-based mechanism for authentication and authorization. An authentication middleware component is a proxy that intercepts HTTP calls from clients, validate the header, and populates HTTP headers in the request context for other WSGI middleware or applications to use.
+The Keystone Auth Token is a middleware that can be plugged into a WSGI pipeline to perform authentication with the central Keystone server. An authentication middleware component is a proxy that intercepts HTTP calls from clients, validate the header, and populates HTTP headers in the request context for other WSGI middleware or applications to use.
 
 
 ####Additional Info
@@ -31,13 +29,14 @@ OpenStack is using a token-based mechanism for authentication and authorization.
 <a name="implementation"/>
 ###Implementation Overview
 
+Implemented as as WSGI middleware
+
 ####Major Components
 
 Keystone Auth token 
 
 ####Dependent components
 Json utilties
-
 
 Crypto: hashlib(md5)
 
@@ -55,7 +54,7 @@ Get user token, Validate user token, Build user header, Add user header, Data to
 
 ###System Assumptions (External Dependencies)
  -  Token service is trustworthy.
- -  Memcache is initialized and the memcache secret key is available.
+ -  Memcache is initialized and the memcache secret key is accessible only by the Client.
  -  The communication channel is secure.
  -  Configuration Parameters: Token Expiry time and Token Issue time.
    

@@ -30,13 +30,13 @@ Keystone Threat Modeling - High Level
    Keystone Havana Stable Release
    
 ####Application Description
-   Keystone provides identity and access management for users of OpenStack Cloud.  Keystone is composed of many internal services most of which are pluggable. The internal services are served through a shim layer. It provides authentication of users, can contain a repository of users (identities) and roles. It also performs account and entitlement management of users.  The entitlements are managed by assigning roles for users and enforcing access control on the target service (object).
+   Keystone provides identity and access management for users of OpenStack Cloud.  Keystone is composed of many internal components/services most of which are pluggable. The internal services are served through a shim layer. Keystone provides authentication of users, can contain a repository of users (identities) and roles. It also performs account and entitlement management of users.  The entitlements are managed by assigning roles for users and enforcing access control on the target service (object).
    
--	Username/user_id identifies the user. A user is authenticated by a configured authentication mechanism. Before authentication, the account needs to be provisioned. Keystone also performs account provisioning e.g., users, tenant, domain, role, and their assignments. External authentication mechanisms e.g., Apache HTTP authentication can be integrated with Keystone.
--	Authorization (entitlement) is performed for each request based on assigned role within a token  and policies  defined in the system. The entitlement decision is decentralized i.e., decided by the respective service.
--	Each successful and unsuccessful request are logged.
--	User and system data is protected by access control and sensitive data (only password) is protected by one way hashing.
--	In addition, Keystone provides catalog information to locate other services.
+-	Username/user_id identifies the user. A user is authenticated by authentication mechanism resides within Keystone or from a remote service (External Authentication). Before authentication, the user account needs to be provisioned. Keystone provides provisioning support for account and related attributes e.g., users, tenant, domain, role, and their assignments.
+-	Authorization (entitlement) is performed for each request based on assigned role within the accompanied token  and policies  defined for that role. Each service has its own policy file, making entitlement decision decentralized. (policy management and entitlement decision is part of Oslo) 
+-	Logging mechanism exist for successful and unsuccessful request (Audit).
+-	User and system data are protected by access control and sensitive data (only password) is protected by one way hashing (privacy).
+-	In addition, Keystone provides catalog information to locate other services (additional service).
 
    
 ####Additional Info
@@ -62,10 +62,11 @@ Related info covered in:
 https://wiki.openstack.org/wiki/Security/Juno/Keystone#Notable_changes_since_Icehouse
 ####Description
 
--	Keystone consists of a combination of services: Identity, Assignment, Catalog, Policy, Token and so on. Each of the service has specific drivers, which can be plugged using configuration file.
--	Keystone performs access control: authentication and authorization (entitlement) of users. The authentication process can be performed using three mechanisms: username/password, token, and external authentication (including external authentication middleware or an external authentication mechanism which set REMOTE_AUTH variable). After successful authentication, Keystone issues a token to the requester.
--	The authorization process consists of assignment of roles, policy definition file specific for a specific OpenStack service, entitlement decision engine and enforcement points. 
--	Keystone provides identity provisioning service e.g., users, tenants, groups, roles, domains 
+-  Keystone follows the same WSGI principle, allows easy addition/remove of components/services from request/response pipeline.
+-	Keystone consists of a set of services: Identity, Assignment, Catalog, Policy, Token and so on. Each service has specific drivers, which is configurable using the configuration file.
+-	Keystone provides access control functionality: authentication and authorization (entitlement) of users. In default setup, authentication mechanism can be performed in three ways : username/password, token, and external authentication (including external authentication middleware or an external authentication mechanism which set REMOTE_AUTH variable). After successful authentication, Keystone issues a token to the requester.
+-	The authorization process consists of assignment of roles. Kesytone roles are primitive acts as an user attribute.
+- The other parts of authorization, i.e., policy file, policy decision point and policy enforcement point are service specific -- provided using Oslo common. 
 
 <a name="assumption"/>
 ###System Assumptions (External Dependencies)
@@ -75,8 +76,8 @@ https://wiki.openstack.org/wiki/Security/Juno/Keystone#Notable_changes_since_Ice
 - The document will cover both V2.0 (limited only for Token service) and V3.0 API.
 - Keystone.conf, unless stated otherwise, the default values of the configuration file is used (keystone with devstack setting)
 - PKI token (default token provider)
-- SSL endpoint (Keystone server endpoint. We assumed keystone server to client transport channel is SSL protected.     OpenStack Security Guide and Keystone doc define steps for SSL endpoints)
-- The communication channel between client and keystone service endpoint is SSL protected (from assumption 4).
+- The communicaiton channel between Client and Keystone Service is SSL protected. (OpenStack Security Guide and Keystone doc define steps to enable SSL endpoints)
+- The communication channel between Client and Other OpenStack services are SSL protected.
 
 ####Persistence 
 - The database server is MySQL and related driver is SQLAlchemy.
@@ -98,6 +99,7 @@ https://wiki.openstack.org/wiki/Security/Juno/Keystone#Notable_changes_since_Ice
 -	Entitlement decision (authorization) for user-initiated request.
 -	Non-repudiable auditing for each request.
 -	Protection of system and user data / state information.
+
 -  In addition, for keystone case: Integrity of catalog information. 
 
 <a name="dfd"/>
@@ -117,9 +119,9 @@ ID-1. Anonymous
 
 ####Name: IA-A: Internet Attacker– authorized
 #####Actors
-ID-2. Member User
+ID-2. Member User ( A user with non admin role)
 
-ID-3. Owner
+ID-3. Owner (e.g., Owner of a resource)
 
 ID-4. Project Admin
 
@@ -128,23 +130,23 @@ ID-5. Domain Admin
 ID-6. Cloud Admin
 
 ID-7. Admin (V2 case)
+
+ID-8: Service user (Other OpenStack user)
 #####Details
 
 ####Name: IA-A: Internal Attacker
 #####Actors
-ID-8.  Keystone System user
+ID-9.  Keystone System user (i.e., Keystone process running user) 
 
-ID-9.  Other System user
+ID-10.  Other System user
 
-ID-10. System Admin
+ID-11. System Admin
 
-ID-11. DB Admin
+ID-12. DB Admin
 
-ID-12. Keystone DB user
+ID-13. Keystone DB user
 
-ID-13. External Identity provider user
-
-ID-14. Service user
+ID-14. External Identity provider user 
 
 #####Details
 
@@ -174,21 +176,23 @@ Protected, for authenticating users (user data) from external system.
 
 Keystone System user can access remote system to verify user data or to perform user authentication.
 Keystone System user should not have permission to modify data in the remote system.
-Not the other way around.
+Remote System user should not be allowwed to access Keystone Data.
 
 ####Name: ID-04 Interface towards persistence layer
 #####Description
 Keystone server communicates with database backend . We only consider MySQL server.
 #####Accessible To
 (8) Keystone System user can access DB (through a DB user/credential, The DB user is Keystone specific and only
-allowed to do operation within Keystone DB). Not the other way around. 
-(10) Does System Admin needs this access?
+allowed to do operation within Keystone DB). 
+
+DB user has no access right within Keystone.
+
 
 ####Name: ID-05 Cache interface
 #####Description
 Keystone uses dogpile cache layer which stores data in one of the cache backends.
 #####Accessible To
-(8) Keystone System user access cache server. Not the other way around. (10) 
+(8) Keystone System user access cache server to access/modify cached data. 
 
 ####Name: ID-06 Configuration and key materials
 #####Description
@@ -196,6 +200,9 @@ Keystone uses configuration parameters during initialization. It also uses key m
 #####Accessible To
 (8)  Keystone System user. 
 (10) System Admin 
+
+Keystone System user can only access the Configuration data
+System Admin can access/Modify configuration data
 
 
 ----------
