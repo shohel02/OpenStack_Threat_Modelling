@@ -4,7 +4,7 @@ OpenStack Threat Modelling
 OpenStack Threat Modelling files are organized here.
 
 Files:
-------- 
+-------- 
 
 **Threat_modelling_process.pdf**    
        Steps of Threat Modelling process followed for the 
@@ -22,7 +22,7 @@ Files:
 **Threat_DB_Ref.xls**
        A collection of known threats.
 
-
+---------
 
 
 **Keystone**
