@@ -38,7 +38,7 @@ Keystone Auth token
 ####Dependent components
 Json utilties
 
-Crypto: hashlib(md5)
+Crypto: hashlib(md5) - to hash PKI tokens
 
 Signing certificate, certificate authority
 
@@ -56,10 +56,11 @@ Get user token, Validate user token, Build user header, Add user header, Data to
  -  Token service is trustworthy.
  -  Memcache is initialized and the memcache secret key is accessible only by the Client.
  -  The communication channel is secure.
- -  Configuration Parameters: Token Expiry time and Token Issue time.
+ -  Configuration Parameters
    
 ###Security Objective
- -  Validation of the token.
+ -  Integrity of the token.
+ -  Authenticity of the token
  
 
 <a name="dfd"/>
@@ -68,36 +69,59 @@ Get user token, Validate user token, Build user header, Add user header, Data to
 ####Token Validation Simplistic
 ![Image Description][1]
 
+####Token Validation (Expanded Validate User Token from previous, Level 2, DFD)
+![Image Description][3]
+
 ####Keystone Client Middleware
 ![Image Description][2]
 
-####Token Validation (Expanded Validate User Token from previous, Level 2, DFD)
-![Image Description][3]
+Note: Token hashing algorithm is not limited to MD5 anymore, rather configurable. It coule be 
+a set of hash algorithm but preferred one is the first hash algorithm.
+Assume its a clean installation (no legacy token cache exist)
+
+Validation (against revocation list ) of cached token is added (configured)
 
 ####Memcache Level 1
 ![Image Description][4]
 
+Note: digest = HMAC(secrect,token+strategy, SHA386).digest
+cache_key = digest[0-127]
+MAC_key= digest[128-255]
+Encryption_key = digest[256-385]
+
+
 <a name="entry"/>
 ###Entry Points
+Upstream Pipeline ( upstream pipe line app from which gets env including token )
 
-####Upstream Pipeline
+HTTP request (UUID token validation, version info)
 
-####WSGI Server
 ----------
 <a name="asset"/>
 ###Assets
 Full assets list is documented in url
 [Asset Library][5]
 
-1) User
-
 8) Token
+   - uuid
+   - PKI (PEM, DER)
 
-8.1) Revocation List
-
-22) PKI signing cert
-
-26) Configuration Parameter (Token Cache time, revocation list cache time)
+26) Configuration Parameter 
+   
+     -auth_uri (where to find the auth service, public api endpoint to validate token)
+     -identity_uri(Identity admin api endpoint)
+     -signing_cert_file_name, signing_ca_file_name, revoked_file_name
+     -admin_token (going to be deprecated or service token)
+     -service_user, service_password, service_tenant (for UUID token verification)
+     -token_cache_enable_disable
+     -token_cache
+     -token_cache_time, 
+     -token_revocation_list
+     -token_revocation_list_cache_time
+     -memchache secret key, memcache_security_strategy
+     -token_bind
+     -delay_auth_decision
+     -include_catalog
 
 
 ----------
@@ -113,17 +137,16 @@ Threat Agent:
 Attack Vectors:
 >If token  is found in cache, the target service returns the token data without validating the cached token.
 A recent modification allowed checking chached token against revocation list. However, the revocation list itself
-can be cached in the target system.
+can be cached in the target system. 
 
 Security Weakness:
->In case of token revocation, there could be inconsistency between the cached token in target service and the current state of the actual token. Thishappens due to a stale revocation list.
+>In case of token revocation, there could be inconsistency between the cached token in target service and the current state of the actual token. This happens due to a stale revocation list.
 
 Vulnerable Component:
 >Cache Management, Validating the cached token.
 
 Counter Measures:
->By refreshing (cache) revocation list frequently, we can minimize the impact or zero cache time for revocation list
-can provide the consistency of token state between token source and target system. Deployers should consider the balace between performance and security during initialization of token cahce time and revocation list cache time.
+>By refreshing (cache) revocation list frequently, we can minimize the impact or no caching for token is another way to eliminate this threat. Deployers should consider the balance between performance and security during initialization of token cahce time, revocation list cache time and cahce enablaement feature.
 
 
 Extra:
@@ -143,16 +166,16 @@ Threat Agent:
 >Internet attacker Unauthorized.
 
 Attack Vectors:
->Restarting Memcache looses token revocation list. This happens only for PKI tokens with memcache or KVS backend. An attacker can use a revoked token if Memcache server restarts.
+>What if revocation list becomes stale or empty for some reason at source or at target system. Bug[1182920] shows, restarting Memcache looses token revocation list. This happens only for PKI tokens with memcache or KVS backend. An attacker can use a revoked token if Memcache server restarts.
 
 Security Weakness:
->With memcached backend, the revoked token  list (revocation list) only lasts as long as the memcached server is up and running. Thus, if the Keystone server is restarted, all token revocations are dropped, and they will not show up in later token revocation list requests. 
+>Lacking Integrity and data loss check of the revocation list. Do we have proper mechanism to maintain revocation list. As for bug[1182920], with memcached backend, the revoked token  list (revocation list) only lasts as long as the memcached server is up and running. Thus, if the Keystone server is restarted, all token revocations are dropped, and they will not show up in later token revocation list requests. 
 
 Vulnerable Component:
->Memcache Backend design.
+>Memcache Backend design, data loss prevention mechanism
 
 Counter Measures:
->Way around is described in See Related Info.
+>Data loss prevention design.
 
 Extra:
 >Probability: Low
@@ -196,13 +219,15 @@ Extra:
 Threat: Service unavailablity
 
 Threat Agent:
->Internet attacker Authorized.
+>Internal attacker 
 
 Attack Vectors:
->The PKI token is getting larger in V3 API. Due to limitation of WSGI MAX_HEADER_LENGTH, a large PKI token can be rejected due to limiation of WSGI request header size limit. 
+>An internal attacker can define a large enough service catalog resulting in a 
+large token which can possibly break/deny services for token users.
+Bug[1186177] shows that PKI token is getting larger in V3 API. Due to limitation of WSGI MAX_HEADER_LENGTH, a large PKI token can be rejected due to limiation of WSGI request header size limit. 
 
 Security Weakness:
->
+> 
 
 Counter Measures:
 >PKI Token with no catalog information. Increase the size of MAX_HEADER_LENGTH (Any security implication?)
@@ -223,19 +248,19 @@ Threat Agent:
 >Internal Attacker.
 
 Attack Vectors:
->For UUID token in version 2.0 the user token is appended to the GET request. The same is also for PKI token, if any service calls PKI token for validation using GET call.
+>For UUID token in version 2.0 Identity API the user token is appended to URL of the GET request. URL is logged by many systems, potentially revealing the Token.
 
 Security Weakness:
->Log Analysis from Keystone Middleware requests could reveal the user token.
-
+>Adding sensitive information in the URL is a bad practice.
 
 Counter Measures:
->Use V3 API. Secure Log Management.
+>Use V3 API. 
+Secure Log Management.
 
 Extra:
->Probability: Medium
+>Probability: Low
 
->Impact: High
+>Impact: Medium
 
 >Related Info: 
 
@@ -249,15 +274,19 @@ Threat Agent:
 >Internet Attacker - Unauthorized
 
 Attack Vectors:
->Fectching of Credentials (certificates to setup secure channel between Keystone Clients and Keystone Server) and using the channel to validate token or fetch revocation_list can lead to MiTM attack. A naive Keystone Client can setup a secure channel with malicious endpoint and thereby the malicious can provide replayed or stale  revocation_list when  a revocation_list is requested by the service (or valid result for invalid UUID token). 
+>Fectching of Credentials (certificates to setup secure channel between Keystone Clients and Keystone Server) and using the channel to validate token or fetch revocation_list can lead to MiTM attack. A naive Keystone Client can setup a secure channel with malicious endpoint and thereby the malicious end point can provide replayed or stale  revocation_list when  a revocation_list is requested by the service (or valid result for invalid UUID token). 
 
 Security Weakness:
->In case of SSL endpoint, MiTM in the SSL is possible as token is no way bind to transport protocol. using this vulnerability it can replay an old revocation_list to the service
-  
+>In TLS/SSL Client assume the trustworthiness of Server, in most cases, authentication of client to the
+server is provided by inner mechanism e.g., token, certificate. How our token bind with transport layer,
+ are they totally independent, if so , it is highly likely that MiTM is possible without proper verification 
+ of server certificate at the first place. 
 
 Counter Measures:
->SSL tunnel, server certificate validation
-Binding of message with transport security.
+>Server certificate validation
+
+Proper use of security bindings of transport protocol and authentication protocols. Best practice would be,
+service binding (token is binded targeted towards a specfici service) or channel binding ( transport layer protocol is binded to authentication protocol).
 
 Extra:
 >Probability:
@@ -267,7 +296,40 @@ Extra:
 >Related Info:
 
 >Comments:
-     Link to Bug/mailing list or Tracking 
+      
+####AuthToken-07
+Threat:  
+
+Threat Agent:
+>
+
+Attack Vectors:
+>
+
+Security Weakness:
+>
+
+Counter Measures:
+>
+
+Extra:
+>Probability: Low
+
+>Impact: Medium
+
+>Related Info: 
+
+>Comments:
+
+####Possible Areas we can look into
+1) multiple token types (uudi, PKI - pem, der) without any configurable options in Auth Token
+Does attacker deliberately choose weak token creation mechanism
+2) Auth_url - is it possible to forge
+3) New cache lookup for a set of hash algorithm - requires more look up for same value in cache.
+4) token authenticity is based on loose assumption - client, transport and all intermediaries are
+   trusted.
+
+
 
   [1]: images/DFD_KeystoneMiddleware_Level1.png
   [2]: images/DFD_KeystoneMiddleware_ValidateUserToken_Level1.png
