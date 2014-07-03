@@ -13,7 +13,7 @@ Keystone Threat Analysis Index
 
 ####ID-2: Keystone Application Server
 
- - ID-2.1: Token_auth middleware  
+ - ID-2.1: Token_auth middleware (included in ID-2.2)  
  - ID-2.2: [Filters][12]
  - ID-2.3: [Identity Service][4]
  - ID-2.4: [Auth Service][5] 
