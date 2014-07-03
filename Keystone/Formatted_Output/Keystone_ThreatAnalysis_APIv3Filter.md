@@ -142,7 +142,8 @@ context['environment'] = request.environ`
 
 5. Build Auth Context from token and returns the Auth Context
 
-"""Environment variable used to convey the Keystone auth context.
+"""
+Environment variable used to convey the Keystone auth context.
 Auth context is essentially the user credential used for policy enforcement.
 It is a dictionary with the following attributes:
 
@@ -237,7 +238,8 @@ Method:
 
 
 ###**json_body:** 
-"""Middleware to allow method arguments to be passed as serialized JSON.
+""" 
+    Middleware to allow method arguments to be passed as serialized JSON.
 
     Accepting arguments as JSON is useful for accepting data that may be more
     complex than simple primitives.
