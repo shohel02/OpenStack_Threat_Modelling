@@ -72,7 +72,7 @@ Method:
 1. If request.content_length > CONF.max_request_body_size then it raises an exception 
 called exception.RequestTooLarge.
 
-2. If req.content_length is None and req.is_body_readable then it limits the size of an 
+2. If request.content_length is None and req.is_body_readable then it limits the size of an 
 incoming request by CONF.max_request_body_size
 
 Default CONF.max_request_body_size=114688
@@ -279,15 +279,21 @@ Method:
 
 8. Token
 
-26. Configuration parameters
-    -CONF.max_request_body_size
-    -request.environ['PATH_INFO']
+26. Configuration parameters:
+
+    -CONF.max_request_body_size,
+    -request.environ['PATH_INFO'],
     -CONF.admin_token
 
-Intermediary Asset
+
+Intermediary Asset:
+
 -Auth Context
--Context[token]
+
+-context[token]
+
 -context[is_admin]
+
 -AUTH_TOKEN_HEADER
 
 
