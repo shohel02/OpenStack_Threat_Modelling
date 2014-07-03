@@ -260,8 +260,8 @@ Method:
 
    
 ###Security Objective
- -input/out sanitization
- -authenticate auth_context
+1. input/out sanitization
+2. authenticate auth_context
  
 <a name="dfd"/>
 ###Data Flow Diagrams 
