@@ -93,7 +93,6 @@ Code Snippet:
 
 ` if (len(request.environ['PATH_INFO']) > 1 and
                 request.environ['PATH_INFO'][-1] == '/'):
-                
             request.environ['PATH_INFO'] = request.environ['PATH_INFO'][:-1] `
 
 2. Rewrites path to root if no path is given.
@@ -101,7 +100,6 @@ Code Snippet:
 Code Snippet:
 
  ` elif not request.environ['PATH_INFO']:
- 
             request.environ['PATH_INFO'] = '/' `
 
 ###**build_auth_context:** keystone.middleware:AuthContextMiddleware.factory
@@ -132,7 +130,6 @@ extra validation)
 Code Snippet:
 
 `if not CONF.token.revoke_by_id:
-                
                 self.token_api.token_provider_api.validate_token(
                     context['token_id'])`
 
@@ -146,7 +143,6 @@ context['environment'] = request.environ`
 5. Build Auth Context from token and returns the Auth Context
 
 """Environment variable used to convey the Keystone auth context.
-
 Auth context is essentially the user credential used for policy enforcement.
 It is a dictionary with the following attributes:
 
