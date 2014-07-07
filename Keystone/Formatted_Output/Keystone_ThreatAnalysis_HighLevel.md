@@ -94,7 +94,19 @@ https://wiki.openstack.org/wiki/Security/Juno/Keystone#Notable_changes_since_Ice
 
 ###Security Objective
 
--  An IdAM must provide:
+Security objectives of any system:
+
+- confidentiality - informaiton is available only to rightful recipient
+- integrity - modification impossible without notice of the recipient (includes authenticity)
+- availability - service availablity
+
+Others: 
+- non-repudiation
+- accountabiltiy
+
+
+An IdAM must provide:
+
 -	Identification (authentication) and entitlements of users.
 -	Entitlement decision (authorization) for user-initiated request.
 -	Non-repudiable auditing for each request.
