@@ -21,7 +21,7 @@ Keystone Threat Modeling : Identity and Assignment Service
 Keystone Havana Stable Release
    
 ####Application Description
-The Identity service provides data about Users (projects), Group, and as well as any associated metadata. In the basic case all this data is managed by the service, allowing the service to manage all the CRUD associated with the data.
+Identity service provides data about Users (projects), Group, and as well as any associated metadata. In basic case, all this data is managed by the service, allowing the service to manage all the CRUD associated with the data.
 
 Starting from Havana, several of the entities previously managed via the Identity backend were divided into a new backend called Assignments.  
 
@@ -58,12 +58,34 @@ Keystone Policy Engine.
 
 ###System Assumptions (External Dependencies)
  -  Assignment and Identity drivers should be configured in the Keystone configuration file.
- -  The path for policy.json file is rightly configured in the Keystone configuration file. In addition, it can be enforced.
+ -  The path for policy.json file is configured in the Keystone configuration file.
  -  The default drivers for Identity and for Assignment service  is SQL.
    
 ###Security Objective
- - Provide authentic CRUD operations on Users, Tenants, Groups, Roles and Domains.
+  
+  Requester requirements:
+
+ - availability of CRUD operations on Users, Tenants, Groups, Roles and Domains
+ - non-repudiation of CRUD response from service (trust and accountability can replace this)
+ - audit log of request
+
+  Service requirements:
+  
+ - Maintain audit log of the requester
+ - Non-repudiation of request from upstream requester (trust and accountability can replace this).
+ - Confidentiality of sensitive information (e.g., password never leaves without encryption)
+ - Maintain integrity of service behavior
+ ..* Lenght check of users, tenant, domain, group, password
+ ..* White listing of Input data
+ ..* Integrity of response / response codes
+
+  Service requirements from Persistence layer:
  
+ -  availability of service prvided by DB
+ -  non-repudiation of request/response prodvided by DB (hard to proof, instead we can go for weak
+ authenticity property and assume that DB will do its job (trust) and have audit log)
+ 
+
 
 <a name="dfd"/>
 ###Data Flow Diagrams 
@@ -71,12 +93,16 @@ Keystone Policy Engine.
 ###Identity Operations:
 
 ####Create User
+
 ![Image Description][1]
 
-(Password truncation is removed due to [bug][14]
+(Password truncation is removed due to [bug][14] 1175904. Instead, it returns an error if password 
+is long)
 
 ####Delete User
 ![Image Description][2]
+(deletion order right to left)
+
 
 ####Change Password
 ![Image Description][3]
@@ -191,6 +217,24 @@ Extra:
 > Related Info: 
 
 > Comments:
+
+Questions:
+Create User:
+1. Is requester authorized to create the user in specified doamin, tenant
+   if so, is requester constrained by what level
+2. Does this service blindly trust any content (context and user) coming from
+   requester.
+   the opposite requester believes response from service. 
+3. user created without password ? (encryption happens to empty password) 
+
+Delete User:
+1. who is alllowed to delete - user, teanant admin, domain admin
+2. what should be the order of deletion (credentials, token, user)
+3. Deletion means total deletion or disabling the user.
+4. Differences in v2 and v3 api deletion.
+
+Change Password:
+1. 
 
   [1]: images/CreateUser.png
   [2]: images/DeleteUser.png
