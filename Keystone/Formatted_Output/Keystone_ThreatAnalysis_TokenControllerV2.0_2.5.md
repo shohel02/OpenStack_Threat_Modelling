@@ -58,14 +58,21 @@ Major process:
 <a name="assumption"/>
 ###System Assumptions (External Dependencies)
 
- - The communication channel between end user and keystone is SSL protected.
+ - The communication channel between end user (client) and Keystone sever is SSL/TLS protected.
  - Only V2.0 API is covered in this doc.
 
 ###Security Objective
 
--   Authentication of user 
--	Validate the authenticity of the token
--	Issuance of consistent and integrity protected token revocation list 
+1. Issuance of integrity protected Token
+2. Validate the integrity of Token
+3. Avalability of service
+4. Authentication of user (desired property is mutual authentication) 
+5.	Issuance of integrity protected token revocation list 
+6. Auditablity of requset/response
+7.	User data integrity check 
+.. * username, tenant, domain, token_id length check
+.. * whitelist/black list check
+
 
 
 
@@ -230,6 +237,29 @@ This is changing in latest releases
 >   Comments:
     https://bugs.launchpad.net/keystone/+bug/1174499 
      
+###Issues:
+
+Authenticate:
+
+
+1. Authenticate_local : password in clear text, weakness of user/password mechanism; what if multiple authentication request coming from same user or different user... rate limiting
+- Out put: scoped token - how much scoped they are -- only user, tenant binding possible
+- Out put: unscoped token - what issues it can cause. 
+
+2. Authenticate_token: unscoped token+trust (both are unscoped, which one has broader unscope).
+
+3. Authenticate External: What data is passed by external auth (or data about user is always in local storage only
+auth is external. At least that is how it looks from the code). 
+
+4. No mention of which authentication mechanism is used for authentication... is it necessary.
+
+
+validate Token:
+
+1. Token id in url ???
+2. 
+
+
 
 
 
