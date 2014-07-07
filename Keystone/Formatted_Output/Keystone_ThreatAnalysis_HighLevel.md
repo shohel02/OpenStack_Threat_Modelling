@@ -102,7 +102,7 @@ Security objectives of any system:
 
 Others: 
 - non-repudiation
-- accountabiltiy
+- accountability
 
 
 An IdAM must provide:
