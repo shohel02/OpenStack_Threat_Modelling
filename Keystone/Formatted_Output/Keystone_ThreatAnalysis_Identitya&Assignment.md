@@ -63,26 +63,26 @@ Keystone Policy Engine.
    
 ###Security Objective
   
-  Requester requirements:
+   Requester requirements:
 
- - availability of CRUD operations on Users, Tenants, Groups, Roles and Domains
- - non-repudiation of CRUD response from service (trust and accountability can replace this)
- - audit log of request
+ 1. availability of CRUD operations on Users, Tenants, Groups, Roles and Domains
+ 2. non-repudiation of CRUD response from service (trust and accountability can replace this)
+ 3. audit log of request
 
   Service requirements:
   
- - Maintain audit log of the requester
- - Non-repudiation of request from upstream requester (trust and accountability can replace this).
- - Confidentiality of sensitive information (e.g., password never leaves without encryption)
- - Maintain integrity of service behavior
+ 1. Maintain audit log of the requester
+ 2. Non-repudiation of request from upstream requester (trust and accountability can replace this).
+ 3. Confidentiality of sensitive information (e.g., password never leaves without encryption)
+ 4. Maintain integrity of service behavior
  ..* Lenght check of users, tenant, domain, group, password
  ..* White listing of Input data
  ..* Integrity of response / response codes
 
   Service requirements from Persistence layer:
  
- -  availability of service prvided by DB
- -  non-repudiation of request/response prodvided by DB (hard to proof, instead we can go for weak
+ 1. availability of service prvided by DB
+ 2. non-repudiation of request/response prodvided by DB (hard to proof, instead we can go for weak
  authenticity property and assume that DB will do its job (trust) and have audit log)
  
 
