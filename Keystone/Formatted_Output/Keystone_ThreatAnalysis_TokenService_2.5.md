@@ -37,6 +37,8 @@ Keystone/token/backends/driver {sql/kvs/memchace}
 ####Dependent components
 Dogpile.cache, SQLAlchemy, IDENTITY_API
 
+unique_id = cms.hash_token (for PKI token) = configurable hash algorithm (md5 default)
+
 ####Description
 Major process: 
 
