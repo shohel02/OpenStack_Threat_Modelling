@@ -35,9 +35,10 @@ UUID driver
 PKI driver
     
 ####Dependent components
-UUID generator
+UUID generator = 128 bit
 
 Crypto: CMS (Openssl)
+Key size and algorithm used to sign ?
 
 Other Kesytone  components: Token API 
 
@@ -54,12 +55,12 @@ Revoke token: revoke_token
 
 <a name="assumption"/>
 ###System Assumptions (External Dependencies)
- -  Requests arriving from Token API service are trustworthy
+ -  Requests arriving from Token API or Token Controller are  trustworthy
    
 
 ###Security Objective
  - Generate cryptographically secure random id as token_id
- - Ensure Integrity protected token data (PKI token)
+ - Service Availability
 
 <a name="dfd"/>
 ###Data Flow Diagrams 
@@ -247,7 +248,9 @@ Extra:
 
 >Comments:
    
+### Issues:
 
+1. 
 
   [1]: images/DFD_Token_provider_issue_v2_token.png
   [2]: images/DFD_Token_provider_issue_v3_token.png
