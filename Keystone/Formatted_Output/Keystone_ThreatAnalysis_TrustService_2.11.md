@@ -23,9 +23,11 @@ Keystone Threat Modeling : Trust
 Keystone Havana Stable Release
    
 ####Application Description
-Trust provides project specific role delegation – i.e., a trustor delegates roles on a project to the trustee.  The trustee acquires the roles of the trustor for the specified period of time defined in the trust. Optionally, it allows impersonation – i.e., trustee takes the user_id of the trustor. Trust is consumed by creating a token scoped under trust_id. A trust_token cannot be used to create another trust_token.
+Trust provides project specific role delegation – i.e., a trustor delegates roles on a project to the trustee.  The trustee acquires the roles of the trustor for the specified period of time defined in the trust. Optionally, it allows impersonation – i.e., trustee takes the user_id of the trustor. Trust is consumed for creating a token scoped under trust_id. A trust_token cannot be used to create another trust_token.
 
 https://github.com/openstack/identity-api/blob/master/openstack-identity-api/v3/src/markdown/identity-api-v3-os-trust-ext.md
+
+
 ####Additional Info
   
 
@@ -56,7 +58,8 @@ Identity API
 
 ###Security Objective
 
- - 
+ - Only trustor can create trust; trustor can create authentic trust (bounded by trustee, role, expiry time)
+ - Only trustee can consume trust.
 
 
 <a name="dfd"/>
@@ -109,7 +112,8 @@ Threat Agent:
 >Internet Attacker - Authorized (Trustee)
 
 Attack Vectors:
->If token impersonation is enabled and a trustor delegates trust to trustee, auditing who is responsible for a certian action can be difficult. (Audit log - is trust_id listed always along with user_id for any operation ?)
+>If token impersonation is enabled and a trustor delegates trust to trustee, auditing who is responsible for a certian action can be difficult. (Audit log - is trust_id listed always along with user_id for any operation, if so at what log level ?)
+ 
 
 Security Weakness:
 > 
@@ -143,7 +147,7 @@ Security Weakness:
 > 
 
 Counter Measures:
-> 
+> Audit log
 
 Extra:
 >  Probability:
@@ -154,6 +158,20 @@ Extra:
 
 >   Comments:
      Link to Bug/mailing list or Tracking 
+
+####Issues:
+
+Create Trust:
+1. Only trustor can create trust. Do we have auditng (log) who is creating the trust.
+2. Can trust be created without providing impersonation ?
+3. Trust is limited within single keystone server, how about trust federation ?
+
+
+Delete Trust:
+
+1. Who can delete trust - trustor, admin
+2. What needs to be deleted when deleting trust: trust itself, token generated from trust.
+
 
 
   [1]: images/DFD_TRUST_ROUTER_V3.png
