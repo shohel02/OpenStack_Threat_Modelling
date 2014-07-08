@@ -256,7 +256,8 @@ This is changing in latest releases
      
 ####TokenController-005
 Threats:
-> Unauthorized access to service
+> Unauthorized access to service (Keyston-manage token flush,
+takes care this issue).
 
 Threat Agent:
 > Internet attacker unauthorized, authorized.
