@@ -44,15 +44,11 @@ Each authentication requests is a POST request, must include user credential, au
 
 POST /auth/tokens authenticate_for_token
 
-GET validates the token. Only permitted roles (defined in policy.json) can validate a token
-
-GET  /auth/tokens validate_token
+GET  /auth/tokens validate_token (validates token)
 
 HEAD /auth/tokens check_token
 
-Delete token disables a token by modifying the ‘enable’ flag
-
-DELETE /auth/tokens revoke_token
+DELETE /auth/tokens revoke_token (disables a token by modifying 'enable' flag)
 
  More info: http://api.openstack.org/api-ref-identity.html
 
@@ -62,9 +58,14 @@ DELETE /auth/tokens revoke_token
  - Only V3.0 API is covered in this doc.
 
 ###Security Objective
--	Authentication of user 
--	Validate the authenticity of the token
 
+1. Issuance of integrity protected Token
+2. Validate the integrity of Token
+3. Avalability of service
+4. Authentication of user (desired property is mutual authentication)
+5. Issuance of integrity protected token revocation list
+6. Auditablity of requset/response
+7. User data integrity check .. * username, tenant, domain, token_id length check .. * whitelist/black list check
 
 <a name="dfd"/>
 ###Data Flow Diagrams 
@@ -78,6 +79,8 @@ DELETE /auth/tokens revoke_token
 ![enter image description here][4]
 ####Delete Token
 ![enter image description here][5]
+
+(unique is hash algorithm dependent)
  
 <a name="entry"/>
 ###Entry Points
@@ -329,15 +332,17 @@ Security Weakness:
 > Currently, Token is binded to user, project and role, not with the 
 endpoint. A single token is valid for all services/endpoints. Besides, a scoped
 token can be used to get an unscoped token and later on scoped token 
-makes all User assets vulnerable if it is exposed in any place.
+makes all User assets vulnerable if it is exposed in any place. Besides,
+without bind parama (with deployment shortcomings), the token is not bind to
+the credential owner. Anyone, having the token can use it. 
 
 Counter Measures:
 > 
 
 Extra:
->  Probability: 
+>  Probability: medium
 
->   Impact: 
+>   Impact: High
 
 >   Related Info:
 
@@ -355,7 +360,7 @@ Attack Vectors:
 resulting an DoS attack against  the system
 
 Security Weakness:
-> By default, the system has no authentication failure handling mechanism.
+> By default, the system has no authentication failure handling mechanism e.g., Rate limiting
 
 Counter Measures:
 > When a number of unsuccessful authentication attempts has been reached, the system
@@ -395,6 +400,17 @@ Extra:
 >   Related Info:
 
 >   Comments:
+
+#### Issues:
+
+Authentication:
+
+1. Issues with identity scope in case of external authentication. There could be many external auth mechanims, how does identity scope in one mechanism interoperate with identity scope with Keystone. For example,  PKIX use distingushed name for subject, Kerberos use SPN or UPN, OAuth use opaaque identifier. How these will interoperate with keystone user_id setting in REMOTE_USER variable. In addition, some mechanism allow wild card , others has black listing in names.
+
+2. Token Bind - token can be binded to e.g., Kerberos. I.e., Kerberos SPN is placed inside the token. The consumer of the token can then verify that whether the requester (current owner) of the token is the owner of the SPN by performing additional checks. It makes unbounded bearer token bounded to the owner. Issues exists with deployment in OpenStack. See. http://www.jamielennox.net/blog/2013/10/22/keystone-token-binding/
+
+3. 
+
 
 
 
