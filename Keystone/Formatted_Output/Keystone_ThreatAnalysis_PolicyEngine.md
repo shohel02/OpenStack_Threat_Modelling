@@ -21,9 +21,9 @@ Keystone Threat Modeling : Policy Engine
 Keystone Havana Stable Release.
    
 ####Application Description
-The Keystone policy service provides a role-based authorization engine.
+The Keystone policy service provides a role-based authorization engine. However, it is not strictly a role based authorization engine rather rules are matched for authorization.
 
-Various components in the system require different actions to be performed based on a user's authorization.
+####Additional Info
 
 The DFDs are based on operations of ‘Adding Users, Tenants and Roles with python-keystoneclient’. http://docs.openstack.org/grizzly/openstack-compute/admin/content/adding-users-tenants-and-roles-with-python-keystoneclient.html
 
@@ -33,12 +33,11 @@ Related Docs:
 http://www.florentflament.com/blog/customizing-openstack-rbac-policies.html
 http://docs.openstack.org/developer/keystone/configuration.html#keystone-api-protection-with-role-based-access-control-rbac
 
-####Additional Info
 
 <a name="implementation"/>
 ###Implementation Overview
 ####Major Components
-- Assert Admin
+- Assert Admin (the context has is_admin set)
 - Policy Engine for Keystone 
 - Common Policy Engine. 
 
@@ -56,7 +55,7 @@ http://docs.openstack.org/developer/keystone/configuration.html#keystone-api-pro
 
 
 ###Security Objective
- - Authorize a user to perform operations based on his role and rule defined in the policy.json file.
+ - Authorize an authenticated user to perform requested action on a target resource based on token credentials, and rule defined in the policy.json file.
  
 
 <a name="dfd"/>
@@ -65,7 +64,14 @@ http://docs.openstack.org/developer/keystone/configuration.html#keystone-api-pro
 ####Authorization in Keystone
 ![Image Description Here!!!][1]
 
-####Policy Engine WorkFlow
+1. PAP -- policy.json - contains rules containing roles/users allowed to perform actions on a target resource. E.g.
+"identity:get_project":[["rule:admin_required"]]
+2. PIP - User auth context (user_id,project_id,domain_id,role_id,group_id) from token. BuildAuthContextMiddleware fileter do the job for Ice House. For Havana, auth context is built up later on named as 'cred'
+3. PDP - OpenStack common Policy engine
+4. PEP - PEP exists at the relevant request routers. Acts based on response from PDP.
+
+
+####Policy Engine WorkFlow - an example case (GET User)
 ![Image Description Here!!!][2]
 
 ####Keystone Policy Engine
@@ -80,6 +86,13 @@ http://docs.openstack.org/developer/keystone/configuration.html#keystone-api-pro
 ####Controllers
 Authorization resolving requests arrive from various service controllers (Which wants to protect resources).
 
+####Token
+To build auth credentials
+
+####Policy_file
+rule_set
+
+
 ----------
 <a name="asset"/>
 ###Assets
@@ -89,6 +102,11 @@ Full assets list is documented in url [Asset Library][5]
 
 20) System
 
+creds, actions, target
+
+rules
+
+policy_file
 
 ----------
 <a name="threats"/>
@@ -149,6 +167,19 @@ Extra:
 > Related Info:
 
 > Comments:
+
+####Issues:
+
+Authorization process:
+
+1. Its a rule engine not role. Nothing exists other than role-label
+2. Only equlity matching, no other operator support.
+2. Environment information is not taking into consideration.
+
+
+OpenStack Policy engine:
+
+
 
 
   [1]: images/DFD_Keystone_Policy_Authorization.png
