@@ -409,7 +409,7 @@ Authentication:
 
 2. Token Bind - token can be binded to e.g., Kerberos. I.e., Kerberos SPN is placed inside the token. The consumer of the token can then verify that whether the requester (current owner) of the token is the owner of the SPN by performing additional checks. It makes unbounded bearer token bounded to the owner. Issues exists with deployment in OpenStack. See. http://www.jamielennox.net/blog/2013/10/22/keystone-token-binding/
 
-3. 
+
 
 
 
