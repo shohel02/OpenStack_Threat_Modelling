@@ -143,8 +143,8 @@ token_id field in DB
 
 Delete Token:
 
-3. Order in which token deletion operation happens: 1) disable token in DB 2) remove individual token from cache 3) remove existing revocation list cache.  --- no notification to external services/endpoints ??? 
-4. 
+1. Order in which token deletion operation happens: 1) disable token in DB 2) remove individual token from cache 3) remove existing revocation list cache.  --- no notification to external services/endpoints ??? 
+
 
 
 
