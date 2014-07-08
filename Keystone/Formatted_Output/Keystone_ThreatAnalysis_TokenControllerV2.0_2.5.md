@@ -26,7 +26,7 @@ Keystone Havana Stable Release
 The V2 Token Controller routes and glues requests from router to the TOKEN API service. It performs filtering on incoming and outgoing requests.  Authenticated users are issued bearer token.
 
 ####Additional Info
-V2 API for Token Operation. Request flows from Token controller to Token API
+V2 API for Token Operation. Request flows from Token controller to Token API and Token provider API
   
 
 <a name="implementation"/>
@@ -91,6 +91,22 @@ Major process:
 ####Name ID-01: Router
 #####Description
 Request from upper pipeline.
+#####Accessible To
+8) Keystone Process user
+
+10) System admin 
+
+####Name ID-02: Internal Services
+#####Description
+
+#####Accessible To
+8) Keystone Process user
+
+10) System admin 
+
+####Name ID-03: Configuration
+#####Description
+
 #####Accessible To
 8) Keystone Process user
 
@@ -184,7 +200,7 @@ Threats:
 > Threats from configuration params.
 
 Threat Agent:
-> 
+> Internal Attacker
 
 Attack Vectors:
 >  Internal attacker abuses the configuration parameter (e.g., expiry time, 
@@ -211,7 +227,8 @@ Extra:
      
 ####TokenController-004
 Threats:
-> Spoofing token_id or unique_id generation using MD5
+> Spoofing token_id or unique_id generation using MD5 (currently it is possible to 
+configure the algorithm, so this avoidable)
 
 Threat Agent:
 > 
@@ -237,6 +254,37 @@ This is changing in latest releases
 >   Comments:
     https://bugs.launchpad.net/keystone/+bug/1174499 
      
+####TokenController-005
+Threats:
+> Unauthorized access to service
+
+Threat Agent:
+> Internet attacker unauthorized, authorized.
+
+Attack Vectors:
+> PKI tokens are checked against revocation list. If a token is revoked, that information 
+is updated in the revocation list. Revocation list consists of disblaed tokens. Now, Keystone
+also has token cleaning operation to clean the DB for all disabled token. If a disabled token
+is cleaned before a PKI token expiration time, the attacker can use the cleaning process 
+and use a revoked token to access a target service.
+
+Security Weakness:
+> Security management and Token deletion mechanism 
+
+Counter Measures:
+> 
+
+Extra:
+>  Probability:
+
+>   Impact:
+
+>   Related Info:
+
+
+>   Comments:
+  
+     
 ###Issues:
 
 Authenticate:
@@ -257,7 +305,15 @@ auth is external. At least that is how it looks from the code).
 validate Token:
 
 1. Token id in url ???
-2. 
+2. what does belongs_to provide?
+
+Revocation List:
+
+1. Revocation list signing and Token signing using the same key.
+2. Revocation list also contains UUID token, although UUID token is validated by direct call
+3. Lifetime of revocation list (short time is prefeered due to the high value asset).
+4. What are the freshness guarantee of a revocation list (fetch time, signing time, do we check it during use)
+
 
 
 
