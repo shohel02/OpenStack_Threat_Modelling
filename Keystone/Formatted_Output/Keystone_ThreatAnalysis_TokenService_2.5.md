@@ -53,12 +53,17 @@ Revocation_list
 <a name="assumption"/>
 ###System Assumptions (External Dependencies)
 
- - Only considered SQL backend
+ - Only SQL backend considered
  - The incoming request to TOKEN_API is trustworthy
 
 ###Security Objective
 
  - Fulfillment of intended API operation.
+ - Auditablity of request/response.
+ 
+Towards DB:
+
+  - non-repudiation of request/response prodvided by DB (hard to proof, instead we can go for weak authenticity property and assume that DB will do its job (trust) and have audit log)
 
 
 <a name="dfd"/>
@@ -128,6 +133,20 @@ Extra:
 
 >   Comments:
      Link to Bug/mailing list or Tracking 
+
+#### Issues
+Create Token:
+
+1. Unique is now configurable, so hash size can vary. Check that hash length do bounded within the 
+token_id field in DB
+2. Cache set for new token, what about new cache security - we assume cache is trustworthy. 
+
+Delete Token:
+
+3. Order in which token deletion operation happens: 1) disable token in DB 2) remove individual token from cache 3) remove existing revocation list cache.  --- no notification to external services/endpoints ??? 
+4. 
+
+
 
 
   [1]: images/DFD_Token_API_Create_Token.png
