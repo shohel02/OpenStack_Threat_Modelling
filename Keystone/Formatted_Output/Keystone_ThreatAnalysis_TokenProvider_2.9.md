@@ -21,7 +21,7 @@ Keystone Threat Modeling : Token Provider
 Keystone Havana Stable Release
    
 ####Application Description
-Keystone has a customizable token provider. Token provider can be either UUID or PKI token. In Havana, PKI token is used as a default token provider. UUID token is 128 bit, provides a random opaque, generated using uuid4(). PKI tokens are cryptographic Message syntax (CMS) string, generated using OpenSSL. PKI tokens require signing key and cert. The cert needs to be distributed earlier to the token verifier before verifing the token. Both PKI and UUID token are bearer tokens.
+Keystone has a customizable token provider. Token provider can be either UUID or PKI token (A new token format in DER is introduced. Earlier token format was only PEM). In Havana, PKI token is used as a default token provider. UUID token is 128 bit, provides a random opaque, generated using uuid4(). PKI tokens are cryptographic Message syntax (CMS) string, generated using OpenSSL. PKI tokens require signing key and cert. The cert needs to be distributed earlier to the token verifier before verifing the token. Both PKI and UUID token are bearer tokens.
 
 ####Additional Info
 
@@ -70,20 +70,20 @@ Revoke token: revoke_token
 ![enter image description here][2]
 ####validate v2 token
  ![enter image description here][3]
+ 
+ (Now, unique_id generation algorithm is configuable)
 
 <a name="entry"/>
 ###Entry Points
 ####Token Controller
-Requester to generate token (both UUID or PKI token)
+Requester to generate and validate token (both UUID or PKI token)
 
 ####CMS (openssl)
 Subprocess to perform PKI token signing. Signed token is returned from CMS.
 
 ####Cache
-Token for validation can be retrieved from cache
+Validation request can fetch token from cache. 
 
-####Persistence layer (DB):
-Token creation phase data is stored in DB, validation phase data is retrieved from DB
 
 ----------
 <a name="asset"/>
@@ -204,7 +204,8 @@ Attack Vectors:
 >Depending on the setup, PKI tokens may need to sign large amount of data (with V3, including catalog) during token generation process. A large number of token signing request can lead to performance degradation of PKI signing engine. 
 
 Security Weakness:
->Large amount of data to sign during token generation 
+>Large amount of data to sign during token generation. Some form of input length check - how much data can be 
+sent for signing.
 
 Counter Measures:
 >Reduce token size: compress, striping of catalog
@@ -250,7 +251,13 @@ Extra:
    
 ### Issues:
 
-1. 
+Validate token
+
+1. Both PKI and UUID token can be validated using validate token, although, PKI token should 
+be validated only using sign and revocation list.
+2. Token cache security in Keystone server side.
+
+
 
   [1]: images/DFD_Token_provider_issue_v2_token.png
   [2]: images/DFD_Token_provider_issue_v3_token.png
