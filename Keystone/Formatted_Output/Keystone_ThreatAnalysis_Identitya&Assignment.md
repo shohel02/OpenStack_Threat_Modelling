@@ -250,8 +250,6 @@ Delete User:
 1. what should be the order of deletion (credentials, token, user)?
 2. Deletion means total deletion or disabling the user and its resources
 
-Change Password:
-1. 
 
   [1]: images/CreateUser.png
   [2]: images/DeleteUser.png
