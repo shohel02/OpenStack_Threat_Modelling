@@ -25,13 +25,39 @@ The Keystone policy service provides a role-based authorization engine. However,
 
 ####Additional Info
 
-The DFDs are based on operations of ‘Adding Users, Tenants and Roles with python-keystoneclient’. http://docs.openstack.org/grizzly/openstack-compute/admin/content/adding-users-tenants-and-roles-with-python-keystoneclient.html
+The DFDs are based on an example operations of ‘Adding User’. http://docs.openstack.org/grizzly/openstack-compute/admin/content/adding-users-tenants-and-roles-with-python-keystoneclient.html
 
-NOTE: Only users with admin credentials can administer users, tenants and roles. You can configure the python-keystoneclient with admin credentials through either the authentication token, or the username and password method.
+NOTE: Only users with admin credentials can administer users, tenants and roles in V2.0. 
 
 Related Docs:
 http://www.florentflament.com/blog/customizing-openstack-rbac-policies.html
 http://docs.openstack.org/developer/keystone/configuration.html#keystone-api-protection-with-role-based-access-control-rbac
+
+Each keystone v3 API has a line in the policy file which dictates what level of protection is applied to it, where each line is of the form:
+
+<api name>: <rule statement> or <match statement>
+
+where
+
+<rule statement> can be contain <rule statement> or <match statement>
+
+<match statement> is a set of identifiers that must match between the token provided by the caller of the API and the parameters or target entities of the API call in question. For example:
+
+“identity:create_user”: [[“role:admin”, “domain_id:%(user.domain_id)s”]]
+
+Each component of a match statement is of the form:
+
+<attribute from token>:<constant> or <attribute related to API call>
+
+The following attributes are available
+
+Attributes from token: user_id, the domain_id or project_id depending on the scope, and the list of roles you have within that scope
+
+Attributes related to API call: Any parameters that are passed into the API call are available, along with any filters specified in the query string. Attributes of objects passed can be referenced using an object.attribute syntax (e.g. user.domain_id). The target objects of an API are also available using a target.object.attribute syntax. For instance:
+
+“identity:delete_user”: [[“role:admin”, “domain_id:%(target.user.domain_id)s”]]
+
+
 
 
 <a name="implementation"/>
@@ -98,15 +124,13 @@ rule_set
 ###Assets
 Full assets list is documented in url [Asset Library][5] 
 
-9) Credentials
-
 20) System
 
-creds, actions, target
+creds (user_id,tenant_id,domain_id,project_id,roles_id[],trust_id,trustor_id,trustee_id),
+  actions (actions), 
+  target (dictionary of object about the resource want to perform operation)
 
-rules
-
-policy_file
+rules, policy_file
 
 ----------
 <a name="threats"/>
@@ -173,9 +197,8 @@ Extra:
 Authorization process:
 
 1. Its a rule engine not role. Nothing exists other than role-label
-2. Only equlity matching, no other operator support.
-2. Environment information is not taking into consideration.
-
+2. Only equlity matching, and, or and not matching (new format), no other operator support.
+3. Environment information is not taking into consideration.
 
 OpenStack Policy engine:
 
