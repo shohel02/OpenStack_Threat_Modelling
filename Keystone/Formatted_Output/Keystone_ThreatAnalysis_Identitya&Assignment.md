@@ -21,20 +21,19 @@ Keystone Threat Modeling : Identity and Assignment Service
 Keystone Havana Stable Release
    
 ####Application Description
-Identity service provides data about Users (projects), Group, and as well as any associated metadata. In basic case, all this data is managed by the service, allowing the service to manage all the CRUD associated with the data.
+Identity service provides data about Users (projects), Group, and as well as any associated metadata. In the basic case, all  data is managed by the service, allowing the service to manage CRUD associated with the data.
 
 Starting from Havana, several of the entities previously managed via the Identity backend were divided into a new backend called Assignments.  
 
 The Assignments  driver  manages:
-•	Projects (previously known as Tenants)
-•	Roles
-•	Role Assignments
-•	Domains
+- Projects (previously known as Tenants)
+- Roles
+- Role Assignments
+- Domains
 
 The Identity driver still manages:
-•	Users
-•	Groups
-•	Group Assignments
+- Users
+- Groups (User assingment to Group)
 
 
 ####Additional Info
@@ -71,13 +70,11 @@ Keystone Policy Engine.
 
   Service requirements:
   
- 1. Maintain audit log of the requester
- 2. Non-repudiation of request from upstream requester (trust and accountability can replace this).
- 3. Confidentiality of sensitive information (e.g., password never leaves without encryption)
- 4. Maintain integrity of service behavior
+ 1. Maintain audit log of the requests/response
+ 2. Confidentiality of sensitive information (e.g., password never leaves without encryption)
+ 3. Maintain integrity of service behavior
  ..* Lenght check of users, tenant, domain, group, password
  ..* White listing of Input data
- ..* Integrity of response / response codes
 
   Service requirements from Persistence layer:
  
@@ -101,7 +98,12 @@ is long)
 
 ####Delete User
 ![Image Description][2]
-(deletion order right to left)
+
+- (deletion order delete_user, delete credentials, delete token)
+- (delete user deletes user and assoicated role information, what about user association with group and group
+assignement to role. Do we have stale data in such case.
+- 
+
 
 
 ####Change Password
@@ -218,20 +220,23 @@ Extra:
 
 > Comments:
 
-Questions:
+###Issues:
+
 Create User:
-1. Is requester authorized to create the user in specified doamin, tenant
-   if so, is requester constrained by what level
-2. Does this service blindly trust any content (context and user) coming from
-   requester.
-   the opposite requester believes response from service. 
-3. user created without password ? (encryption happens to empty password) 
+
+1. constrainted are placed in different places :
+..* during authorization check role matching and domain id matching
+..* inside DB: e.g., user_id (pk), name(not null), domain_id (fk), length check
+..* User controller do some check e.g., field length, not null, password encrypted. 
+
+What is the best division of checks ?
+
+2. user created without password ? (encryption happens to empty password- does openstack support this) 
 
 Delete User:
-1. who is alllowed to delete - user, teanant admin, domain admin
-2. what should be the order of deletion (credentials, token, user)
-3. Deletion means total deletion or disabling the user.
-4. Differences in v2 and v3 api deletion.
+
+1. what should be the order of deletion (credentials, token, user)?
+2. Deletion means total deletion or disabling the user and its resources
 
 Change Password:
 1. 
