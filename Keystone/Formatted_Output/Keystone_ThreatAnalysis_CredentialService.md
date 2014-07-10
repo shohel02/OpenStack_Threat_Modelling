@@ -21,8 +21,10 @@ Keystone Threat Modeling : Credential Service
 Keystone Havana Stable Release.
    
 ####Application Description
-The Keystone Credential Service falls under the Identity service. http://api.openstack.org/api-ref-identity.html
-This document is in continuation with the Threat Modeling of Keystone Identity and Assignment Driver.
+The Keystone Credential Service provides CRUD operation on credentials.
+Why: to store key pair in keystone . 
+https://blueprints.launchpad.net/nova/+spec/credentials-from-keystone
+any other reason.
 
 ####Additional Info
 
@@ -47,13 +49,17 @@ Keystone Policy Engine.
  -  The default driver for Keystone Credential Service is SQL.
 
 ###Security Objective
- - Provide authentic CRUD operation for Credential Services.
+ - Provide authentic CRUD operations for Credential Services 
  
 
 <a name="dfd"/>
 ###Data Flow Diagrams 
 ####Create Credentials
 ![enter image description here][1]
+
+- note: based on Ice-house release
+- 
+
 ####UpdateCredentials
 ![enter image description here][2]
 ####DeleteCredentials
@@ -62,11 +68,11 @@ Keystone Policy Engine.
 <a name="entry"/>
 ###Entry Points
 
-####Public Port
-SSL protected port, used to send request and receive response from  the Keystone server. Default port is 5000. 
+####router
+Request arriving from router /processing pipeline.
 
 ####Persistence layer (DB):
-Token creation phase data is stored in DB, validation phase data is retrieved from DB.
+Credential storage and retrieval.
 
 ----------
 <a name="asset"/>
@@ -74,9 +80,9 @@ Token creation phase data is stored in DB, validation phase data is retrieved fr
 Full assets list is documented in url
 [Asset Library][4]
 
-9) Credentials
-
-9.1) Credential_ID
+- Credentials
+- Credential_ID
+- trust_id
 
 ----------
 <a name="threats"/>
