@@ -101,8 +101,13 @@ is long)
 
 - (deletion order delete_user, delete credentials, delete token)
 - (delete user deletes user and assoicated role information, what about user association with group and group
-assignement to role. Do we have stale data in such case.
+assignement to role. Do we have stale data in such case.)
+- delete token : deletes token. if deleted user is part of a trust (trustee or trustor), the process deletes 
+  token associated. What about the trust relationship, shouldnot we delete all those. who is going to delete
+  the trust?
 - 
+
+
 
 
 
@@ -226,7 +231,8 @@ Create User:
 
 1. constrainted are placed in different places :
 ..* during authorization check role matching and domain id matching
-..* inside DB: e.g., user_id (pk), name(not null), domain_id (fk), length check
+..* inside DB: e.g., user_id (pk), name(not null), domain_id (not null), length check. DB constraints
+are not tight e.g., domain_id is not bound to any fk relationship.
 ..* User controller do some check e.g., field length, not null, password encrypted. 
 
 What is the best division of checks ?
