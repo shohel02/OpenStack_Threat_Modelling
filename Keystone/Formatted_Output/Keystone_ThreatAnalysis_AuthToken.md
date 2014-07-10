@@ -56,11 +56,9 @@ Get user token, Validate user token, Build user header, Add user header, Data to
  -  Token service is trustworthy.
  -  Memcache is initialized and the memcache secret key is accessible only by the Client.
  -  The communication channel is secure.
- -  Configuration Parameters
    
 ###Security Objective
- -  Integrity of the token.
- -  Authenticity of the token
+ -  Verify the Integrity of the token (authenticity, freshness)
  
 
 <a name="dfd"/>
@@ -84,10 +82,10 @@ Validation (against revocation list ) of cached token is added (configured)
 ####Memcache Level 1
 ![Image Description][4]
 
-Note: digest = HMAC(secrect,token+strategy, SHA386).digest
+Note: digest = HMAC(secrect,token+strategy, SHA384).digest
 cache_key = digest[0-127]
 MAC_key= digest[128-255]
-Encryption_key = digest[256-385]
+Encryption_key = digest[256-383]
 
 
 <a name="entry"/>
@@ -322,11 +320,11 @@ Extra:
 >Comments:
 
 ####Possible Areas we can look into
-1) multiple token types (uudi, PKI - pem, der) without any configurable options in Auth Token
+1. multiple token types (uudi, PKI - pem, der) without any configurable options in Auth Token
 Does attacker deliberately choose weak token creation mechanism
-2) Auth_url - is it possible to forge
-3) New cache lookup for a set of hash algorithm - requires more look up for same value in cache.
-4) token authenticity is based on loose assumption - client, transport and all intermediaries are
+2. Auth_url - is it possible to forge
+3. New cache lookup for a set of hash algorithm - requires more look up for same value in cache.
+4. token authenticity is based on loose assumption - client, transport and all intermediaries are
    trusted.
 
 
