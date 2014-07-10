@@ -101,15 +101,10 @@ is long)
 
 - (deletion order delete_user, delete credentials, delete token)
 - (delete user deletes user and assoicated role information, what about user association with group and group
-assignement to role. Do we have stale data in such case.)
+assignement to role. yes it is deleted.)
 - delete token : deletes token. if deleted user is part of a trust (trustee or trustor), the process deletes 
   token associated. What about the trust relationship, shouldnot we delete all those. who is going to delete
-  the trust?
-- 
-
-
-
-
+  the trust info.. file bug?
 
 ####Change Password
 ![Image Description][3]
@@ -120,6 +115,10 @@ assignement to role. Do we have stale data in such case.)
 ####Remove Users From Group
 ![Image Description][5]
 
+- Remove user from group, are we also removing the trust assoicated with user because by removing a user from group,
+can curtail a user role permission. 
+
+
 ####Delete Group
 ![Image Description][6]
 
@@ -127,6 +126,11 @@ assignement to role. Do we have stale data in such case.)
 
 ####Delete Domain
 ![Image Description][7]
+
+- order left to right
+- figure based on ice house, considerably different from Havan release. Domain deletion in havana
+did not consider all issues (e.g., content deletion)
+
 
 ####Delete Project
 ![Image Description][8]
@@ -139,6 +143,8 @@ assignement to role. Do we have stale data in such case.)
 
 ####Create Grant
 ![Image Description][11]
+
+- OS-INHERIT enabled in conf: domain roles assignment means also project roles assignment ?
 
 ####Revoke Grant
 ![Image Description][12]
@@ -158,34 +164,34 @@ Token creation phase data is stored in DB, validation phase data is retrieved fr
 Full assets list is documented in url
 [Asset Library][13]
 
-9) Credentials
-
-20) System
+- context
+- user,group
+- project,domain
+- role
+- tokens (trust, trust scoped token)
 
 ----------
 <a name="threats"/>
 ###Threats
 ####Assignment & Identity Service-01
-Threat: According to the current Policy File, a domain admin can create a group and add user to the group.
-If the Domain Admin becomes rogue and deletes the group then all tokens for a user beloging to the group are revoked.
+Threat: 
+Service denial through crafted deletion operation
 
 Threat Agent:
 >Domain Admin / Cloud Admin. 
 
 Attack Vectors:
->Revoking all tokens for a user based on group membership is overkill, as we only would need to revoke tokens
+>According to the current Policy File, a domain admin can create a group and add user to the group.
+If the Domain Admin becomes rogue and deletes the group then all tokens for a user beloging to the group are revoked.
+Revoking all tokens for a user based on group membership is overkill, as we only would need to revoke tokens
 that had role assignments via the group.  Calculating those assignments would have to be done by the 
 assignment backend.
-
 
 Security Weakness:
 >
 
-Vulnerable Component:
->Removing Users From Group.
-
 Counter Measures:
-> 
+>Prudent selection of tokens to be deleted during role, group deletion. 
 
 Extra:
 > Probability: Low 
@@ -199,7 +205,7 @@ https://bugs.launchpad.net/keystone/+bug/1268751
 > Comments: 
 
 
-####Assignment & Identity Service-01
+####Assignment & Identity Service-02
 Threat: 
 Threat Agent:
 >
