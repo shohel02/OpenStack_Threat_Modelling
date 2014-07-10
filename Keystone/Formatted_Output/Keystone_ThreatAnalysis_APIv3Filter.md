@@ -59,7 +59,7 @@ The default filters present in the api_v3 pipeline are:
 
 ####Description
 
-###**sizelimit:** keystone.middleware:RequestBodySizeLimiter.factory
+#####**sizelimit:** keystone.middleware:RequestBodySizeLimiter.factory
 
 Description: Limits the size of an incoming request
 
@@ -77,7 +77,7 @@ incoming request by CONF.max_request_body_size
 
 Default CONF.max_request_body_size=114688
 
-###**url_normalize:** keystone.middleware:NormalizingFilter.factory
+#####**url_normalize:** keystone.middleware:NormalizingFilter.factory
 
 Description: Middleware filter to handle URL normalization
 
@@ -102,7 +102,7 @@ Code Snippet:
  ` elif not request.environ['PATH_INFO']:
             request.environ['PATH_INFO'] = '/' `
 
-###**build_auth_context:** keystone.middleware:AuthContextMiddleware.factory
+#####**build_auth_context:** keystone.middleware:AuthContextMiddleware.factory
 
 Description: Build the authentication context from the request auth token.
 
@@ -158,7 +158,7 @@ It is a dictionary with the following attributes:
 ```
 
 
-###**admin_token_auth:**  keystone.middleware:AdminTokenAuthMiddleware.factory
+#####**admin_token_auth:**  keystone.middleware:AdminTokenAuthMiddleware.factory
 
 Description: A trivial filter that checks for a pre-defined admin token. Sets 'is_admin' 
 to true in the context, expected to be checked by methods that are admin-only.
@@ -184,7 +184,7 @@ Code Snippet
 `context['is_admin'] = (token == CONF.admin_token)
   request.environ[CONTEXT_ENV] = context`
 
-###**ec2_extension_v3:** keystone.contrib.ec2:Ec2ExtensionV3.factory
+#####**ec2_extension_v3:** keystone.contrib.ec2:Ec2ExtensionV3.factory
 
 Description: This service provides EC2 token validation and CRUD for services configured
 with the EC2_token middleware.
@@ -216,7 +216,7 @@ CRUD Code Snippet:
             conditions=dict(method=['POST']))`
 
 
-###**s3_extension:** keystone.contrib.s3:S3Extension.factory
+#####**s3_extension:** keystone.contrib.s3:S3Extension.factory
 
 Description: This service provides S3 token validation for services configured with the 
 s3_token middleware to authorize S3 requests.
@@ -237,7 +237,7 @@ Method:
                        conditions=dict(method=['POST']))`
 
 
-###**json_body:** 
+#####**json_body:** 
 ``` 
     Middleware to allow method arguments to be passed as serialized JSON.
 
@@ -331,7 +331,7 @@ Extra:
 
 > Comments:
 
-Note: 
+####Issues: 
 
 1. Is there any other input/output filtering mechanism missing ?
 2. Is there a way to tamper authorization context header
