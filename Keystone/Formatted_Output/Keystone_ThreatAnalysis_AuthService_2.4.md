@@ -50,7 +50,7 @@ HEAD /auth/tokens check_token
 
 DELETE /auth/tokens revoke_token (disables a token by modifying 'enable' flag)
 
- More info: http://api.openstack.org/api-ref-identity.html
+ More info: https://github.com/openstack/identity-api/blob/master/v3/src/markdown/identity-api-v3.md
 
 <a name="assumption"/>
 ###System Assumptions (External Dependencies)
