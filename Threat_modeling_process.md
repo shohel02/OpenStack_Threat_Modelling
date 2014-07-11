@@ -107,13 +107,14 @@ Based on this information, we identify threats  for each asset accessed or modif
 ####Logic to find related threats
 
 ```
-for each asset_A in Asset:
-   for each operation in DataFlows:
-       modified_Asset_A = operation(asset_A)
-       for each threat_group in STRIDE:
-         attack_vectors = Find attack_vectors related to threat_group (possibly use Threat DB)
-         possible_Threat  = Threats exploitable  by using attack_vectors on asset_A to perform an operation
-        ranked_Threat = Ranking(possible_Threat)
+# within each component
+for each asset_A in asset: 
+   for each threat_group in STRIDE applied on an asset_A:
+       Derive a possible threat_A on asset_A which breaks security properties
+       for each operation in DataFlows:
+           modified_Asset_A = operation(asset_A)
+           attack_vectors = Find attack_vectors related to threat_A during the operation/environment
+           ranked_Threat = Ranking(attack_vectors)
 
 return ranked_Threat
 ```        
