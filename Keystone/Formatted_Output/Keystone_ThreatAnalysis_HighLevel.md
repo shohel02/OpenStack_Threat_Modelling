@@ -70,10 +70,10 @@ https://wiki.openstack.org/wiki/Security/Juno/Keystone#Notable_changes_since_Ice
 
 ####DFD Description
 
--Square: input/output 
--Round: process
--Diamond: sanity check process
--Arrow: data flow
+- Square: input/output 
+- Round: process
+- Diamond: sanity check process
+- Arrow: data flow
 
 <a name="assumption"/>
 ###System Assumptions (External Dependencies)
