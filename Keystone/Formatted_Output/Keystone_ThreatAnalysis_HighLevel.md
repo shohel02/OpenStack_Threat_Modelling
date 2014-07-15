@@ -68,6 +68,13 @@ https://wiki.openstack.org/wiki/Security/Juno/Keystone#Notable_changes_since_Ice
 -	The authorization process consists of assignment of roles. Kesytone roles are primitive acts as an user attribute.
 - The other parts of authorization, i.e., policy file, policy decision point and policy enforcement point are service specific -- provided using Oslo common. 
 
+####DFD Description
+
+-Square: input/output 
+-Round: process
+-Diamond: sanity check process
+-Arrow: data flow
+
 <a name="assumption"/>
 ###System Assumptions (External Dependencies)
 ####Application
