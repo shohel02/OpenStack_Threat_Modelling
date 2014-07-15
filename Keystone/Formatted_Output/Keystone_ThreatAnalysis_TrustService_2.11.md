@@ -159,6 +159,118 @@ Extra:
 >   Comments:
      Link to Bug/mailing list or Tracking 
 
+####Trust-003
+Threats:
+>Threats arriving from unlimited/long expiry time in trust 
+
+Threat Agent:
+>Internet Attacker - Autorized
+
+Attack Vectors:
+> An attacker can set long enough / unlimited trust expiry time. Then 
+use it to create a trust token.
+
+Security Weakness:
+> Expiry time is not limted by bound
+
+Counter Measures:
+> Expiry time bounded by CONF
+
+Extra:
+>  Probability:
+
+>   Impact:
+
+>   Related Info:
+
+>   Comments:
+     Link to Bug/mailing list or Tracking 
+
+
+####Trust-004
+Threats:
+> Service(DB) exhaustion through unlimited number of trust creation 
+
+Threat Agent:
+> Interet Attacker- Authorized
+
+Attack Vectors:
+> An authorized user can create unlimited number of trust, this can lead to many 
+record in trust db. 
+
+Security Weakness:
+> Should we have a limit on number of trust per user.
+
+Counter Measures:
+> 
+
+Extra:
+>  Probability:
+
+>   Impact:
+
+>   Related Info:
+
+>   Comments:
+     Link to Bug/mailing list or Tracking 
+
+
+####Trust-005
+Threats:
+> Spoofing of trust by using the weakness of token
+
+Threat Agent:
+> Internet attacker - authorized
+
+Attack Vectors:
+> An internal service (possesor of token) can create a trust longer than
+the value of the token ... the trust then can be used to get a trust token.
+This allows an attacker enlarging the scope of the token. 
+
+Security Weakness:
+> Trust can be created from a weak creadential (trust creation from exising token is a  weakness)
+
+Counter Measures:
+> 
+
+Extra:
+>  Probability:
+
+>   Impact:
+
+>   Related Info:
+
+>   Comments:
+     Link to Bug/mailing list or Tracking 
+
+####Trust-006
+Threats:
+> non-repudiation and unauthorized use of trust
+
+Threat Agent:
+> Internal attacker
+
+Attack Vectors:
+> Trust is not binded by cryptograpic signing allowing an internal attacker to change the
+database and break the non-repudiation of trust
+
+Security Weakness:
+> trust should have cryptographic bind.
+
+Counter Measures:
+> 
+
+Extra:
+>  Probability:
+
+>   Impact:
+
+>   Related Info:
+
+>   Comments:
+     Link to Bug/mailing list or Tracking 
+
+
 ####Issues:
 
 Create Trust:
