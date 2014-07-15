@@ -19,11 +19,13 @@ Keystone Threat Analysis Index
  - ID-2.5.1: [Token Controller V2][7]
  - ID-2.9: [Token provider][10] 
  - ID-2.11: [Trust][11]
+
 #####Authorization & Provisioning:
  - ID-2.3: [Identity Service][4]
  - ID-2.6: [Assignment service][8] 
  - ID-2.7: [Credentials Service][9] 
  - ID-2.8: [Policy Service][14]
+
 #####Others:
  - ID-2.1: Token_auth middleware (included in ID-2.2) 
  - ID-2.2: [Filters][12]
