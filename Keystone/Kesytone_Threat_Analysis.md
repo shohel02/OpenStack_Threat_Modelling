@@ -30,7 +30,7 @@ Keystone Threat Analysis Index
 
   Others:
   
- - ID-2.1: Token_auth middleware (included in ID-2.2)  
+ - ID-2.1: Token_auth middleware (included in ID-2.2) 
  - ID-2.2: [Filters][12]
  - ID-2.10: Cache 
 
