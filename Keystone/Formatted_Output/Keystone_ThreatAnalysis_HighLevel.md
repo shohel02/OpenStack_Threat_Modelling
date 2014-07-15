@@ -48,11 +48,11 @@ Keystone Threat Modeling - High Level
 **Pipe line middlewares:**  url_nomalizer, token_auth, admin_token_auth, xml_body, Json_body, ec2_extension,  S3_extension,  crud_extension, admin_service, public_service (check the middleware from paste.ini for specific Pipe). 
 This document focuses on [pipeline:api_v3] i.e., the keystone v3 API pipeline. The document also includes some functionalities of [pipeline:public_api] i.e., keystone v2 API pipeline.
 
-**Services/internal components:** Identity, Assignment, Catalog, Policy, Token, Token Provider, Trust
+**Services/internal components:** Identity, Assignment, Catalog, Policy, Token, Token Provider, Trust, endpoint
 
 **Drivers/persistence storage:**  SQL, FILE, KVA, LDAP
 
-####Dependent components
+####Dependent components (assumed trusted component)
 **Webservers:**  WSGI (or any web server on top WSGI modules can run) 
 
 **Operating system and libraries:**  oslo.config, dependencies. 
@@ -160,6 +160,8 @@ ID-13. Keystone DB user
 
 ID-14. External Identity provider user 
 
+ID-15. Internal network attacker
+
 #####Details
 
 ----------
@@ -252,11 +254,13 @@ Components layering two trust boundaries and performing critical operations are 
  - ID-2.9: Token provider 
  - ID-2.10: Cache (excluded dogpile)
  - ID-2.11: Trust
+ - ID-2.12: Audit - Log (To be)
+ - ID-2.13: Notification (CADF) (To be)
 
 ####ID-3: Persistence Storage 
 
  - ID-3.1: SQL Backend 
- - ID-3.2: LDAP Backend
+ - ID-3.2: LDAP Backend (To be)
 
 ####ID-4: System
 
@@ -267,7 +271,7 @@ Components layering two trust boundaries and performing critical operations are 
  - ID-4.5: Execution Environment
 
 ####Name: ID-5: External
-  - ID-5.1: External Auth system (only REMOTE_USER checked)
+  - ID-5.1: External Auth system (only REMOTE_USER checked) (SAML, Cert, other auth federation need to checked)
   
 (Note: The naming of asset and component is same for some cases. There are distinctions between an asset and a component: an asset is something which has value and has a state. Component or proxies on the other hand manipulates /performs operation on top of asset. E.g., Trust is an asset – it defines a relational state while ‘Trust component’ is the process doing operation on top of Trust asset)
 
