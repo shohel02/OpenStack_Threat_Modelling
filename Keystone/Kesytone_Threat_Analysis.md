@@ -21,7 +21,7 @@ Keystone Threat Analysis Index
  - ID-2.9: [Token provider][10] 
  - ID-2.11: [Trust][11]
  
- Authorization & Provisioning:
+  Authorization & Provisioning:
  
  - ID-2.3: [Identity Service][4]
  - ID-2.6: [Assignment service][8] 
