@@ -1,10 +1,19 @@
-Keystone Threat Modeling : ComponentName
+Keystone Threat Modeling : OS-INHERIT
 =========================================
 ### Table of contents
 
 [System Overview](#system)
+Provide an ability for projects to inherit roles from their owning domain.
+
+A role assigned to a domain to optionally be able to be inherited by the owned projects. That way a cloud provider could assign, for example, a maintenance-role to an admin user (or group) on each domain they create, which would be automatically be included in a token they scoped to any project for issuing maintenance commands.
+
+https://blueprints.launchpad.net/keystone/+spec/inherited-domain-roles
 
 [Implementation Overview](#implementation)
+
+https://github.com/openstack/identity-api/blob/master/v3/src/markdown/identity-api-v3-os-inherit-ext.md
+
+
 
 [System Assumptions](#assumption)
 
