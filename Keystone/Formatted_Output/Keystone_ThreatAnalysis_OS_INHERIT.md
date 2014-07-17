@@ -13,15 +13,52 @@ https://blueprints.launchpad.net/keystone/+spec/inherited-domain-roles
 
 https://github.com/openstack/identity-api/blob/master/v3/src/markdown/identity-api-v3-os-inherit-ext.md
 
+https://etherpad.openstack.org/p/inhertited-domain-roles
 
+API overview:
+
+Assign role to user on projects owned by a domain:
+
+PUT /OS-INHERIT/domains/{domain_id}/users/{user_id}/roles/{role_id}/inherited_to_projects
+
+Assign role to group on projects owned by a domain:
+
+PUT /OS-INHERIT/domains/{domain_id}/groups/{group_id}/roles/{role_id}/inherited_to_projects
+
+List user's inherited project roles on a domain:
+
+GET /OS-INHERIT/domains/{domain_id}/users/{user_id}/roles/inherited_to_projects
+
+List group's inherited project roles on domain:
+
+GET /OS-INHERIT/domains/{domain_id}/groups/{group_id}/roles/inherited_to_projects
 
 [System Assumptions](#assumption)
 
+Config file:
+config.CONF.os_inherit.enabled  
+
 [Data Flow Diagrams](#dfd)
+
+[Security Objective](#objective)
+- authentic assignment of domain role to the project user 
+- authentic assignment of domain role to the project group
 
 [Entry Points](#entry)
 
+
 [Assets](#asset)
+user,
+group,
+
+project,
+domain
+
+role
+
+inherited_to
+
+
 
 [Threats](#threats)
 
