@@ -4,13 +4,9 @@ Keystone Threat Modeling : OS-INHERIT
 
 [System Overview](#system)
 
-
 [Implementation Overview](#implementation)
 
-
-
 [System Assumptions](#assumption)
-
 
 [Data Flow Diagrams](#dfd)
 
@@ -18,9 +14,7 @@ Keystone Threat Modeling : OS-INHERIT
 
 [Entry Points](#entry)
 
-
 [Assets](#asset)
-
 
 [Threats](#threats)
 
@@ -34,16 +28,17 @@ A role assigned to a domain to optionally be able to be inherited by the owned p
 https://blueprints.launchpad.net/keystone/+spec/inherited-domain-roles
 
 ####Application version
+API v3.1
    
 ####Application Description
    
 ####Additional Info
   
-
 <a name="implementation"/>
 ###Implementation Overview
-https://github.com/openstack/identity-api/blob/master/v3/src/markdown/identity-api-v3-os-inherit-ext.md
 
+API description: 
+https://github.com/openstack/identity-api/blob/master/v3/src/markdown/identity-api-v3-os-inherit-ext.md
 https://etherpad.openstack.org/p/inhertited-domain-roles
 
 API overview:
@@ -64,14 +59,15 @@ List group's inherited project roles on domain:
 
 GET /OS-INHERIT/domains/{domain_id}/groups/{group_id}/roles/inherited_to_projects
 
+List effective role assignments: 
+
+GET /role_assignments
+
 ####Major Components
    
-
 ####Dependent components
   
-
 ####Description
-
 
 
 <a name="assumption"/>
@@ -88,21 +84,19 @@ config.CONF.os_inherit.enabled
 <a name="dfd"/>
 ###Data Flow Diagrams 
 ####Name 
-image url
- 
+Assign role to user on projects owned by a domain.
+![Image Description][1]
 
 
 <a name="entry"/>
 ###Entry Points
-####Name
-  data
-
+####Router
 
 
 ----------
 <a name="asset"/>
 ###Assets
-Full assets list is documented in url
+
 
 
 
@@ -152,3 +146,6 @@ Counter Measures:
 Extra:
 > 
 
+
+
+[1]: images/DFD_Assignment_OS_INHERIT_create_grant_user_to_project.png
