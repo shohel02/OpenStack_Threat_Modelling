@@ -72,22 +72,22 @@ This needs to be broken up into the separate flows below.
 ![Image Description][x]
 
 ####external.DefaultDomain Auth Plugin
-![Image Description][2]
+![Image Description][x]
 
 ####external.KerberosDomain Auth Plugin
-![Image Description][3]
+![Image Description][x]
 
 ####external.ExternalDefault Auth Plugin
-![Image Description][4]
+![Image Description][x]
 
 ####external.ExternalDomain Auth Plugin
-![Image Description][5]
+![Image Description][x]
 
 ####external.LegacyDomain Auth Plugin
-![Image Description][6]
+![Image Description][x]
 
 ####external.LegacyDefaultDomain Auth Plugin
-![Image Description][7]
+![Image Description][x]
 
 <a name="entry"/>
 ###Entry Points
@@ -99,7 +99,7 @@ HTTP request (UUID token validation, version info)
 <a name="asset"/>
 ###Assets
 Full assets list is documented in url
-[Asset Library][5]
+[Asset Library][10]
 
 1) User
 5) Domain
@@ -113,22 +113,19 @@ Threat:
 >Spoofing: REMOTE_USER, REMOTE_DOMAIN modified by middleware.
 
 Threat Agent:
-> Authorized User
+> Authorized System User
 
 Attack Vectors:
->If token  is found in cache, the target service returns the token data without validating the cached token.
-A recent modification allowed checking chached token against revocation list. However, the revocation list itself
-can be cached in the target system. 
+>Configuration of the middleware can modify critical REMOTE_USER and REMOTE_DOMAIN environment variables allowing spoofing the user that the web server authenticated.
 
 Security Weakness:
->In case of token revocation, there could be inconsistency between the cached token in target service and the current state of the actual token. This happens due to a stale revocation list.
+>Keystone auth plugin cannot verify who authenticated the user and if REMOTE_USER or REMOTE_DOMAIN were modified after authentication.
 
 Vulnerable Component:
->Cache Management, Validating the cached token.
+>All external auth plugins
 
 Counter Measures:
->By refreshing (cache) revocation list frequently, we can minimize the impact or no caching for token is another way to eliminate this threat. Deployers should consider the balance between performance and security during initialization of token cahce time, revocation list cache time and cahce enablaement feature.
-
+>Validate middleware and web server configuration.
 
 Extra:
 >Probability: Low
@@ -136,17 +133,11 @@ Extra:
 >Impact: High
 
 >Related Info: 
-https://bugs.launchpad.net/python-keystoneclient/+bug/1287301
 
 >Comments: 
 
 
-  [1]: images/DFD_KeystoneMiddleware_Level1.png
-  [2]: images/DFD_KeystoneMiddleware_ValidateUserToken_Level1.png
-  [3]: images/DFD_KeystoneMiddleware_Level2.png
-  [4]: images/DFD_KeystoneMiddleware_MemCache_Level1.png
-  [5]: Keystone_asset_library.md
+  [1]: images/DFD_External_Auth_Plugin.png
+  [10]: Keystone_asset_library.md
   
  
-
-  
