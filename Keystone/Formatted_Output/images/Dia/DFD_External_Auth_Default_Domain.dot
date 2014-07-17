@@ -1,0 +1,23 @@
+digraph DFD_External_Auth_DefaultDomain_Plugin {
+    Web_Server [shape=box,label="Web Server"];
+    middleware [shape=box,label="Paste Middleware"];
+    Conf_API1 [shape=box,label="CONF API"];
+    Conf_API2 [shape=box,label="CONF API"];
+    Identity_API [shape=box,label="Identity API"];
+    Default_Domain [shape=circle,label="Default Domain"];
+    REMOTE_USER_exists [shape=invtriangle];
+
+    Web_Server -> middleware;
+    middleware -> REMOTE_USER_exists [label="request, request evn"];
+    REMOTE_USER_exists -> Default_Domain [label="REMOTE_USER"];
+    Default_Domain -> Conf_API1;
+    Conf_API1 -> Default_Domain [label="domain_id"];
+    Default_Domain -> Identity_API [label="REMOTE_USER,\ndomain_id"];
+    Identity_API -> Default_Domain [label="user_ref"];
+    Default_Domain -> Base_Auth [label="user_ref"];
+    Base_Auth -> Conf_API2;
+    Conf_API2 -> Base_Auth [label="token.bind"];
+    Base_Auth -> token_bind;
+    token_bind -> out [label="kerberos in\ntoken.bind\nand AUTH_TYPE==negotiate"];
+    token_bind -> out [label="kerberos not in\ntoken.bind"];
+}    
