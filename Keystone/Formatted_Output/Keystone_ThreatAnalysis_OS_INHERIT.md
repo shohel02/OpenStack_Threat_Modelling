@@ -38,6 +38,7 @@ API v3.1
 ###Implementation Overview
 
 API description: 
+
 https://github.com/openstack/identity-api/blob/master/v3/src/markdown/identity-api-v3-os-inherit-ext.md
 https://etherpad.openstack.org/p/inhertited-domain-roles
 
@@ -72,6 +73,7 @@ GET /role_assignments
 
 <a name="assumption"/>
 ###System Assumptions (External Dependencies)
+
 Config file:
 config.CONF.os_inherit.enabled  
 
@@ -86,6 +88,13 @@ config.CONF.os_inherit.enabled
 ####Name 
 Assign role to user on projects owned by a domain.
 ![Image Description][1]
+
+after OS-INHERIT assignment:
+(when user assigned a role in project, is this the point when 
+role (domain roles inherit) are assignened to the user).
+
+Need to check ? 
+
 
 
 <a name="entry"/>
@@ -103,13 +112,14 @@ Assign role to user on projects owned by a domain.
 ----------
 ####ComponentName-001
 Threats:
-> 
+> Domain role assigned to user 
 
 Threat Agent:
-> 
+> Internet Attacker - Authorized 
 
 Attack Vectors:
-> 
+> Domain roles assigned to user are inherited automatically to the projects (new and existing) for that user. 
+The role allows cloud
 
 Security Weakness:
 > 
