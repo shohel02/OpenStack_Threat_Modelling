@@ -45,17 +45,17 @@ Keystone Threat Analysis Index File
   - ID-5.1: External Auth system
 
 
-  [1]: Formatted_Output/Keystone_ThreatAnalysis_HighLevel.md
-  [2]: Formatted_Output/Keystone_asset_library.md
-  [3]: Formatted_Output/Keystone_ThreatAnalysis_AuthToken.md
-  [4]: Formatted_Output/Keystone_ThreatAnalysis_Identitya&Assignment.md
-  [5]: Formatted_Output/Keystone_ThreatAnalysis_AuthService_2.4.md
-  [6]: Formatted_Output/Keystone_ThreatAnalysis_TokenService_2.5.md
-  [7]: Formatted_Output/Keystone_ThreatAnalysis_TokenControllerV2.0_2.5.md
-  [8]: Formatted_Output/Keystone_ThreatAnalysis_Identitya&Assignment.md
-  [9]: Formatted_Output/Keystone_ThreatAnalysis_CredentialService.md
-  [10]: Formatted_Output/Keystone_ThreatAnalysis_TokenProvider_2.9.md
-  [11]: Formatted_Output/Keystone_ThreatAnalysis_TrustService_2.11.md
-  [12]: Formatted_Output/Keystone_ThreatAnalysis_APIv3Filter.md
-  [13]: Formatted_Output/Keystone_ThreatAnalysi_ExecutionEnv.md
-  [14]: Formatted_Output/Keystone_ThreatAnalysis_PolicyEngine.md 
+  [1]: Keystone_ThreatAnalysis_HighLevel.md
+  [2]: Keystone_asset_library.md
+  [3]: Keystone_ThreatAnalysis_AuthToken.md
+  [4]: Keystone_ThreatAnalysis_Identitya&Assignment.md
+  [5]: Keystone_ThreatAnalysis_AuthService_2.4.md
+  [6]: Keystone_ThreatAnalysis_TokenService_2.5.md
+  [7]: Keystone_ThreatAnalysis_TokenControllerV2.0_2.5.md
+  [8]: Keystone_ThreatAnalysis_Identitya&Assignment.md
+  [9]: Keystone_ThreatAnalysis_CredentialService.md
+  [10]: Keystone_ThreatAnalysis_TokenProvider_2.9.md
+  [11]: Keystone_ThreatAnalysis_TrustService_2.11.md
+  [12]: Keystone_ThreatAnalysis_APIv3Filter.md
+  [13]: Keystone_ThreatAnalysi_ExecutionEnv.md
+  [14]: Keystone_ThreatAnalysis_PolicyEngine.md 
