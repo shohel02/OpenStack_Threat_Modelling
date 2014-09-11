@@ -1,4 +1,4 @@
-Keystone Threat Analysis Index
+Keystone Threat Analysis Index File
 ====================================
 
 [Keystone High Level Analysis][1]
@@ -32,17 +32,14 @@ Keystone Threat Analysis Index
  - ID-2.10: Cache 
 
 ####ID-3: Persistence Storage
-
  - ID-3.1: SQL Backend 
  - ID-3.2: LDAP Backend
 
 ####ID-4: System
-
- - ID-4.1: Web server – WSGI server 
- - ID-4.2: SSL server 
- - ID-4.3  [Execution environment][13] 
- - ID-4.4: Dependencies ( PyPI, python packages) httplib2, requirements.txt
- - ID-4.5: Audit System
+ - ID-4.1: Web server – WSGI server  
+ - ID-4.2  [Execution environment][13] 
+ - ID-4.3: Dependencies (PyPI, python packages) httplib2, requirements.txt
+ - ID-4.4: Audit System
 
 ####ID-5: External
   - ID-5.1: External Auth system
