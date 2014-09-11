@@ -20,7 +20,6 @@ Files:
 OpenStack Projects:
 -------
 **Keystone**
-
        Threat modelling directory for OpenStack Identity API, Keystone. This
        directory contains threat analysis reports for Keystone.
 
