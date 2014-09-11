@@ -1,46 +1,33 @@
 OpenStack Threat Modelling
 ==========================
 
-OpenStack Threat Modelling files are organized here.
+This directory contains files relevant to OpenStack threat modelling.
+A quick overview of files and underlying directory is provided below.
+
 
 Files:
 -------- 
-
-**Threat_modelling_process.pdf**    
-       Steps of Threat Modelling process followed for the 
-       analysis of OpenStack projects.
-       
-       
 **Threat_modelling_process.md**
-       Steps of the Threat Modelling process (in markdown format)
-
+       Process and steps followed for OpenStack threat modelling
 
 **Project_ThreatAnalysis_ComponentName_Number.md**
-       A common format for Threat modelling 
+       Common format file for threat modelling
+
+**images**
+	Contains common images
 
 
-**Threat_DB_Ref.xls**
-       A collection of known threats.
-
----------
-
-
+OpenStack Projects:
+-------
 **Keystone**
-       Openstack Keystone - Threat Modelling repository for Keystone. 
+       Threat modelling directory for OpenStack Identity API, Keystone. This
+       directory contains threat analysis reports for Keystone.
 
+**Keystone/Kesytone_Threat_Analysis_Index.md**
+        Index file for Keystone Threat analysis
 
-**Keystone/Kesytone_Threat_Analysis.md**
-        Template for Threat analysis
+**Keystone/images**
+       Directory containing .png files for Keystone directory.
 
-
-**Keystone/Formatted_Output**
-       Directory containing Threat analysis reports in Markdown format.
-      
-       
-**Keystone/Formatted_Output/images**
-       Directory containing images referenced from keystone/Formatted_Output directory
-
-
-**Keystone/Formatted_Output/images/dia** 
-       Directory containing .dia files referenced from 'keystone/Formatted_Output' directory
-       (images are drawn in dia)
+**Keystone/images/Dia** 
+       Directory containing .dia files for keystone directory.

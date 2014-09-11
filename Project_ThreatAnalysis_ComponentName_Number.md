@@ -1,5 +1,5 @@
-Keystone Threat Modeling : ComponentName
-=========================================
+ProjectName Threat Modelling : ComponentName
+===========================================
 ### Table of contents
 
 [System Overview](#system)
@@ -20,55 +20,46 @@ Keystone Threat Modeling : ComponentName
 <a name="system"/>
 ###System Overview
 ####Application version
-   dd
-   
+    Version info   
+
 ####Application Description
-   
+    A short description about the target application/component 
 
 ####Additional Info
-  
+    Any additional info
 
 <a name="implementation"/>
 ###Implementation Overview
 ####Major Components
-   
-
+   Internal major components of the target system
+    
 ####Dependent components
+   Dependent components of the target system
   
-
 ####Description
-
-
+   A short description about implementation e.g., language, constraints
 
 <a name="assumption"/>
 ###System Assumptions (External Dependencies)
-
- - item 1
+ - Any explicit or implicit assumptions
 
 ###Security Objective
-
- - item 1
-
+ - Security objectives of the target system
 
 <a name="dfd"/>
 ###Data Flow Diagrams 
-####Name 
-image url
- 
-
+#### Provide DFD  Digram based on operation.
 
 <a name="entry"/>
 ###Entry Points
-####Name
-  data
-
+####Name - Description
+Data entry and exit points to the system.
 
 
 ----------
 <a name="asset"/>
 ###Assets
-Full assets list is documented in url
-
+Asset list of the target system.
 
 
 ----------
@@ -91,11 +82,11 @@ Counter Measures:
 Extra:
 >  Probability:
 
->   Impact:
+>  Impact:
 
->   Related Info:
+>  Related Info:
 
->   Comments:
+>  Comments:
      Link to Bug/mailing list or Tracking 
 
 ####ComponentName-002
@@ -115,5 +106,12 @@ Counter Measures:
 > 
 
 Extra:
-> 
-
+                                                                          
+>  Probability:                                                                 
+                                                                                
+>  Impact:                                                                      
+                                                                                
+>  Related Info:                                                                
+                                                                                
+>  Comments:                                                                    
+     Link to Bug/mailing list or Tracking
