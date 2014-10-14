@@ -147,8 +147,8 @@ auth_token:
 <a name="threats"/>
 ###Threats
 
-####Spoofing: unauthorized access to the target service (OR)
 <pre><code>
+Spoofing: unauthorized access to the target service (OR)
  S1. Attacker populates authentication headers in request env and
      keystonemiddleware fails to remove authentication headers (P:Zero)
  S2. Validate UUID token against a compromised Identity API (P:Low)
@@ -194,13 +194,13 @@ auth_token:
            S6.4.1. MiTM in the communication channel (AND)
            S6.4.2. Keystonemiddleware has no root of trust to verify the
                    authenticity of the signing certificate (P: Low)
-</code></pre>
-####Tampering of data: modification of sensitive data (OR)
->T1. Tampering of token data in memcache (P: Zero)
+
+Tampering of data: modification of sensitive data (OR)
+ T1. Tampering of token data in memcache (P: Zero)
  T2. Tampering of Auth headers in the request env (P:zero)
 
-####Repudiation:
->R1. The client cannot be held responsible for a request (P:Low)
+Repudiation:
+ R1. The client cannot be held responsible for a request (P:Low)
      R1.1. A requester can impersonate as the owner of the token due to the
            nature of the bearer token. No signing of the presenter exist in the
            request (P:Low)
@@ -208,14 +208,14 @@ auth_token:
      auth headers (P:Zero)
  R3. Delay auth modules cannot be held responsible for its action (P:Zero)
 
-####Information disclosure: exposure of sensitive data (OR)
->I1. Token data is read from the memcache store (P:Low)
+Information disclosure: exposure of sensitive data (OR)
+ I1. Token data is read from the memcache store (P:Low)
  I2. Sensitive data is read (e.g., service token, service password, cache secret
      key) from the configuration file due to lack of access control and
      plain text format.
 
-####Denial of Service (OR)
->D1. DoS attack on keystonemiddleware (P:Low)
+Denial of Service (OR)
+ D1. DoS attack on keystonemiddleware (P:Low)
      D1.1. Attacker sends excessive number of invalid PKI tokens causing time
            consuming signature verification
      D1.2. Low token_cache_time causes frequent token verification
@@ -234,8 +234,8 @@ auth_token:
      D3.1. Low token_cache_time and low revocation_list_cache time causes more
            cache write operation on memcache (P:Zero)
 
-####Elevation of privileges (OR)
-
+Elevation of privileges (OR)
+</code></pre>
 
 ####Detailed description of major threats
 #####Keystonemiddleware-01
