@@ -1,16 +1,16 @@
-ProjectName Threat Modelling : ComponentName
+Project_name threat modeling : component_name
 ===========================================
 ### Table of contents
 
-[System Overview](#system)
+[System overview](#system)
 
-[Implementation Overview](#implementation)
+[Implementation overview](#implementation)
 
-[System Assumptions](#assumption)
+[System assumptions](#assumption)
 
-[Data Flow Diagrams](#dfd)
+[Data flow diagrams](#dfd)
 
-[Entry Points](#entry)
+[Entry points](#entry)
 
 [Assets](#asset)
 
@@ -18,67 +18,67 @@ ProjectName Threat Modelling : ComponentName
 
 
 <a name="system"/>
-###System Overview
+###System overview
 ####Application version
-    Version info   
+    Version info
 
-####Application Description
-    A short description about the target application/component 
+####Application description
+    A short description of target application/component
 
-####Additional Info
+####Additional info
     Any additional info
 
 <a name="implementation"/>
 ###Implementation Overview
 ####Major Components
     Internal major components of the target system
-    
+
 ####Dependent components
     Dependent components of the target system
-  
+
 ####Description
     A short description about implementation e.g., language, constraints
 
 <a name="assumption"/>
-###System Assumptions (External Dependencies)
+###System assumptions (external dependencies)
     Any explicit or implicit assumptions
 
-###Security Objective
+###Security objective
     Security objectives of the target system
 
 <a name="dfd"/>
-###Data Flow Diagrams 
+###Data flow diagrams
 #### Diagram 1
-    Provide DFD  Digram based on operation.
+    DFD digram for each major process of the target system
 
 <a name="entry"/>
-###Entry Points
+###Entry points
 ####Name - Description
-    Data entry and exit points to the system.
+    Data entry and exit points of the target system.
 
 
 ----------
 <a name="asset"/>
 ###Assets
-    Asset list of the target system.
+    Assets list of the target system
 
 
 ----------
-####ComponentName-001
+####Component_name-001
 Threats:
-> 
+>
 
 Threat Agent:
-> 
+>
 
 Attack Vectors:
-> 
+>
 
 Security Weakness:
-> 
+>
 
 Counter Measures:
-> 
+>
 
 Extra:
 >  Probability:
@@ -88,31 +88,30 @@ Extra:
 >  Related Info:
 
 >  Comments:
-     Link to Bug/mailing list or Tracking 
+     Link to bug/mailing list or tracking
 
-####ComponentName-002
+####Component name-002
 Threats:
-> 
+>
 
 Threat Agent:
-> 
+>
 
 Attack Vectors:
-> 
+>
 
 Security Weakness:
-> 
+>
 
 Counter Measures:
-> 
+>
 
 Extra:
-                                                                          
->  Probability:                                                                 
-                                                                                
->  Impact:                                                                      
-                                                                                
->  Related Info:                                                                
-                                                                                
->  Comments:                                                                    
-     Link to Bug/mailing list or Tracking
+>  Probability:
+
+>  Impact:
+
+>  Related Info:
+
+>  Comments:
+     Link to bug/mailing list or tracking
