@@ -60,14 +60,14 @@ hashlib:
    algorithm is md5.
 
 ####Major use cases:
-1) Verifies that incoming client requests have valid tokens by validating
+1. Verifies that incoming client requests have valid tokens by validating
    tokens with the auth service (UUID token).
-2) Verifies that incoming client requests have valid tokens by validating
+2. Verifies that incoming client requests have valid tokens by validating
    tokens using token signing certificate (PKI token).
-3) Delay authentication decision.
-4) Signing certificate management.
-5) Revocation list fetching.
-6) Memcache management.
+3. Delay authentication decision.
+4. Signing certificate management.
+5. Revocation list fetching.
+6. Memcache management.
 
 <a name="assumption"/>
 ###System assumptions
@@ -104,51 +104,50 @@ hashlib:
 
 <a name="entry"/>
 ###Entry Points
-Request env variables (from client request)
-Config parameters
-Cache
-Certificate store
-UUID token validation data from auth service
-Signing and revocation_list data from auth service
+1. Request env variables (from client request)
+2. Config parameters
+3. Cache
+4. Certificate store
+5. UUID token validation data from auth service
+6. Signing and revocation_list data from auth service
 
 <a name="asset"/>
 ###Assets
 
-1)Request env parameters
- - X-Auth-Token:UUID or PKI token
-2)Config parameters
- - auth_URI (identity_URI)
- - signing_cert_file_name, signing_ca_file_name, revoked_file_name
- - service username, password, service token
- - service certificate for authentication (not used)
- - token cache related configuration: token_cache_enable,
-   revocation_check_on_cached_token
- - token_cache_time
- - token revocation list related configuration:token_revocation_list,
-   token_revocation_list_cache_time
- - memcache related configuration: secret key, memcache_security_strategy
- - token_bind
- - delay_auth_decision
- - http_max_retries
-3)Cache
- - token_id, token_data, per object secret key
-4)Certificate Store
-5) UUID token validation data from auth service (Identity API)
-  - response code, data related to token in HTTP headers
-6) Signing and revocation list data from auth service (Identity API)
-7) Internal important env variables
-  - X-Identity-Status
-  - X-Service-Catalog
-  - X-Roles
-  - X-Service-Roles
-  - keystone.token_info
+1. Request env parameters
+   - X-Auth-Token:UUID or PKI token
+2. Config parameters
+   - auth_URI (identity_URI)
+   - signing_cert_file_name, signing_ca_file_name, revoked_file_name
+   - service username, password, service token
+   - service certificate for authentication (not used)
+   - token cache related configuration: token_cache_enable,
+     revocation_check_on_cached_token
+   - token_cache_time
+   - token revocation list related configuration:token_revocation_list,
+     token_revocation_list_cache_time
+   - memcache related configuration: secret key, memcache_security_strategy
+   - token_bind
+   - delay_auth_decision
+   - http_max_retries
+3. Cache
+   - token_id, token_data, per object secret key
+4. Certificate Store
+5. UUID token validation data from auth service (Identity API)
+   - response code, data related to token in HTTP headers
+6. Signing and revocation list data from auth service (Identity API)
+7. Internal important env variables
+   - X-Identity-Status
+   - X-Service-Catalog
+   - X-Roles
+   - X-Service-Roles
+   - keystone.token_info
 
 ----------
 <a name="threats"/>
 ###Threats
-
 ####Spoofing: unauthorized access to the target service (OR)
- S1. Attacker populates authentication headers in request env and
+>S1. Attacker populates authentication headers in request env and
      keystonemiddleware fails to remove authentication headers (P:Zero)
  S2. Validate UUID token against a compromised Identity API (P:Low)
      S2.1. Identity API is compromised
@@ -194,11 +193,11 @@ Signing and revocation_list data from auth service
                    authenticity of the signing certificate (P: Low)
 
 ####Tampering of data: modification of sensitive data (OR)
- T1. Tampering of token data in memcache (P: Zero)
+>T1. Tampering of token data in memcache (P: Zero)
  T2. Tampering of Auth headers in the request env (P:zero)
 
 ####Repudiation:
- R1. The client cannot be held responsible for a request (P:Low)
+>R1. The client cannot be held responsible for a request (P:Low)
      R1.1. A requester can impersonate as the owner of the token due to the
            nature of the bearer token. No signing of the presenter exist in the
            request (P:Low)
@@ -207,13 +206,13 @@ Signing and revocation_list data from auth service
  R3. Delay auth modules cannot be held responsible for its action (P:Zero)
 
 ####Information disclosure: exposure of sensitive data (OR)
- I1. Token data is read from the memcache store (P:Low)
+>I1. Token data is read from the memcache store (P:Low)
  I2. Sensitive data is read (e.g., service token, service password, cache secret
      key) from the configuration file due to lack of access control and
      plain text format.
 
 ####Denial of Service (OR)
- D1. DoS attack on keystonemiddleware (P:Low)
+>D1. DoS attack on keystonemiddleware (P:Low)
      D1.1. Attacker sends excessive number of invalid PKI tokens causing time
            consuming signature verification
      D1.2. Low token_cache_time causes frequent token verification
