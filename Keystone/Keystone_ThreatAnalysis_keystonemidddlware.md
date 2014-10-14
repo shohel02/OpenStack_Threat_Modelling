@@ -49,15 +49,15 @@ auth_token:
    such as user name, tenant, etc.
 
 ####Dependent components
-cms:
- - Certificate signing functions
-_memcache_crypt:
- - Utilities for memcache encryption and integrity check. Encryption has a
-   dependency on the *pycrypto*. If *pycrypto* is not available,
-   CryptoUnavailableError will be raised.
-hashlib:
- - To hash PKI tokens using a configured hash algorithm.The default hash
-   algorithm is md5.
+1. cms:
+   - Certificate signing functions
+2. memcache_crypt:
+   - Utilities for memcache encryption and integrity check. Encryption has a
+     dependency on the *pycrypto*. If *pycrypto* is not available,
+     CryptoUnavailableError will be raised.
+3. hashlib:
+   - To hash PKI tokens using a configured hash algorithm.The default hash
+     algorithm is md5.
 
 ####Major use cases:
 1. Verifies that incoming client requests have valid tokens by validating
@@ -146,27 +146,31 @@ hashlib:
 ----------
 <a name="threats"/>
 ###Threats
+
+>
 ####Spoofing: unauthorized access to the target service (OR)
->S1. Attacker populates authentication headers in request env and
+- S1 Attacker populates authentication headers in request env and
      keystonemiddleware fails to remove authentication headers (P:Zero)
- S2. Validate UUID token against a compromised Identity API (P:Low)
-     S2.1. Identity API is compromised
-     S2.2. Keystonemiddleware do not verify authenticity of the Identity API
-           endpoint e.g., server certificate check turned off (P:Low)
- S3. Delay_auth_request flag is set and delay_auth_module is not trusted (P:Zero)
- S4. A revoked token can be used as a valid token (P:Low)
-     S4.1. check_revocation_for_cached token flag is not set and a revoked token
-           which is in cache is used to access target service (P:Low)
-     S4.2.  Compromised revocation list (P:Medium)
-            S4.2. Revocation list provider (Identity API) is compromised (P:Low)
-                  S4.2.1. Signing key for revocation list is compromised
-                  S4.2.2. Revoked token is not updated/added to the revocation
-                          list in provider side (P:Low)
-                          S4.2.1.1 Backend failure cause earlier token revocation
-                                   history removed (P:Low)
-                          S4.2.1.1 Revocation_list cache is not updated
-                                   when token revocation happens (P:Zero)
-     S4.2. A stale revocation_list is sent by a network attacker(P:Low)
+- S2 Validate UUID token against a compromised Identity API (P:Low)
+     - S2.1 Identity API is compromised
+     - S2.2 Keystonemiddleware do not verify authenticity of the Identity API
+            endpoint e.g., server certificate check turned off (P:Low)
+- S3 Delay_auth_request flag is set and delay_auth_module is not trusted (P:Zero)
+- S4 A revoked token can be used as a valid token (P:Low)
+     - S4.1 check_revocation_for_cached token flag is not set and a revoked
+             token which is in cache is used to access target service (P:Low)
+     - S4.2 Compromised revocation list (P:Medium)
+            - S4.2.1 Revocation list provider (Identity API) is compromised
+                      (P:Low)
+                     - S4.2.1. Signing key for revocation list is compromised
+            - S4.2.2 Revoked token is not updated/added to the revocation
+                      list in provider side (P:Low)
+                     - S4.2.2.1 Backend failure cause earlier token revocation
+                                history removed (P:Low)
+                     - S4.2.2.2 Revocation_list cache is not updated
+                                when token revocation happens (P:Zero)
+
+    S4.2. A stale revocation_list is sent by a network attacker(P:Low)
            S4.2.1. MiTM  in the communication channel (AND)
            S4.2.2. Keystone middleware cannot check the freshness of the
                    revocation_list (P:Low)
